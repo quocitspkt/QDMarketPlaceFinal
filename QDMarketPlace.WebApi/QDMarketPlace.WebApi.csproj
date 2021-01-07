@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QDMarketPlace.Application.Dapper\QDMarketPlace.Application.Dapper.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.Application\QDMarketPlace.Application.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.Data.EF\QDMarketPlace.Data.EF.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.Data\QDMarketPlace.Data.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.Infrastructure\QDMarketPlace.Infrastructure.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.Utilities\QDMarketPlace.Utilities.csproj" />
+  </ItemGroup>
+</Project>

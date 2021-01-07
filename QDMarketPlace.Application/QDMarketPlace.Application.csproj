@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="EPPlus.Core" Version="1.5.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QDMarketPlace.Data.EF\QDMarketPlace.Data.EF.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.Data\QDMarketPlace.Data.csproj" />
+    <ProjectReference Include="..\QDMarketPlace.Utilities\QDMarketPlace.Utilities.csproj" />
+  </ItemGroup>
+</Project>
