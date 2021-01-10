@@ -87,7 +87,7 @@ namespace QDMarketPlace.Application.Implementation
                 _orderDetailRepository.Add(detail);
             }
 
-            _orderDetailRepository.RemoveMultiple(existedDetails.Except(updatedDetails).ToList());
+            //_orderDetailRepository.RemoveMultiple(existedDetails.Except(updatedDetails).ToList());
 
             _orderRepository.Update(order);
         }

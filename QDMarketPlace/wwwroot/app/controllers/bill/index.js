@@ -130,8 +130,8 @@
                         Id: $(item).data('id'),
                         ProductId: $(item).find('select.ddlProductId').first().val(),
                         Quantity: $(item).find('input.txtQuantity').first().val(),
-                        ColorId: $(item).find('select.ddlColorId').first().val(),
-                        SizeId: $(item).find('select.ddlSizeId').first().val(),
+                        ColorId: 1, //$(item).find('select.ddlColorId').first().val(),
+                        SizeId: 1, //$(item).find('select.ddlSizeId').first().val(),
                         BillId: id
                     });
                 });
@@ -176,14 +176,14 @@
         $('#btnAddDetail').on('click', function () {
             var template = $('#template-table-bill-details').html();
             var products = getProductOptions(null);
-            var colors = getColorOptions(null);
-            var sizes = getSizeOptions(null);
+            //var colors = getColorOptions(null);
+            //var sizes = getSizeOptions(null);
             var render = Mustache.render(template,
                 {
                     Id: 0,
                     Products: products,
-                    Colors: colors,
-                    Sizes: sizes,
+                    Colors: 1,
+                    Sizes: 1,
                     Quantity: 0,
                     Total: 0
                 });
