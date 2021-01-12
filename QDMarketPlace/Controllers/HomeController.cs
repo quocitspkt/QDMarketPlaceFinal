@@ -46,6 +46,9 @@ namespace QDMarketPlace.Controllers
             homeVm.TopSellProducts = _productService.GetLastest(5);
             homeVm.LastestBlogs = _blogService.GetLastest(5);
             homeVm.HomeSlides = _commonService.GetSlides("top");
+            homeVm.TopGames = _productService.GetAll("Game");
+            homeVm.TopMicorsofts = _productService.GetAll("Microsoft");
+            homeVm.TopSecurities = _productService.GetAll("Security");
             return View(homeVm);
         }
 
