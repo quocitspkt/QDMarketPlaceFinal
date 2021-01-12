@@ -108,6 +108,7 @@ namespace QDMarketPlace
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IViewRenderService, ViewRenderService>();
+            services.AddTransient<INotification, NotificationService>();
 
             services.AddTransient<DbInitializer>();
 

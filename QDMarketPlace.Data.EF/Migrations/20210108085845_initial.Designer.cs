@@ -10,7 +10,7 @@ using QDMarketPlace.Data.EF;
 namespace QDMarketPlace.Data.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210107085706_initial")]
+    [Migration("20210108085845_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
