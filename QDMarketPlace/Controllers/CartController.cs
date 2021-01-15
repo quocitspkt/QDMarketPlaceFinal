@@ -47,10 +47,10 @@ namespace QDMarketPlace.Controllers
         {
             var model = new CheckoutViewModel();
             var session = HttpContext.Session.Get<List<ShoppingCartViewModel>>(CommonConstants.CartSession);
-            if (session.Any(x => x.Color == null || x.Size == null))
+            /*if (session.Any(x => x.Color == null || x.Size == null))
             {
                 return Redirect("/cart.html");
-            }
+            }*/
 
             model.Carts = session;
             return View(model);
@@ -74,8 +74,6 @@ namespace QDMarketPlace.Controllers
                         {
                             Product = item.Product,
                             Price = item.Price,
-                            ColorId = item.Color.Id,
-                            SizeId = item.Size.Id,
                             Quantity = item.Quantity,
                             ProductId = item.Product.Id
                         });

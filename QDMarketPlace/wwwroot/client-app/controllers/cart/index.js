@@ -24,7 +24,7 @@
                     productId: id
                 },
                 success: function () {
-                    tedu.notify('Removing product is successful.', 'success');
+                    /*tedu.notify('Removing product is successful.', 'success');*/
                     loadHeaderCart();
                     loadData();
                 }
@@ -43,7 +43,7 @@
                         quantity: q
                     },
                     success: function () {
-                        tedu.notify('Update quantity is successful', 'success');
+                        /*tedu.notify('Update quantity is successful', 'success');*/
                         loadHeaderCart();
                         loadData();
                     }
@@ -72,7 +72,7 @@
                         size:sizeId
                     },
                     success: function () {
-                        tedu.notify('Update quantity is successful', 'success');
+                        /*tedu.notify('Update quantity is successful', 'success');*/
                         loadHeaderCart();
                         loadData();
                     }
@@ -100,7 +100,7 @@
                         size:sizeId
                     },
                     success: function () {
-                        tedu.notify('Update quantity is successful', 'success');
+                        /*tedu.notify('Update quantity is successful', 'success');*/
                         loadHeaderCart();
                         loadData();
                     }
@@ -116,7 +116,7 @@
                 url: '/Cart/ClearCart',
                 type: 'post',
                 success: function () {
-                    tedu.notify('Clear cart is successful', 'success');
+                    /*tedu.notify('Clear cart is successful', 'success');*/
                     loadHeaderCart();
                     loadData();
                 }

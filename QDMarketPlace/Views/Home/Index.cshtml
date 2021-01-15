@@ -10,6 +10,8 @@
     <script>
         var homeObj = new HomeController();
         homeObj.initialize();
+        var productObj1 = new ProductDetailController();
+        productObj1.initialize();
     </script>
 }
 <div class="relative clearfix full-width">
@@ -113,7 +115,7 @@
                                                 <i class="fa fa-star-o" aria-hidden="true"></i>
                                             </div>
                                             <p class="title-product clearfix full-width title-hover-black animate-default"><a class="animate-default" href="/@item.SeoAlias-p.@(item.Id).html">@item.Name</a></p>
-                                            <p class="clearfix price-product"><span class="price-old">@item.OriginalPrice</span> @item.PromotionPrice</p>
+                                            <p class="clearfix price-product"><span class="price-old">@item.OriginalPrice₫</span> @item.PromotionPrice₫</p>
                                         </div>
                                     }
                                     <!-- End Product Son -->

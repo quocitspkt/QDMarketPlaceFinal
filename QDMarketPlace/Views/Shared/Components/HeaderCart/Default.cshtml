@@ -1,9 +1,6 @@
 ﻿@model List<ShoppingCartViewModel>
 
-@section Scripts{
-    <script src="~/client-app/controllers/product/details.js"></script>
 
-}
 
 <div id="headerCart">
     <div class="clearfix cart-website absolute" onclick="showCartBoxDetail()">
@@ -42,8 +39,8 @@
             <p class=" clear-margin bold">@Model.Sum(x => x.Quantity * x.Price).ToString("N0") </p>
         </div>
         <div class="relative btn-cart-header">
-            <a href="/cart.html" class="uppercase bold animate-default">view cart</a>
-            <a href="/checkout.html" class="uppercase bold button-hover-red animate-default">checkout</a>
+            <a href="/cart.html" class="uppercase bold animate-default">Xem giỏ hàng</a>
+            <a href="/checkout.html" class="uppercase bold button-hover-red animate-default">Thanh toán</a>
         </div>
     </div>
 </div>
