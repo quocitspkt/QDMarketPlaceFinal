@@ -185,5 +185,6 @@ namespace QDMarketPlace.Application.Implementation
         {
             return _mapper.Map<Size, SizeViewModel>(_sizeRepository.FindById(id));
         }
+        
     }
 }

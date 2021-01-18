@@ -113,6 +113,19 @@ namespace QDMarketPlace.Application.Implementation
                 _productRepository.FindAll(x => x.ProductCategory))
                 .ToList();
         }
+        public List<ProductViewModel> GetAll(string keyword)
+        {
+            if (!string.IsNullOrEmpty(keyword))
+                return _mapper.ProjectTo<ProductViewModel>(
+                    _productRepository.FindAll(x => x.Name.Contains(keyword)
+                || x.Description.Contains(keyword))
+                    .OrderBy(x => x.Name)).ToList();
+            else
+                return _mapper.ProjectTo<ProductViewModel>(
+                    _productRepository.FindAll().OrderBy(x => x.Name)
+                    )
+                    .ToList();
+        }
 
         public PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize)
         {

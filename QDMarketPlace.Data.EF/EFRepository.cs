@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using QDMarketPlace.Infrastructure.Interfaces;
 using QDMarketPlace.Infrastructure.SharedKernel;
+using Microsoft.IdentityModel.Protocols.WSFederation.Metadata;
 
 namespace QDMarketPlace.Data.EF
 {
@@ -19,6 +20,7 @@ namespace QDMarketPlace.Data.EF
         }
         public void Add(T entity)
         {
+            
             _context.Add(entity);
         }
 
