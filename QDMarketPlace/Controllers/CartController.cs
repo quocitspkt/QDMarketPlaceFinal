@@ -13,6 +13,9 @@ using QDMarketPlace.Data.Enums;
 using System.Security.Claims;
 using QDMarketPlace.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
+using PayPal.Core;
+using PayPal.v1.Payments;
 
 namespace QDMarketPlace.Controllers
 {
@@ -23,6 +26,10 @@ namespace QDMarketPlace.Controllers
         private IViewRenderService _viewRenderService;
         private IConfiguration _configuration;
         private IEmailSender _emailSender;
+        private readonly string _clientId;
+        private readonly string _secretKey;
+
+        public double TyGiaUSD = 23300;
 
         public CartController(IProductService productService,
             IViewRenderService viewRenderService, IEmailSender emailSender,
@@ -33,6 +40,8 @@ namespace QDMarketPlace.Controllers
             _viewRenderService = viewRenderService;
             _configuration = configuration;
             _emailSender = emailSender;
+            _clientId = configuration["PaypalSettings:ClientId"];
+            _secretKey = configuration["PaypalSettings:SecretKey"];
         }
 
         [Route("cart.html", Name = "Cart")]
@@ -72,7 +81,7 @@ namespace QDMarketPlace.Controllers
                     {
                         details.Add(new BillDetailViewModel()
                         {
-                            Product = item.Product,
+                            //Product = item.Product,
                             Price = item.Price,
                             Quantity = item.Quantity,
                             ProductId = item.Product.Id
@@ -281,7 +290,9 @@ namespace QDMarketPlace.Controllers
             var sizes = _billService.GetSizes();
             return new OkObjectResult(sizes);
         }
-
+        
+        
         #endregion AJAX Request
+
     }
 }

@@ -34,5 +34,6 @@ namespace QDMarketPlace.Application.Interfaces
         SizeViewModel GetSize(int id);
 
         void Save();
+        
     }
 }
