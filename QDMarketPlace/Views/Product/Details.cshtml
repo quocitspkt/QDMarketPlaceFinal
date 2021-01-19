@@ -87,7 +87,7 @@
                             <p class="availability @(product.Status==QDMarketPlace.Data.Enums.Status.Active?"in-stock":"out-of-stock") pull-right">Availability: <span>@product.Status</span></p>
                         </div>
                         <div class="short-description">
-                            <h2>Quick Overview</h2>
+                            <h2>Tổng quan</h2>
                             @product.Description
                         </div>
                         <div class="product-color-size-area">
@@ -96,7 +96,7 @@
                         <div class="product-variation">
                             <form action="#" method="post">
                                 <div class="cart-plus-minus">
-                                    <label for="qty">Quantity:</label>
+                                    <label for="qty">Số lượng:</label>
                                     <div class="numbers-row">
                                         <div onClick="var result = document.getElementById('txtQuantity'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
                                         <input type="text" class="qty" title="Qty" value="1" maxlength="12" id="txtQuantity" name="txtQuantity">
@@ -127,7 +127,7 @@
                         }
 
                         <div class="share-box">
-                            <div class="title">Share in social media</div>
+                            <div class="title">Chia sẻ lên mạng xã hội</div>
                             <div class="socials-box"> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-google-plus"></i></a> <a href="#"><i class="fa fa-youtube"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-instagram"></i></a> </div>
                         </div>
                     </div>
