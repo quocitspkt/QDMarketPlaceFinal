@@ -74,9 +74,22 @@ namespace QDMarketPlace.Controllers
                         {
                             Product = item.Product,
                             Price = item.Price,
+                            ColorId = 1,
+                            SizeId = 1,
                             Quantity = item.Quantity,
                             ProductId = item.Product.Id
+
                         });
+                        var billDetailViewModel = new BillDetailViewModel()
+                        {
+                            Product = item.Product,
+                            Price = item.Price,
+                            ColorId = 1,
+                            SizeId = 1,
+                            Quantity = item.Quantity,
+                            ProductId = item.Product.Id
+                        };
+                        _billService.CreateDetail(billDetailViewModel);
                     }
                     var billViewModel = new BillViewModel()
                     {
@@ -92,6 +105,8 @@ namespace QDMarketPlace.Controllers
                         billViewModel.CustomerId = Guid.Parse(User.GetSpecificClaim("UserId"));
                     }
                     _billService.Create(billViewModel);
+                    
+                    
                     try
                     {
                         _billService.Save();

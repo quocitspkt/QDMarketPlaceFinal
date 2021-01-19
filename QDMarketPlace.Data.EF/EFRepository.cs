@@ -19,6 +19,18 @@ namespace QDMarketPlace.Data.EF
         }
         public void Add(T entity)
         {
+            var local = _context.Set<T>().Local.FirstOrDefault(entry => entry.Id.Equals(entity.Id));
+
+            // check if local is not null 
+            if (local != null)
+            {
+                // detach
+                _context.Entry(local).State = EntityState.Detached;
+            }
+            // set Modified flag in your entry
+            _context.Entry(entity).State = EntityState.Modified;
+
+            // save 
             _context.Add(entity);
         }
 
