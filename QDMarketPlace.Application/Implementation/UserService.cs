@@ -17,6 +17,7 @@ namespace QDMarketPlace.Application.Implementation
     public class UserService : IUserService
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<IdentityResult> _userManagerModel;
         private readonly IMapper _mapper;
 
         public UserService(UserManager<AppUser> userManager, IMapper mapper)
@@ -122,6 +123,16 @@ namespace QDMarketPlace.Application.Implementation
                 user.PhoneNumber = userVm.PhoneNumber;
                 await _userManager.UpdateAsync(user);
             }
+        }
+
+        public async Task<string> ForgotPasswordAsync(string email)
+        {
+            string pass = "XuanDuc@1999";
+            var user = await _userManager.FindByEmailAsync(email);
+
+            await _userManager.RemovePasswordAsync(user);
+            await _userManager.AddPasswordAsync(user,pass );
+            return pass;
         }
     }
 }
