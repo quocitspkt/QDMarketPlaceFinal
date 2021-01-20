@@ -211,6 +211,7 @@ namespace QDMarketPlace.Controllers
                                     paypalRedirectUrl = lnk.Href;
                                 }
                             }
+                            HttpContext.Session.Remove(CommonConstants.CartSession);
 
                             return Redirect(paypalRedirectUrl);
                         }
@@ -227,6 +228,7 @@ namespace QDMarketPlace.Controllers
                         //Send mail
                         //await _emailSender.SendEmailAsync(_configuration["MailSettings:AdminMail"], "New bill from Panda Shop", content);
                         ViewData["Success"] = true;
+                        
                     }
                     catch (Exception ex)
                     {
