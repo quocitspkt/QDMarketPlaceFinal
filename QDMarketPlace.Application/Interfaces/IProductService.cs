@@ -10,6 +10,7 @@ namespace QDMarketPlace.Application.Interfaces
     public interface IProductService : IDisposable
     {
         List<ProductViewModel> GetAll();
+        List<ProductViewModel> GetAll(string keyword);
 
         PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize);
 
