@@ -126,6 +126,7 @@ namespace QDMarketPlace.Application.Implementation
                     )
                     .ToList();
         }
+        
 
         public PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize)
         {
