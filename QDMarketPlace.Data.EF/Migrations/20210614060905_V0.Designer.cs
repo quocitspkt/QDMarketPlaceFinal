@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QDMarketPlace.Data.EF;
 
 namespace QDMarketPlace.Data.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210614060905_V0")]
+    partial class V0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -541,7 +543,7 @@ namespace QDMarketPlace.Data.EF.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<string>("NameColors")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 

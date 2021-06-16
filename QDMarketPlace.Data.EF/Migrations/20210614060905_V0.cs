@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QDMarketPlace.Data.EF.Migrations
 {
-    public partial class initial : Migration
+    public partial class V0 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

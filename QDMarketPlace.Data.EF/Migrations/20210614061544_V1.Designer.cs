@@ -10,8 +10,8 @@ using QDMarketPlace.Data.EF;
 namespace QDMarketPlace.Data.EF.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210108085845_initial")]
-    partial class initial
+    [Migration("20210614061544_V1")]
+    partial class V1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -543,7 +543,7 @@ namespace QDMarketPlace.Data.EF.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameColors")
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
