@@ -32,7 +32,7 @@
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                     <li class="relative"><a href="/account.html">@User.GetSpecificClaim("FullName")</a></li>
-                                    <li class="relative"><a href="/wishlist.html">Sản phẩm yêu thích</a></li>
+                                    <li class="relative"><a href="/purchaseshistory.html">Lịch sử mua hàng</a></li>
                                     <li class="relative"><a href="#">Chính sách bán hàng</a></li>
                                     <li class="relative">
                                         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
