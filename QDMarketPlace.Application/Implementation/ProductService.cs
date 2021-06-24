@@ -25,6 +25,8 @@ namespace QDMarketPlace.Application.Implementation
         private IRepository<ProductQuantity, int> _productQuantityRepository;
         private IRepository<ProductImage, int> _productImageRepository;
         private IRepository<WholePrice, int> _wholePriceRepository;
+        private IRepository<Bill, int> _billRepository;
+        private IRepository<BillDetail, int> _billDetailRepository;
         private readonly IMapper _mapper;
         private IUnitOfWork _unitOfWork;
 
@@ -33,6 +35,8 @@ namespace QDMarketPlace.Application.Implementation
             IRepository<ProductQuantity, int> productQuantityRepository,
             IRepository<ProductImage, int> productImageRepository,
             IRepository<WholePrice, int> wholePriceRepository,
+            IRepository<Bill,int> billRepository,
+            IRepository<BillDetail,int> billDetailRepository,
         IUnitOfWork unitOfWork,
         IRepository<ProductTag, int> productTagRepository, IMapper mapper)
         {
@@ -42,6 +46,8 @@ namespace QDMarketPlace.Application.Implementation
             _productTagRepository = productTagRepository;
             _wholePriceRepository = wholePriceRepository;
             _productImageRepository = productImageRepository;
+            _billRepository = billRepository;
+            _billDetailRepository = billDetailRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -349,6 +355,29 @@ namespace QDMarketPlace.Application.Implementation
             if (quantity == null)
                 return false;
             return quantity.Quantity > 0;
+        }
+
+        public List<PurchaseHistoryViewModel> GetPurchaseHistory(Guid id)
+        {
+            var bills = _billRepository.FindAll();
+            var billDetails = _billDetailRepository.FindAll();
+            var products = _productRepository.FindAll();
+
+            var query = from b in bills
+                        join bd in billDetails
+                        on b.Id equals bd.BillId
+                        join pd in products
+                        on bd.ProductId equals pd.Id
+                        where b.CustomerId == id
+                        select new PurchaseHistoryViewModel()
+                        {
+                            ProductName = pd.Name,
+                            Image = pd.Image,
+                            Price = pd.Price,
+                            Quantity = bd.Quantity,
+                            DateCreated = b.DateCreated
+                        };
+            return query.ToList();
         }
     }
 }

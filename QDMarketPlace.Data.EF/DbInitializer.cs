@@ -125,10 +125,10 @@ namespace QDMarketPlace.Data.EF
             {
                 List<Color> listColor = new List<Color>()
                 {
-                    new Color() {Name="Black", Code="#000000" },
-                    new Color() {Name="White", Code="#FFFFFF"},
-                    new Color() {Name="Red", Code="#ff0000" },
-                    new Color() {Name="Blue", Code="#1000ff" },
+                    new Color() {NameColors="Black", Code="#000000" },
+                    new Color() {NameColors="White", Code="#FFFFFF"},
+                    new Color() {NameColors="Red", Code="#ff0000" },
+                    new Color() {NameColors="Blue", Code="#1000ff" },
                 };
                 _context.Colors.AddRange(listColor);
             }

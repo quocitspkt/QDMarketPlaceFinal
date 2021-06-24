@@ -11,6 +11,7 @@ namespace QDMarketPlace.Application.Interfaces
     {
         List<ProductViewModel> GetAll();
         List<ProductViewModel> GetAll(string keyword);
+        List<PurchaseHistoryViewModel> GetPurchaseHistory(Guid id);
 
         PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize);
 
