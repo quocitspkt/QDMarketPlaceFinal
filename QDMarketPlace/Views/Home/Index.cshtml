@@ -48,18 +48,24 @@
                         </div>
                     </div>
                     <div class=" box-banner-small-v1 box-banner-small">
-                        <div class="effect-layla relative clear-padding col-md-4 col-sm-4 col-xs-4 float-left zoom-image-hover">
-                            <img src="/client-side/images/products/product-4.jpg" alt="counter-strik">
-                            <a href="/Key-Game-Assassin-s-Creed-p.28.html" class="relative"></a>
-                        </div>
-                        <div class="effect-layla relative clear-padding col-md-4 col-sm-4 col-xs-4 float-left zoom-image-hover">
-                            <img src="/client-side/images/products/product-5.jpg" alt="">
-                            <a href="/Battlefield-V-p.38.html" class="relative"></a>
-                        </div>
-                        <div class="effect-layla relative clear-padding col-md-4 col-sm-4 col-xs-4 float-left zoom-image-hover">
-                            <img src="/client-side/images/products/product-6.jpg" alt="">
-                            <a href="/game-grand-theft-auto-v-premium-edition-p.25.html" class="relative"></a>
-                        </div>
+                        @foreach (var item in Model.HotProducts)
+                        {
+                            <div class="effect-layla relative clear-padding col-md-4 col-sm-4 col-xs-4 float-left zoom-image-hover">
+                                <img src="@item.Image" alt="@item.Name" height="250" width="220">
+                                <a href="/@item.SeoAlias-p.@(item.Id).html" class="relative"></a>
+                            </div>
+                        }
+
+                        <!--
+        <div class="effect-layla relative clear-padding col-md-4 col-sm-4 col-xs-4 float-left zoom-image-hover">
+        <img src="/client-side/images/products/product-5.jpg" alt="">
+        <a href="/Battlefield-V-p.38.html" class="relative"></a>
+    </div>
+    <div class="effect-layla relative clear-padding col-md-4 col-sm-4 col-xs-4 float-left zoom-image-hover">
+        <img src="/client-side/images/products/product-6.jpg" alt="">
+        <a href="/game-grand-theft-auto-v-premium-edition-p.25.html" class="relative"></a>
+    </div>
+    -->
                     </div>
                 </div>
                 <!-- End Menu & Slide -->
@@ -75,7 +81,7 @@
                     <div class="clearfix title-box full-width bottom-margin-default border bg-white">
                         <div class="clearfix name-title-box title-hot-bg relative">
                             <img src="/client-side-1/img/icon_percent.png" class="absolute" alt="Icon Hot Deals" />
-                            <p>giá sốc hôm nay</p>
+                            <p>Sản phẩm nổi bật</p>
                         </div>
                         <div class="clearfix menu-title-box bold uppercase">
                             <ul>
