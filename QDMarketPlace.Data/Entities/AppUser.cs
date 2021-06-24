@@ -34,5 +34,7 @@ namespace QDMarketPlace.Data.Entities
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
         public Status Status { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
