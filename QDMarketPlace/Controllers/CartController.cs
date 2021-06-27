@@ -383,7 +383,14 @@ namespace QDMarketPlace.Controllers
                         item.Product = product;
                         item.Size = _billService.GetSize(size);
                         item.Color = _billService.GetColor(color);
-                        item.Quantity = quantity;
+                        if (quantity > _productService.GetAmount(productId))
+                        {
+                            item.Quantity = _productService.GetAmount(productId);
+                        }
+                        else
+                        {
+                            item.Quantity = quantity;
+                        }
                         item.Price = product.PromotionPrice ?? product.Price;
                         hasChanged = true;
                     }
