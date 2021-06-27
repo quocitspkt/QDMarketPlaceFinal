@@ -34,5 +34,11 @@ namespace QDMarketPlace.Application.Interfaces
         SizeViewModel GetSize(int id);
 
         void Save();
+
+        int CountBill();
+
+        List<int> CountInMonth();
+
+        List<BillDetailViewModel> TotalMoney();
     }
 }

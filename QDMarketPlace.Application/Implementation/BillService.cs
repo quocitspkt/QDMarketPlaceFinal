@@ -103,7 +103,35 @@ namespace QDMarketPlace.Application.Implementation
         {
             return _mapper.ProjectTo<SizeViewModel>(_sizeRepository.FindAll()).ToList();
         }
+        public int CountBill() 
+        {
+            List<BillViewModel> lst = _mapper.ProjectTo<BillViewModel>(_orderRepository.FindAll()).ToList();
+            return lst.Count();
+        }
 
+        public List<BillDetailViewModel> TotalMoney()
+        {
+            List<BillDetailViewModel> lst = _mapper.ProjectTo<BillDetailViewModel>(_orderDetailRepository.FindAll()).ToList();
+            return lst;
+        }
+
+        public List<int> CountInMonth()
+        {
+            List<int> lst = new List<int>(12) {0,0,0,0,0,0,0,0,0,0,0,0};
+            List<BillViewModel> lstBill = _mapper.ProjectTo<BillViewModel>(_orderRepository.FindAll()).ToList();
+            foreach(BillViewModel item in lstBill)
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    if (int.Parse(item.DateCreated.ToString().Substring(5, 2)) == i)
+                    {
+                        lst[i-1] += 1;
+                    }
+                }
+                
+            }
+            return lst;
+        }
         public void Save()
         {
             _unitOfWork.Commit();

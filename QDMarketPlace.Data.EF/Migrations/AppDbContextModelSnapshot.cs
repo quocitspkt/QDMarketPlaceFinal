@@ -541,7 +541,7 @@ namespace QDMarketPlace.Data.EF.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameColors")
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 

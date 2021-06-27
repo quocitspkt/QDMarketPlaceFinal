@@ -16,6 +16,7 @@ using QDMarketPlace.Services;
 using QDMarketPlace.Data.Entities;
 using QDMarketPlace.Data.Enums;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
+using QDMarketPlace.Utilities.Constants;
 
 namespace QDMarketPlace.Controllers
 {
@@ -264,6 +265,7 @@ namespace QDMarketPlace.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            HttpContext.Session.Remove(CommonConstants.CartSession);
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 

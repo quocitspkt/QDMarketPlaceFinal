@@ -2,7 +2,9 @@
     this.initialize = function () {
         registerEvents();
     }
-
+    //var send = function (subject, body) {
+        
+    //}
     var registerEvents = function () {
         $('#frmSend').validate({
             errorClass: 'red',
@@ -17,34 +19,35 @@
                 }
             }
         });
-        $('#btnSend').on('click', function (e) {
+        $('#btnSendEmail').on('click', function (e) {
             if ($('#frmSend').valid()) {
                 e.preventDefault();
                 var subject = $('#txtSubject').val();
                 var body = $('#txtContent').val();
-                send(subject, body);
+                $(document).ready(function () {
+                    $.ajax({
+                        type: 'POST',
+                        data: {
+                            subject: subject,
+                            body: body
+                        },
+                        dateType: 'json',
+                        url: '/admin/notification/Send',
+                        success: function (res) {
+                            if (res != null) {
+                                tedu.notify('Send successed', 'success');
+                            }
+                            else {
+                                tedu.notify('Send failed', 'error');
+                            }
+                        }
+                    });
+                });
+                
             }
 
         });
     }
 
-    var send = function (subject, body) {
-        $.ajax({
-            type: 'POST',
-            data: {
-                subject: subject,
-                body: body
-            },
-            dateType: 'json',
-            url: '/admin/notification/Send',
-            success: function (res) {
-                if (res != null) {
-                    tedu.notify('Send successed', 'success');
-                }
-                else {
-                    tedu.notify('Send failed', 'error');
-                }
-            }
-        })
-    }
+    
 }

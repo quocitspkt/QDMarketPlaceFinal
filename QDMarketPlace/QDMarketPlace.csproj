@@ -19,12 +19,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.5" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" PrivateAssets="All" />
     <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
     <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.2" />
+    <PackageReference Include="PayPal" Version="2.0.0-beta00" />
+    <PackageReference Include="RestApiSDK" Version="0.11.0" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
     <PackageReference Include="SkiaSharp" Version="1.68.3" />
     <PackageReference Include="WebMarkupMin.AspNetCore2" Version="2.8.3" />
@@ -75,6 +78,5 @@
 
   <ItemGroup>
     <Folder Include="Middleware\" />
-    <Folder Include="wwwroot\export-files\" />
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ namespace QDMarketPlace.Data.Entities
     {
 
         [StringLength(250)]
-        public string Name
+        public string NameColors
         {
             get; set;
         }

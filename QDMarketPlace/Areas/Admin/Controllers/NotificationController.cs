@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace QDMarketPlace.Areas.Admin.Controllers
 {
@@ -21,7 +22,7 @@ namespace QDMarketPlace.Areas.Admin.Controllers
         {
             return View();
         }
-        [HttpPost]
+        [Microsoft.AspNetCore.Mvc.HttpPost]
         public async Task<IActionResult> Send(string subject, string body)
         {
             List<AppUserViewModel>  lstUser =await _userService.GetAllAsync();
@@ -31,7 +32,7 @@ namespace QDMarketPlace.Areas.Admin.Controllers
             }
             
             string str = "Thành công";
-
+            //return Json(str, JsonRequestBehavior.AllowGet);
             return new ObjectResult(str);
         }
 

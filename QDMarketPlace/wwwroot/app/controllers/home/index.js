@@ -24,7 +24,7 @@
 
             },
             error: function (status) {
-                tedu.notify('Có lỗi xảy ra', 'error');
+                //tedu.notify('Có lỗi xảy ra', 'error');
                 tedu.stopLoading();
             }
         });

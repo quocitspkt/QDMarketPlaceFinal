@@ -39,7 +39,7 @@
             url: '/admin/login/authen',
             success: function (res) {
                 if (res.Success) {
-                    window.location.href = "/Admin/Home/Index";
+                    window.location.href = "/Admin/Report/Index";
                 }
                 else {
                     tedu.notify('Login failed', 'error');

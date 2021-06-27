@@ -13,6 +13,10 @@ namespace QDMarketPlace.Models
         public List<ProductViewModel> TopSellProducts { get; set; }
 
         public List<ProductCategoryViewModel> HomeCategories { set; get; }
+        public List<ProductViewModel> TopGames { get; set; }
+        public List<ProductViewModel> TopMicorsofts { get; set; }
+        public List<ProductViewModel> TopSecurities { get; set; }
+
 
         public string Title { set; get; }
         public string MetaKeyword { set; get; }

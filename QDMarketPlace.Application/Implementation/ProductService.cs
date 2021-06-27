@@ -25,6 +25,8 @@ namespace QDMarketPlace.Application.Implementation
         private IRepository<ProductQuantity, int> _productQuantityRepository;
         private IRepository<ProductImage, int> _productImageRepository;
         private IRepository<WholePrice, int> _wholePriceRepository;
+        private IRepository<Bill, int> _billRepository;
+        private IRepository<BillDetail, int> _billDetailRepository;
         private readonly IMapper _mapper;
         private IUnitOfWork _unitOfWork;
 
@@ -33,6 +35,8 @@ namespace QDMarketPlace.Application.Implementation
             IRepository<ProductQuantity, int> productQuantityRepository,
             IRepository<ProductImage, int> productImageRepository,
             IRepository<WholePrice, int> wholePriceRepository,
+            IRepository<Bill,int> billRepository,
+            IRepository<BillDetail,int> billDetailRepository,
         IUnitOfWork unitOfWork,
         IRepository<ProductTag, int> productTagRepository, IMapper mapper)
         {
@@ -42,6 +46,8 @@ namespace QDMarketPlace.Application.Implementation
             _productTagRepository = productTagRepository;
             _wholePriceRepository = wholePriceRepository;
             _productImageRepository = productImageRepository;
+            _billRepository = billRepository;
+            _billDetailRepository = billDetailRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -113,6 +119,20 @@ namespace QDMarketPlace.Application.Implementation
                 _productRepository.FindAll(x => x.ProductCategory))
                 .ToList();
         }
+        public List<ProductViewModel> GetAll(string keyword)
+        {
+            if (!string.IsNullOrEmpty(keyword))
+                return _mapper.ProjectTo<ProductViewModel>(
+                    _productRepository.FindAll(x => x.Name.Contains(keyword)
+                || x.Description.Contains(keyword))
+                    .OrderBy(x => x.Name)).ToList();
+            else
+                return _mapper.ProjectTo<ProductViewModel>(
+                    _productRepository.FindAll().OrderBy(x => x.Name)
+                    )
+                    .ToList();
+        }
+        
 
         public PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize)
         {
@@ -335,6 +355,58 @@ namespace QDMarketPlace.Application.Implementation
             if (quantity == null)
                 return false;
             return quantity.Quantity > 0;
+        }
+
+        public int GetAmount(int productId)
+        {
+            var quantity = _productQuantityRepository.FindSingle(x => x.ProductId == productId);
+            return quantity.Quantity;
+        }
+
+        public List<PurchaseHistoryViewModel> GetPurchaseHistory(Guid id)
+        {
+            var bills = _billRepository.FindAll();
+            var billDetails = _billDetailRepository.FindAll();
+            var products = _productRepository.FindAll();
+
+            var query = from b in bills
+                        join bd in billDetails
+                        on b.Id equals bd.BillId
+                        join pd in products
+                        on bd.ProductId equals pd.Id
+                        where b.CustomerId == id
+                        select new PurchaseHistoryViewModel()
+                        {
+                            ProductName = pd.Name,
+                            Image = pd.Image,
+                            Price = pd.Price,
+                            Quantity = bd.Quantity,
+                            DateCreated = b.DateCreated
+                        };
+            return query.ToList();
+        }
+
+        public int CountProduct()
+        {
+            int count = 0;
+
+            List<ProductViewModel> lst = _mapper.ProjectTo<ProductViewModel>(
+                _productRepository.FindAll(x => x.ProductCategory))
+                .ToList();
+            count = lst.Count();
+            return count;
+        }
+
+        public int CountProductAmount()
+        {
+            List<ProductQuantityViewModel> quantity = _mapper.ProjectTo < ProductQuantityViewModel >(_productQuantityRepository.FindAll(x => x.ColorId == 1 && x.SizeId == 1)).ToList();
+            int sum = 0;
+            foreach ( ProductQuantityViewModel item in quantity)
+            {
+                sum += item.Quantity;
+
+            }
+            return sum;
         }
     }
 }
