@@ -83,6 +83,7 @@ namespace QDMarketPlace.Application.Implementation
                 {
                     product.ProductTags.Add(productTag);
                 }
+                product.DateCreated = DateTime.Now;
                 _productRepository.Add(product);
             }
             return productVm;

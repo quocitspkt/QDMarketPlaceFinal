@@ -15,7 +15,12 @@ namespace QDMarketPlace.Controllers
         {
             _pageService = pageService;
         }
-
+        [Route("homepage")]
+        public IActionResult HomePage()
+        {
+            var blog = _pageService.GetAll();
+            return View(blog);
+        }
         [Route("page/{alias}.html", Name = "Page")]
         public IActionResult Index(string alias)
         {
