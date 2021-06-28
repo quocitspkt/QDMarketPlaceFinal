@@ -358,6 +358,12 @@ namespace QDMarketPlace.Application.Implementation
             return quantity.Quantity > 0;
         }
 
+        public int GetAmount(int productId)
+        {
+            var quantity = _productQuantityRepository.FindSingle(x => x.ProductId == productId);
+            return quantity.Quantity;
+        }
+
         public List<PurchaseHistoryViewModel> GetPurchaseHistory(Guid id)
         {
             var bills = _billRepository.FindAll();
@@ -379,6 +385,29 @@ namespace QDMarketPlace.Application.Implementation
                             DateCreated = b.DateCreated
                         };
             return query.ToList();
+        }
+
+        public int CountProduct()
+        {
+            int count = 0;
+
+            List<ProductViewModel> lst = _mapper.ProjectTo<ProductViewModel>(
+                _productRepository.FindAll(x => x.ProductCategory))
+                .ToList();
+            count = lst.Count();
+            return count;
+        }
+
+        public int CountProductAmount()
+        {
+            List<ProductQuantityViewModel> quantity = _mapper.ProjectTo < ProductQuantityViewModel >(_productQuantityRepository.FindAll(x => x.ColorId == 1 && x.SizeId == 1)).ToList();
+            int sum = 0;
+            foreach ( ProductQuantityViewModel item in quantity)
+            {
+                sum += item.Quantity;
+
+            }
+            return sum;
         }
     }
 }
