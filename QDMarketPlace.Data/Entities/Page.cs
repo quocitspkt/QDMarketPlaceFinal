@@ -15,13 +15,14 @@ namespace QDMarketPlace.Data.Entities
         public Page() { }
 
         public Page(int id, string name, string alias, 
-            string content, Status status)
+            string content, Status status,DateTime dateCreated)
         {
             Id = id;
             Name = name;
             Alias = alias;
             Content = content;
             Status = status;
+            DateCreated = dateCreated;
         }
         [Required]
         [MaxLength(256)]
@@ -32,6 +33,7 @@ namespace QDMarketPlace.Data.Entities
         public string Alias { set; get; }
 
         public string Content { set; get; }
+        public DateTime DateCreated { get; set; }
         public Status Status { set; get; }
     }
 }

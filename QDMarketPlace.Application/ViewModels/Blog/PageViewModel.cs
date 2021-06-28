@@ -18,6 +18,7 @@ namespace QDMarketPlace.Application.ViewModels.Blog
         public string Alias { set; get; }
 
         public string Content { set; get; }
+        public DateTime DateCreated { get; set; }
         public Status Status { set; get; }
     }
 }

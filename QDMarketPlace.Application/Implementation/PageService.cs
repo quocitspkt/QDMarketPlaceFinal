@@ -28,6 +28,7 @@ namespace QDMarketPlace.Application.Implementation
         public void Add(PageViewModel pageVm)
         {
             var page = _mapper.Map<PageViewModel, Page>(pageVm);
+            page.DateCreated = DateTime.Now;
             _pageRepository.Add(page);
         }
 

@@ -49,7 +49,7 @@ namespace QDMarketPlace.Application.AutoMapper
                 .ConstructUsing(c => new Feedback(c.Id, c.Name, c.Email, c.Message, c.Status));
 
             CreateMap<PageViewModel, Page>()
-             .ConstructUsing(c => new Page(c.Id, c.Name, c.Alias, c.Content, c.Status));
+             .ConstructUsing(c => new Page(c.Id, c.Name, c.Alias, c.Content, c.Status,c.DateCreated));
 
 
             CreateMap<AnnouncementViewModel, Announcement>()

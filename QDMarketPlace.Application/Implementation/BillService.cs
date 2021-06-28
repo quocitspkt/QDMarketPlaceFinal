@@ -125,7 +125,7 @@ namespace QDMarketPlace.Application.Implementation
                 {
                     if (int.Parse(item.DateCreated.ToString().Substring(5, 2)) == i)
                     {
-                        lst[i-1] += 1;
+                        lst[i+1] += 1;
                     }
                 }
                 

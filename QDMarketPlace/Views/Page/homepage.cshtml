@@ -1,0 +1,43 @@
+﻿@model List<QDMarketPlace.Application.ViewModels.Blog.PageViewModel>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="relative full-width">
+    <!-- Breadcrumb -->
+    <div class="container-web relative">
+        <div class="container">
+            <div class="row">
+                <div class="breadcrumb-web">
+                    <ul class="clear-margin">
+                        <li class="animate-default title-hover-red"><a href="/">Home</a></li>
+                        <li class="animate-default title-hover-red"><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumb -->
+    <!-- Content Blogs -->
+    <div class="relative container-web">
+        <div class="container">
+            <div class="row relative">
+                <div class=" relative clearfix full-width grid-box-content top-margin-default">
+                    <!-- Blog Son -->
+                    @foreach (var item in Model)
+                    {
+                        <div class="relative card grid-content-blogs">
+                            <div class="category-blog border no-border-t no-border-l no-border-r">
+
+                            </div>
+                            <p class="date-p-blog">@item.DateCreated</p>
+                            <h3 class="title-blog-in-category title-hover-black hover" ><a class="animate-default" href="#" style="color:black">@item.Name</a></h3>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Content Blogs -->
+</div>
