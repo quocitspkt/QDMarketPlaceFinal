@@ -244,7 +244,7 @@
             $.ajax({
                 type: "POST",
                 url: "/Admin/Product/Delete",
-                data: { id: that },
+                data: { id: id },
                 dataType: "json",
                 beforeSend: function () {
                     tedu.startLoading();
@@ -260,6 +260,7 @@
                 }
             });
         });
+          
     }
 
     function loadDetails(that) {
