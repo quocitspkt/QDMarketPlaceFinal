@@ -134,5 +134,11 @@ namespace QDMarketPlace.Application.Implementation
             await _userManager.AddPasswordAsync(user,pass );
             return pass;
         }
+
+        public int CountUser() 
+        {
+            List<AppUserViewModel> lst = _mapper.ProjectTo<AppUserViewModel>(_userManager.Users).ToList();
+            return lst.Count() - 1;
+        }
     }
 }

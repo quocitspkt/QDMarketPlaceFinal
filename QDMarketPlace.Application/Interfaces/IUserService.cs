@@ -23,5 +23,7 @@ namespace QDMarketPlace.Application.Interfaces
         Task UpdateAsync(AppUserViewModel userVm);
 
         Task<string> ForgotPasswordAsync(string email);
+
+        int CountUser();
     }
 }

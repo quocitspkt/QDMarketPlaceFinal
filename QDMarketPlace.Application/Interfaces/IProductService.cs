@@ -22,6 +22,7 @@ namespace QDMarketPlace.Application.Interfaces
         void Delete(int id);
 
         ProductViewModel GetById(int id);
+        int GetAmount(int productId);
 
         void ImportExcel(string filePath, int categoryId);
 
@@ -51,7 +52,8 @@ namespace QDMarketPlace.Application.Interfaces
 
         bool CheckAvailability(int productId, int size, int color);
 
-        
+        int CountProduct();
+        int CountProductAmount();
 
 
     }
