@@ -58,6 +58,7 @@ namespace QDMarketPlace.Data.EF
         public DbSet<Advertistment> Advertistments { get; set; }
         public DbSet<AdvertistmentPosition> AdvertistmentPositions { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Key> Keys { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -91,6 +92,7 @@ namespace QDMarketPlace.Data.EF
             builder.AddConfiguration(new PermissionConfiguration());
             builder.AddConfiguration(new FunctionConfiguration());
             builder.AddConfiguration(new CommentConfiguration());
+            builder.AddConfiguration(new KeyConfiguration());
 
             //base.OnModelCreating(builder);
         }

@@ -137,7 +137,7 @@ namespace QDMarketPlace.Application.Implementation
 
         public PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize)
         {
-            var query = _productRepository.FindAll(x => x.Status == Status.Active);
+            var query = _productRepository.FindAll();
             if (!string.IsNullOrEmpty(keyword))
                 query = query.Where(x => x.Name.Contains(keyword));
             if (categoryId.HasValue)
@@ -249,6 +249,7 @@ namespace QDMarketPlace.Application.Implementation
             {
                 product.ProductTags.Add(productTag);
             }
+            product.DateCreated = DateTime.Now;
             _productRepository.Update(product);
         }
 
