@@ -129,6 +129,10 @@ namespace QDMarketPlace.Data.Entities
         public DateTime DateModified {set;get;}
 
         public Status Status {set;get;}
-        public virtual Comment Comment { get; set; }
+
+        public bool IsDeleted { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Key> Keys { get; set; }
+
     }
 }

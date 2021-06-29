@@ -83,6 +83,7 @@ namespace QDMarketPlace.Areas.Admin.Controllers
                 }
                 else
                 {
+                    productVm.DateModified = DateTime.Now;
                     _productService.Update(productVm);
                 }
                 _productService.Save();

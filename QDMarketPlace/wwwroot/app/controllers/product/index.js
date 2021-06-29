@@ -189,7 +189,6 @@
             var seoMetaDescription = $('#txtMetaDescriptionM').val();
             var seoPageTitle = $('#txtSeoPageTitleM').val();
             var seoAlias = $('#txtSeoAliasM').val();
-
             var content = CKEDITOR.instances.txtContent.getData();
             var status = $('#ckStatusM').prop('checked') == true ? 1 : 0;
             var hot = $('#ckHotM').prop('checked');
@@ -285,7 +284,7 @@
                 $('#txtOriginalPriceM').val(data.OriginalPrice);
                 $('#txtPromotionPriceM').val(data.PromotionPrice);
 
-                // $('#txtImageM').val(data.ThumbnailImage);
+                $('#txtImage').val(data.Image);
 
                 $('#txtTagM').val(data.Tags);
                 $('#txtMetakeywordM').val(data.SeoKeywords);
