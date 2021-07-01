@@ -115,7 +115,7 @@
                                                 <i class="fa fa-star-o" aria-hidden="true"></i>
                                             </div>
                                             <p class="title-product clearfix full-width title-hover-black animate-default"><a class="animate-default" href="/@item.SeoAlias-p.@(item.Id).html">@item.Name</a></p>
-                                            <p class="clearfix price-product"><span class="price-old">@item.OriginalPrice₫</span> @item.PromotionPrice₫</p>
+                                            <p class="clearfix price-product"><span class="price-old">@item.Price.ToString("N0")₫</span> @item.PromotionPrice.Value.ToString("N0")₫</p>
                                         </div>
                                     }
                                     <!-- End Product Son -->

@@ -516,6 +516,7 @@ namespace QDMarketPlace.Controllers
         }
         public IActionResult CheckoutSuccess()
         {
+            
             return View();
         }
         #endregion AJAX Request
