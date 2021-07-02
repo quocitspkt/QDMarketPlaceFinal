@@ -39,8 +39,8 @@
                     Id: $(item).data('id'),
                     ProductId: $('#hidId').val(),
                     FromQuantity: $(item).find('input.txtQuantityFrom').first().val(),
-                    ToQuantity: $(item).find('input.txtQuantityTo').first().val(),
-                    Price: $(item).find('input.txtWholePrice').first().val(),
+                    //ToQuantity: $(item).find('input.txtQuantityTo').first().val(),
+                    //Price: $(item).find('input.txtWholePrice').first().val(),
                 });
             });
             $.ajax({

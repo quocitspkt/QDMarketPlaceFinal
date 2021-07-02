@@ -276,7 +276,7 @@ namespace QDMarketPlace.Application.Implementation
 
         public void AddWholePrice(int productId, List<WholePriceViewModel> wholePrices)
         {
-            _wholePriceRepository.RemoveMultiple(_wholePriceRepository.FindAll(x => x.ProductId == productId).ToList());
+            //_wholePriceRepository.RemoveMultiple(_wholePriceRepository.FindAll(x => x.ProductId == productId).ToList());
             foreach (var wholePrice in wholePrices)
             {
                 _wholePriceRepository.Add(new WholePrice()
@@ -286,6 +286,7 @@ namespace QDMarketPlace.Application.Implementation
                     ToQuantity = wholePrice.ToQuantity,
                     Price = wholePrice.Price
                 });
+                _unitOfWork.Commit();
             }
         }
 
