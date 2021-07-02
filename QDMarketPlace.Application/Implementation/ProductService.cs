@@ -410,5 +410,13 @@ namespace QDMarketPlace.Application.Implementation
             }
             return sum;
         }
+
+        public void SetUnitProduct(int productId,int quantity)
+        {
+            var product = _productRepository.FindById(productId);
+            product.Unit = (int.Parse(product.Unit) - quantity).ToString();
+            _productRepository.Update(product);
+            
+        }
     }
 }

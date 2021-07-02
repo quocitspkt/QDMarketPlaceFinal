@@ -25,6 +25,7 @@ namespace QDMarketPlace.Controllers
         private IProductService _productService;
         private IBillService _billService;
         private IViewRenderService _viewRenderService;
+        private IKeyService _keyService;
         private IConfiguration _configuration;
         private IEmailSender _emailSender;
         private readonly string _clientId;
@@ -33,15 +34,16 @@ namespace QDMarketPlace.Controllers
         public decimal TyGiaUSD = 23300;
         public CartController(IProductService productService,
             IViewRenderService viewRenderService, IEmailSender emailSender,
-            IConfiguration configuration, IBillService billService,IConfiguration config)
+            IConfiguration configuration, IBillService billService,IConfiguration config,IKeyService keyService)
         {
             _productService = productService;
             _billService = billService;
+            _keyService = keyService;
             _viewRenderService = viewRenderService;
             _configuration = configuration;
             _emailSender = emailSender;
             _clientId = config["PaypalSettings:ClientId"];
-            _secretKey = config["PaypalSettings:SecretKey"];
+            _secretKey = config["PaypalSettings:SecretKey"];  
         }
 
         [Route("cart.html", Name = "Cart")]
@@ -69,11 +71,6 @@ namespace QDMarketPlace.Controllers
         {
             var model = new CheckoutViewModel();
             var session = HttpContext.Session.Get<List<ShoppingCartViewModel>>(CommonConstants.CartSession);
-            /*if (session.Any(x => x.Color == null || x.Size == null))
-            {
-                return Redirect("/cart.html");
-            }*/
-
             model.Carts = session;
             return View(model);
         }
@@ -99,6 +96,7 @@ namespace QDMarketPlace.Controllers
                             ColorId = 1,
                             SizeId = 1,
                             Quantity = item.Quantity,
+                            Key = _keyService.GetById(item.Product.Id),
                             ProductId = item.Product.Id
 
                         });
@@ -120,7 +118,9 @@ namespace QDMarketPlace.Controllers
                         CustomerAddress = model.CustomerAddress,
                         CustomerName = model.CustomerName,
                         CustomerMessage = model.CustomerMessage,
-                        BillDetails = details
+                        BillDetails = details,
+                        DateCreated = DateTime.Now,
+                        
                     };
                     if (User.Identity.IsAuthenticated == true)
                     {
@@ -211,6 +211,14 @@ namespace QDMarketPlace.Controllers
                                     paypalRedirectUrl = lnk.Href;
                                 }
                             }
+                            foreach(var item  in Carts)
+                            {
+                                _productService.SetUnitProduct(item.Product.Id, item.Quantity);
+                                _productService.Save();
+                            }
+                            var content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
+                            //Send mail
+                            await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
                             HttpContext.Session.Remove(CommonConstants.CartSession);
 
                             return Redirect(paypalRedirectUrl);
@@ -511,12 +519,11 @@ namespace QDMarketPlace.Controllers
             }
         }
         public IActionResult CheckoutFail()
-        {
+        { 
             return View();
         }
         public IActionResult CheckoutSuccess()
         {
-            
             return View();
         }
         #endregion AJAX Request

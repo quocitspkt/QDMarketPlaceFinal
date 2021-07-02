@@ -181,6 +181,7 @@ namespace QDMarketPlace
             services.AddTransient<IPageService, PageService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IAnnouncementService, AnnouncementService>();
+            services.AddTransient<IKeyService, KeyService>();
 
             services.AddTransient<IAuthorizationHandler, BaseResourceAuthorizationHandler>();
 

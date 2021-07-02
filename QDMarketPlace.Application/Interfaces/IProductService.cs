@@ -32,7 +32,6 @@ namespace QDMarketPlace.Application.Interfaces
         void AddQuantity(int productId, List<ProductQuantityViewModel> quantities);
 
         List<ProductQuantityViewModel> GetQuantities(int productId);
-
         void AddImages(int productId, string[] images);
 
         List<ProductImageViewModel> GetImages(int productId);
@@ -54,6 +53,7 @@ namespace QDMarketPlace.Application.Interfaces
 
         int CountProduct();
         int CountProductAmount();
+        void SetUnitProduct(int productId,int quantity);
 
 
     }

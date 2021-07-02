@@ -9,9 +9,11 @@ namespace QDMarketPlace.Data.Entities
     [Table("Keys")]
     public class Key:DomainEntity<int>
     {
+        
         public int ProductId { get; set; }
         public string Value { get; set; }
         public bool Status { get; set; }
+        [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
     }
 }
