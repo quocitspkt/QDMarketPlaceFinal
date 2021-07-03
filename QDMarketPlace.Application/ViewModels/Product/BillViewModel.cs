@@ -38,6 +38,7 @@ namespace QDMarketPlace.Application.ViewModels.Product
         public Status Status { set; get; }
 
         public Guid? CustomerId { set; get; }
+        public string Key { get; set; }
 
         public List<BillDetailViewModel> BillDetails { set; get; }
     }

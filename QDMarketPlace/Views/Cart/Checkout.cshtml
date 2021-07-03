@@ -65,12 +65,12 @@
                                 <li class="row">
                                     <div class="col-sm-6">
                                         <label class="required">Tên đầy đủ</label>
-                                        <input class="input form-control" type="text" asp-for="CustomerName">
+                                        <input class="input form-control" type="text" asp-for="CustomerName" value="@User.GetSpecificClaim("FullName")">
                                     </div>
                                     <!--/ [col] -->
                                     <div class="col-sm-6">
                                         <label class="required">Điện thoại</label>
-                                        <input class="input form-control" type="text" asp-for="CustomerMobile">
+                                        <input class="input form-control" type="text" asp-for="CustomerMobile" value="@User.GetSpecificClaim("PhoneNumber")">
                                     </div>
                                 </li>
                                 <!--/ .row -->
@@ -79,7 +79,7 @@
                                 <li class="row">
                                     <div class="col-xs-12">
                                         <label class="required">Địa chỉ Email</label>
-                                        <input class="input form-control" type="text" asp-for="CustomerAddress">
+                                        <input class="input form-control" type="text" asp-for="CustomerAddress" value="@User.GetSpecificClaim("Email")">
                                     </div>
                                     <!--/ [col] -->
 

@@ -24,9 +24,10 @@ namespace QDMarketPlace.Application.Implementation
         private IRepository<ProductTag, int> _productTagRepository;
         private IRepository<ProductQuantity, int> _productQuantityRepository;
         private IRepository<ProductImage, int> _productImageRepository;
-        private IRepository<WholePrice, int> _wholePriceRepository;
+        private IRepository<ProductKey, int> _wholePriceRepository;
         private IRepository<Bill, int> _billRepository;
         private IRepository<BillDetail, int> _billDetailRepository;
+        private IRepository<ProductKey, int> _productKeyRepository;
         private readonly IMapper _mapper;
         private IUnitOfWork _unitOfWork;
 
@@ -34,9 +35,10 @@ namespace QDMarketPlace.Application.Implementation
             IRepository<Tag, string> tagRepository,
             IRepository<ProductQuantity, int> productQuantityRepository,
             IRepository<ProductImage, int> productImageRepository,
-            IRepository<WholePrice, int> wholePriceRepository,
+            IRepository<ProductKey, int> wholePriceRepository,
             IRepository<Bill,int> billRepository,
             IRepository<BillDetail,int> billDetailRepository,
+            IRepository<ProductKey, int> productKeyRepository,
         IUnitOfWork unitOfWork,
         IRepository<ProductTag, int> productTagRepository, IMapper mapper)
         {
@@ -48,6 +50,7 @@ namespace QDMarketPlace.Application.Implementation
             _productImageRepository = productImageRepository;
             _billRepository = billRepository;
             _billDetailRepository = billDetailRepository;
+            _productKeyRepository = productKeyRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -274,26 +277,66 @@ namespace QDMarketPlace.Application.Implementation
             }
         }
 
-        public void AddWholePrice(int productId, List<WholePriceViewModel> wholePrices)
+        public void AddWholePrice(int productId, List<ProductKeyViewModel> WholePrices)
         {
-            _wholePriceRepository.RemoveMultiple(_wholePriceRepository.FindAll(x => x.ProductId == productId).ToList());
-            foreach (var wholePrice in wholePrices)
+            //Get list key with status is true
+            var productKeys = _wholePriceRepository.FindAll(x => x.ProductId == productId);
+            var query = from p in productKeys
+                        where p.Status == true
+                        select p;
+            foreach(var itemProductKey in query.ToList())
             {
-                _wholePriceRepository.Add(new WholePrice()
+                var count = 0;
+                foreach (var itemWholePrice in WholePrices)
+                {
+                    
+                    if (itemWholePrice.Key.Contains(itemProductKey.Key))
+                    {
+                        break;
+                    }
+                    if (!itemWholePrice.Key.Contains(itemProductKey.Key))
+                    {
+                        count = count + 1;
+                    }
+                    if(count == WholePrices.Count())
+                    {
+                        var key = _productKeyRepository.FindById(itemProductKey.Id);
+                        key.Status = false;
+                        _productKeyRepository.Update(key);
+                        _unitOfWork.Commit();
+                    }    
+                }
+            }
+            var productKeyLast = _wholePriceRepository.FindAll(x => x.ProductId == productId);
+            var queryLast = from p in productKeyLast
+                        where p.Status == true
+                        select p;
+            //Delete list key
+            _wholePriceRepository.RemoveMultiple(queryLast.ToList());
+            foreach (var wholePrice in WholePrices)
+            {
+                _wholePriceRepository.Add(new ProductKey()
                 {
                     ProductId = productId,
-                    FromQuantity = wholePrice.FromQuantity,
-                    ToQuantity = wholePrice.ToQuantity,
-                    Price = wholePrice.Price
+                    Key = wholePrice.Key,
+                    Status = true,
                 });
+                _unitOfWork.Commit();
             }
         }
 
-        public List<WholePriceViewModel> GetWholePrices(int productId)
+        public List<ProductKeyViewModel> GetWholePrices(int productId)
         {
-            return _mapper.ProjectTo<WholePriceViewModel>(
-                _wholePriceRepository.FindAll(x => x.ProductId == productId)
-                ).ToList();
+            var productKeys = _wholePriceRepository.FindAll(x => x.ProductId == productId);
+
+            var query = from p in productKeys
+                        where p.Status == true
+                        select p;
+
+            //return _mapper.ProjectTo<ProductKeyViewModel>(
+            //    _wholePriceRepository.FindAll(x => x.ProductId == productId)
+            //    ).ToList();
+            return _mapper.ProjectTo<ProductKeyViewModel>(query).ToList();
         }
 
         public List<ProductViewModel> GetLastest(int top)
@@ -409,6 +452,14 @@ namespace QDMarketPlace.Application.Implementation
 
             }
             return sum;
+        }
+
+        public void SetUnitProduct(int productId,int quantity)
+        {
+            var product = _productRepository.FindById(productId);
+            product.Unit = (int.Parse(product.Unit) - quantity).ToString();
+            _productRepository.Update(product);
+            
         }
     }
 }

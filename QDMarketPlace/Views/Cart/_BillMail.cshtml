@@ -1,32 +1,33 @@
 ﻿@model BillViewModel
-<h1>Panda Shop new bill</h1>
+<h1>Đơn hàng của bạn từ QDMarketPlace</h1>
 <table>
     <tr>
-        <td>Customer Name</td>
+        <td>Tên khách hàng</td>
         <td>@Model.CustomerName</td>
     </tr>
     <tr>
-        <td>Address</td>
+        <td>Địa chỉ email</td>
         <td>@Model.CustomerAddress</td>
     </tr>
     <tr>
-        <td>Phone</td>
+        <td>Điện thoại</td>
         <td>@Model.CustomerMobile</td>
     </tr>
     <tr>
-        <td>Date</td>
+        <td>Ngày mua</td>
         <td>@Model.DateCreated.ToString("dd/MM/yyyy hh:mm")</td>
     </tr>
     <tr>
-        <td>Details</td>
+        <td>Chi tiết</td>
         <td>
             <table>
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Key</th>
+                        <th>Giá</th>
+                        <th>Tổng cộng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,16 +35,17 @@
                     {
                         <tr>
                             <td>@item.Product.Name</td>
-                            <td>@item.Quantity</td>
-                            <td>@item.Price</td>
-                            <td>@((item.Quantity * item.Price).ToString("N0"))</td>
+                            <td style="text-align:center">@item.Quantity</td>
+                            <td style="text-align:center">@item.Key</td>
+                            <td style="text-align:center">@item.Price.ToString("N0")</td>
+                            <td style="text-align:center">@((item.Quantity * item.Price).ToString("N0"))</td>
                         </tr>
                     }
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="5">
-                            Total: @Model.BillDetails.Sum(x => x.Quantity * x.Price).ToString("N0")
+                            Tổng cộng: @Model.BillDetails.Sum(x => x.Quantity * x.Price).ToString("N0")đ
                         </td>
                     </tr>
                 </tfoot>
