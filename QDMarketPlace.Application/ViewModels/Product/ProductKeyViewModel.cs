@@ -4,14 +4,12 @@ using System.Text;
 
 namespace QDMarketPlace.Application.ViewModels.Product
 {
-    public class WholePriceViewModel
+    public class ProductKeyViewModel
     {
         public int ProductId { get; set; }
 
-        public int FromQuantity { get; set; }
+        public string Key { get; set; }
 
-        public int ToQuantity { get; set; }
-
-        public decimal Price { get; set; }
+        public bool Status { get; set; }
     }
 }

@@ -6,17 +6,15 @@ using QDMarketPlace.Infrastructure.SharedKernel;
 
 namespace QDMarketPlace.Data.Entities
 {
-    [Table("WholePrices")]
-    public class WholePrice : DomainEntity<int>
+    [Table("ProductKeys")]
+    public class ProductKey : DomainEntity<int>
     {
         
         public int ProductId { get; set; }
 
-        public int FromQuantity { get; set; }
+        public string Key { get; set; }
 
-        public int ToQuantity { get; set; }
-
-        public decimal Price { get; set; }
+        public bool Status { get; set; }
 
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }

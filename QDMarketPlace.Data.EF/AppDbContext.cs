@@ -52,7 +52,7 @@ namespace QDMarketPlace.Data.EF
         public DbSet<Tag> Tags { set; get; }
 
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<WholePrice> WholePrices { get; set; }
+        public DbSet<ProductKey> WholePrices { get; set; }
 
         public DbSet<AdvertistmentPage> AdvertistmentPages { get; set; }
         public DbSet<Advertistment> Advertistments { get; set; }

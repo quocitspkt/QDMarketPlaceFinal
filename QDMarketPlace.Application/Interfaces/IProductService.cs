@@ -36,9 +36,9 @@ namespace QDMarketPlace.Application.Interfaces
 
         List<ProductImageViewModel> GetImages(int productId);
 
-        void AddWholePrice(int productId, List<WholePriceViewModel> wholePrices);
+        void AddWholePrice(int productId, List<ProductKeyViewModel> WholePrices);
 
-        List<WholePriceViewModel> GetWholePrices(int productId);
+        List<ProductKeyViewModel> GetWholePrices(int productId);
 
         List<ProductViewModel> GetLastest(int top);
 

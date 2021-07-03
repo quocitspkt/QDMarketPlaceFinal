@@ -38,7 +38,7 @@
                 priceList.push({
                     Id: $(item).data('id'),
                     ProductId: $('#hidId').val(),
-                    FromQuantity: $(item).find('input.txtQuantityFrom').first().val(),
+                    Key: $(item).find('input.txtQuantityFrom').first().val(),
                     //ToQuantity: $(item).find('input.txtQuantityTo').first().val(),
                     //Price: $(item).find('input.txtWholePrice').first().val(),
                 });
@@ -47,7 +47,7 @@
                 url: '/admin/Product/SaveWholePrice',
                 data: {
                     productId: $('#hidId').val(),
-                    wholePrices: priceList
+                    WholePrices: priceList
                 },
                 type: 'post',
                 dataType: 'json',
@@ -72,9 +72,9 @@
                 $.each(response, function (i, item) {
                     render += Mustache.render(template, {
                         Id: item.Id,
-                        FromQuantity: item.FromQuantity,
-                        ToQuantity: item.ToQuantity,
-                        Price: item.Price
+                        Key: item.Key,
+                        //ToQuantity: item.ToQuantity,
+                        //Price: item.Price
                     });
                 });
                 $('#table-content-whole-price').html(render);
