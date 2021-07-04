@@ -102,7 +102,7 @@ namespace QDMarketPlace.Controllers
                 Text = x.Name,
                 Value = x.Id.ToString()
             }).ToList();
-
+            ViewBag.Amount = _productService.GetAmount(id);
             return View(model);
         }
 
