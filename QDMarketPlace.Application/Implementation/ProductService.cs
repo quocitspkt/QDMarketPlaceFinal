@@ -109,7 +109,10 @@ namespace QDMarketPlace.Application.Implementation
 
         public void Delete(int id)
         {
-            _productRepository.Remove(id);
+            var product = _productRepository.FindSingle(x => x.Id == id);
+            product.IsDeleted = true;
+            _productRepository.Update(product);
+
         }
 
         public void Dispose()
@@ -140,7 +143,7 @@ namespace QDMarketPlace.Application.Implementation
 
         public PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize)
         {
-            var query = _productRepository.FindAll();
+            var query = _productRepository.FindAll(x => x.IsDeleted == false);
             if (!string.IsNullOrEmpty(keyword))
                 query = query.Where(x => x.Name.Contains(keyword));
             if (categoryId.HasValue)
@@ -404,8 +407,8 @@ namespace QDMarketPlace.Application.Implementation
 
         public int GetAmount(int productId)
         {
-            var quantity = _productQuantityRepository.FindSingle(x => x.ProductId == productId);
-            return quantity.Quantity;
+            var quantity = _productRepository.FindSingle(x => x.Id == productId);
+            return int.Parse(quantity.Unit);
         }
 
         public List<PurchaseHistoryViewModel> GetPurchaseHistory(Guid id)

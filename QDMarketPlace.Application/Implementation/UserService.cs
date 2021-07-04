@@ -50,7 +50,8 @@ namespace QDMarketPlace.Application.Implementation
         public async Task DeleteAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            await _userManager.DeleteAsync(user);
+            user.IsDeleted = true;
+            await _userManager.UpdateAsync(user);
         }
 
         public async Task<List<AppUserViewModel>> GetAllAsync()
@@ -60,7 +61,7 @@ namespace QDMarketPlace.Application.Implementation
 
         public PagedResult<AppUserViewModel> GetAllPagingAsync(string keyword, int page, int pageSize)
         {
-            var query = _userManager.Users;
+            var query = _userManager.Users.Where(x => x.IsDeleted == false);
             if (!string.IsNullOrEmpty(keyword))
                 query = query.Where(x => x.FullName.Contains(keyword)
                 || x.UserName.Contains(keyword)
