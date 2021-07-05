@@ -33,6 +33,7 @@ namespace QDMarketPlace.Controllers
         private readonly string _secretKey;
 
         public decimal TyGiaUSD = 23300;
+        public static string content;
         public CartController(IProductService productService,
             IViewRenderService viewRenderService, IEmailSender emailSender,
             IConfiguration configuration, IBillService billService,IConfiguration config,IKeyService keyService)
@@ -214,7 +215,7 @@ namespace QDMarketPlace.Controllers
                                 }
                             }
                             
-                            //var content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
+                            content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
                             //Send mail
                             //await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
                             
@@ -517,11 +518,12 @@ namespace QDMarketPlace.Controllers
         { 
             return View();
         }
-        public async Task<IActionResult> CheckoutSuccess()
+        public async Task<IActionResult> CheckoutSuccess(CheckoutViewModel model)
         {
-            var model = new CheckoutViewModel();
             var session = HttpContext.Session.Get<List<ShoppingCartViewModel>>(CommonConstants.CartSession);
             model.Carts = session;
+            if (session == null)
+                return View();
 
             var details = new List<BillDetailViewModel>();
             foreach (var item in session)
@@ -537,15 +539,7 @@ namespace QDMarketPlace.Controllers
                     ProductId = item.Product.Id
 
                 });
-                var billDetailViewModel = new BillDetailViewModel()
-                {
-                    Product = item.Product,
-                    Price = item.Price,
-                    ColorId = 1,
-                    SizeId = 1,
-                    Quantity = item.Quantity,
-                    ProductId = item.Product.Id
-                };
+                
             }
 
             var billViewModel = new BillViewModel()
@@ -565,7 +559,7 @@ namespace QDMarketPlace.Controllers
                 _productService.Save();
             }
 
-            var content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
+            //var content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
             //Send mail
             await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
             HttpContext.Session.Remove(CommonConstants.CartSession);
