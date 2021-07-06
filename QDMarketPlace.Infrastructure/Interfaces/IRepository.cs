@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace QDMarketPlace.Infrastructure.Interfaces
 {
@@ -25,5 +26,6 @@ namespace QDMarketPlace.Infrastructure.Interfaces
         void Remove(K id);
 
         void RemoveMultiple(List<T> entities);
+
     }
 }

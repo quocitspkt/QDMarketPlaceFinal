@@ -84,7 +84,7 @@ namespace QDMarketPlace.Controllers
         public async Task<IActionResult> Checkout(CheckoutViewModel model)
         {
             var session = HttpContext.Session.Get<List<ShoppingCartViewModel>>(CommonConstants.CartSession);
-
+            
             if (ModelState.IsValid)
             {
                 if (session != null)
@@ -92,6 +92,12 @@ namespace QDMarketPlace.Controllers
                     var details = new List<BillDetailViewModel>();
                     foreach (var item in session)
                     {
+                        //string keys = "";
+                        //for (int i = 0; i < item.Quantity; i++)
+                        //{
+                        //    keys = keys + _keyService.GetById(item.Product.Id) + ", ";
+                        //    //_keyService.Save();
+                        //}
                         details.Add(new BillDetailViewModel()
                         {
                             Product = item.Product,
@@ -99,7 +105,7 @@ namespace QDMarketPlace.Controllers
                             ColorId = 1,
                             SizeId = 1,
                             Quantity = item.Quantity,
-                            Key = _keyService.GetById(item.Product.Id),
+                            Key = _keyService.GetById(item.Product.Id,item.Quantity),
                             ProductId = item.Product.Id
 
                         });
@@ -332,6 +338,7 @@ namespace QDMarketPlace.Controllers
                     Color = _billService.GetColor(color),
                     Size = _billService.GetSize(size),
                     Price = product.PromotionPrice ?? product.Price
+                    //Price = product.Price
                 });
                 HttpContext.Session.Set(CommonConstants.CartSession, cart);
             }
@@ -525,34 +532,34 @@ namespace QDMarketPlace.Controllers
             if (session == null)
                 return View();
 
-            var details = new List<BillDetailViewModel>();
-            foreach (var item in session)
-            {
-                details.Add(new BillDetailViewModel()
-                {
-                    Product = item.Product,
-                    Price = item.Price,
-                    ColorId = 1,
-                    SizeId = 1,
-                    Quantity = item.Quantity,
-                    Key = _keyService.GetById(item.Product.Id),
-                    ProductId = item.Product.Id
+            //var details = new List<BillDetailViewModel>();
+            //foreach (var item in session)
+            //{
+            //    details.Add(new BillDetailViewModel()
+            //    {
+            //        Product = item.Product,
+            //        Price = item.Price,
+            //        ColorId = 1,
+            //        SizeId = 1,
+            //        Quantity = item.Quantity,
+            //        Key = _keyService.GetById(item.Product.Id),
+            //        ProductId = item.Product.Id
 
-                });
+            //    });
                 
-            }
+            //}
 
-            var billViewModel = new BillViewModel()
-            {
-                CustomerMobile = model.CustomerMobile,
-                BillStatus = BillStatus.New,
-                CustomerAddress = model.CustomerAddress,
-                CustomerName = model.CustomerName,
-                CustomerMessage = model.CustomerMessage,
-                BillDetails = details,
-                DateCreated = DateTime.Now,
+            //var billViewModel = new BillViewModel()
+            //{
+            //    CustomerMobile = model.CustomerMobile,
+            //    BillStatus = BillStatus.New,
+            //    CustomerAddress = model.CustomerAddress,
+            //    CustomerName = model.CustomerName,
+            //    CustomerMessage = model.CustomerMessage,
+            //    BillDetails = details,
+            //    DateCreated = DateTime.Now,
 
-            };
+            //};
             foreach (var item in Carts)
             {
                 _productService.SetUnitProduct(item.Product.Id, item.Quantity);

@@ -6,7 +6,7 @@ namespace QDMarketPlace.Application.Interfaces
 {
     public interface IKeyService :IDisposable
     {
-        string GetById(int productId);
+        string GetById(int productId, int quantity);
         void Save();
     }
 }

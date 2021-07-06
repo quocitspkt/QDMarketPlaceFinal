@@ -96,26 +96,33 @@
                                 <div class="owl-carousel owl-theme">
                                     @foreach (var item in Model.TopSellProducts)
                                     {
-                                        <div class=" product-son ">
-                                            <div class="clearfix image-product relative animate-default">
-                                                <div class="center-vertical-image">
-                                                    <img src="@item.Image" alt="Product @item.Name" />
-                                                </div>
-                                                <ul class="option-product animate-default">
-                                                    <li class="relative"><a href="#"><i class="data-icon data-icon-ecommerce icon-ecommerce-bag"></i></a></li>
-                                                    <li class="relative"><a href="#"><i class="data-icondata-icon-basic icon-basic-heart" aria-hidden="true"></i></a></li>
-                                                    <li class="relative"><a href="#"><i class="data-icon data-icon-basic icon-basic-magnifier" aria-hidden="true"></i></a></li>
-                                                </ul>
+                                    <div class=" product-son ">
+                                        <div class="clearfix image-product relative animate-default">
+                                            <div class="center-vertical-image">
+                                                <img src="@item.Image" alt="Product @item.Name" />
                                             </div>
-                                            <div class="clearfix ranking">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-half" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            </div>
-                                            <p class="title-product clearfix full-width title-hover-black animate-default"><a class="animate-default" href="/@item.SeoAlias-p.@(item.Id).html">@item.Name</a></p>
+                                            <ul class="option-product animate-default">
+                                                <li class="relative"><a href="#"><i class="data-icon data-icon-ecommerce icon-ecommerce-bag"></i></a></li>
+                                                <li class="relative"><a href="#"><i class="data-icondata-icon-basic icon-basic-heart" aria-hidden="true"></i></a></li>
+                                                <li class="relative"><a href="#"><i class="data-icon data-icon-basic icon-basic-magnifier" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix ranking">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-half" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="title-product clearfix full-width title-hover-black animate-default"><a class="animate-default" href="/@item.SeoAlias-p.@(item.Id).html">@item.Name</a></p>
+                                        @if (item.PromotionPrice != null)
+                                        {
                                             <p class="clearfix price-product"><span class="price-old">@item.Price.ToString("N0")₫</span> @item.PromotionPrice.Value.ToString("N0")₫</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="clearfix price-product"> @item.Price.ToString("N0")₫</p>
+                                        }
                                         </div>
                                     }
                                     <!-- End Product Son -->
