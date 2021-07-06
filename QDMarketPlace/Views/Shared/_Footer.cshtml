@@ -112,9 +112,36 @@
                 </a>
             </div>
         </div>
-        <a id="fb-chat-app" target="blank" href="https://www.messenger.com/t/3570595946328886">
+        @*<a id="fb-chat-app" target="blank" href="https://www.messenger.com/t/3570595946328886">
             <img src="~/images/facebook-messenger.png" alt="Chat Facebook" title="Chat Facebook" width="60" class="lazyloading" data-was-processed="true">
-        </a>
+        </a>*@
+        <!-- Messenger Plugin chat Code -->
+        <div id="fb-root"></div>
+
+        <!-- Your Plugin chat code -->
+        <div id="fb-customer-chat" class="fb-customerchat">
+        </div>
+
+        <script>
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "109855358027782");
+            chatbox.setAttribute("attribution", "biz_inbox");
+
+            window.fbAsyncInit = function () {
+                FB.init({
+                    xfbml: true,
+                    version: 'v11.0'
+                });
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
 
     </footer>
     <script src="~/client-side-1/js/jquery-3.3.1.min.js" defer=""></script>
