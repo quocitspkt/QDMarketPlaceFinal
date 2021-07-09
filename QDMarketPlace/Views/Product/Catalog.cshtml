@@ -53,8 +53,14 @@
                                     <div class="product-item">
                                         <div class="item-inner">
                                             <div class="product-thumbnail">
-                                                <div class="icon-sale-label sale-left">Sale</div>
-                                                <div class="icon-new-label new-right">New</div>
+                                                @if (item.PromotionPrice != null)
+                                                {
+                                                    <div class="icon-sale-label sale-left">Sale</div>
+                                                }
+                                                @if (DateTime.Now.Day - item.DateCreated.Day <= 3)
+                                                {
+                                                    <div class="icon-new-label new-right">New</div>
+                                                }
                                                 <div class="pr-img-area">
                                                     <a title="Ipsums Dolors Untra" href="@url">
                                                         <figure> <img class="first-img" src="@item.Image" alt="@item.Name"> <img class="hover-img" src="@item.Image" alt="@item.Name"></figure>

@@ -17,6 +17,7 @@ using QDMarketPlace.Data.Entities;
 using QDMarketPlace.Data.Enums;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
 using QDMarketPlace.Utilities.Constants;
+using QDMarketPlace.Extensions;
 
 namespace QDMarketPlace.Controllers
 {
@@ -487,5 +488,19 @@ namespace QDMarketPlace.Controllers
         }
 
         #endregion
+        [Route("account.html")]
+        public IActionResult MyAccount()
+        {
+
+            var accountDetail = new AccountDetailViewModel();
+            var user = _userManager.FindByIdAsync(User.GetSpecificClaim("UserId"));
+            accountDetail.FullName = user.Result.FullName;
+            accountDetail.Email = user.Result.Email;
+            accountDetail.BirthDay = user.Result.BirthDay;
+            accountDetail.DateCreated = user.Result.DateCreated;
+            accountDetail.PhoneNumber = user.Result.PhoneNumber;
+            accountDetail.Status = user.Result.Status;
+            return View(accountDetail);
+        }
     }
 }
