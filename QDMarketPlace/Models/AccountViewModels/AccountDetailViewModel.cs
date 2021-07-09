@@ -8,9 +8,10 @@ namespace QDMarketPlace.Models.AccountViewModels
 {
     public class AccountDetailViewModel
     {
+        public Guid Id { get; set; }
         public string FullName { get; set; }
 
-        public DateTime? BirthDay { set; get; }
+        public DateTime BirthDay { set; get; }
 
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
