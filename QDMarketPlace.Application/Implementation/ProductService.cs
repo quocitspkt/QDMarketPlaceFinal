@@ -172,7 +172,7 @@ namespace QDMarketPlace.Application.Implementation
                 query = query.Where(x => x.Name.Contains(keyword));
             if (categoryId.HasValue)
                 query = query.Where(x => x.CategoryId == categoryId.Value);
-
+            query = query.Where(x => x.Status == Status.Active);
             int totalRow = query.Count();
             switch (sortBy)
             {
@@ -497,11 +497,11 @@ namespace QDMarketPlace.Application.Implementation
 
         public int CountProductAmount()
         {
-            List<ProductQuantityViewModel> quantity = _mapper.ProjectTo < ProductQuantityViewModel >(_productQuantityRepository.FindAll(x => x.ColorId == 1 && x.SizeId == 1)).ToList();
+            List<ProductViewModel> quantity = _mapper.ProjectTo < ProductViewModel >(_productRepository.FindAll()).ToList();
             int sum = 0;
-            foreach ( ProductQuantityViewModel item in quantity)
+            foreach ( ProductViewModel item in quantity)
             {
-                sum += item.Quantity;
+                sum += int.Parse(item.Unit);
 
             }
             return sum;

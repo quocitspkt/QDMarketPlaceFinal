@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../../lib/angular/angular.js" />
 
 angular.module("app", ["chart.js"]).controller("BarCtrl", function ($scope) {
-    $scope.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; $scope.data = [[0,0,0,2,2,6,0,0,0,0,0,0]];
+    $scope.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; $scope.data = [[6, 8, 10, 20, 44, 48, 74,0,0,0,0,0]];
     //$.ajax({
     //    url: "/Admin/Home/GetCountInMont",
     //    dataType: "json",
