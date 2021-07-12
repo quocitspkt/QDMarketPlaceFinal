@@ -1,6 +1,6 @@
 ﻿@model ExternalLoginViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Đăng ký";
 }
 
 <!-- Breadcrumbs -->
@@ -11,7 +11,7 @@
             <div class="col-xs-12">
                 <ul>
                     <li class="home"> <a title="Go to Home Page" href="/">Home</a><span>&raquo;</span></li>
-                    <li><strong>Associate your @ViewData["LoginProvider"] account.</strong></li>
+                    <li><strong>Liên kết tài khoản @ViewData["LoginProvider"] của bạn.</strong></li>
                 </ul>
             </div>
         </div>
@@ -26,27 +26,26 @@
                 <div class="col-md-3 col-sm-2"></div>
                 <div class="col-md-6 col-sm-8">
                     <p class="text-info">
-                        You've successfully authenticated with <strong>@ViewData["LoginProvider"]</strong>.
-                        Please enter an email address for this site below and click the Register button to finish
-                        logging in.
+                        Bạn đã xác thực thành công tài khoản <strong>@ViewData["LoginProvider"]</strong>.
+                        Vui lòng nhập địa chỉ email cho trang web này bên dưới và nhấp vào nút Đăng ký để hoàn tất quá trình đăng nhập.
                     </p>
                     <div class="single-input p-bottom50 clearfix">
                         <form asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="col-sm-6">
-                                <label asp-for="FullName"></label>
+                                <label asp-for="FullName">Họ và tên:</label>
                                 <div class="input-text">
                                     <input type="text" asp-for="FullName" name="fullName" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label>DOB:</label>
+                                <label>Ngày sinh:</label>
                                 <div class="input-text">
                                     <input type="date" asp-for="DOB" name="dob" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label>Phone Number:</label>
+                                <label>Số điện thoại:</label>
                                 <div class="input-text">
                                     <input type="text" name="phoneNumber" asp-for="PhoneNumber" class="form-control">
                                 </div>
@@ -60,7 +59,7 @@
                             </div>
                             <div class="col-xs-12">
                                 <div class="submit-text">
-                                    <button type="submit" class="button"><i class="fa fa-user"></i>&nbsp; <span>Register</span></button>
+                                    <button type="submit" class="button"><i class="fa fa-user"></i>&nbsp; <span>Đăng ký</span></button>
                                 </div>
                             </div>
                         </form>
