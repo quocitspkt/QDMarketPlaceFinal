@@ -12,7 +12,7 @@
             <div class="col-xs-12">
                 <ul>
                     <li class="home"> <a title="Go to Home Page" href="/">Home</a><span>&raquo;</span></li>
-                    <li><strong>Search result: @Model.Keyword</strong></li>
+                    <li><strong>Kết quả tìm kiếm: @Model.Keyword</strong></li>
                 </ul>
             </div>
         </div>
@@ -26,14 +26,14 @@
             <div class="col-main col-sm-12 col-xs-12">
                 <div class="shop-inner">
                     <div class="page-title">
-                        <h2>Search result: @Model.Keyword</h2>
+                        <h2>Kết quả tìm kiếm: @Model.Keyword</h2>
                     </div>
                     <div class="toolbar column">
                         <form action="/search.html" method="get">
                             <input type="hidden" name="keyword" value="@Model.Keyword" />
                             <div class="sorter">
                                 <div class="short-by">
-                                    <label>Sort By:</label>
+                                    <label>Sắp xếp theo:</label>
                                     <select name="sortBy" asp-for="SortType"
                                             onchange="this.form.submit()" asp-items="Model.SortTypes"></select>
                                 </div>
