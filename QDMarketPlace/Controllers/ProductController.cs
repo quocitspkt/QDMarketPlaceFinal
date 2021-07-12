@@ -58,7 +58,7 @@ namespace QDMarketPlace.Controllers
 
             catalog.PageSize = pageSize;
             catalog.SortType = sortBy;
-            catalog.Data = _productService.GetAllPaging(id, string.Empty, page, pageSize.Value);
+            catalog.Data = _productService.GetAllPaging(id, string.Empty, page, pageSize.Value,sortBy);
             catalog.Category = _productCategoryService.GetById(id);
 
             return View(catalog);
@@ -75,7 +75,8 @@ namespace QDMarketPlace.Controllers
 
             catalog.PageSize = pageSize;
             catalog.SortType = sortBy;
-            catalog.Data = _productService.GetAllPaging(null, keyword, page, pageSize.Value);
+            catalog.Data = _productService.GetAllPaging(null, keyword, page, pageSize.Value, sortBy);
+                 
             catalog.Keyword = keyword;
 
             return View(catalog);

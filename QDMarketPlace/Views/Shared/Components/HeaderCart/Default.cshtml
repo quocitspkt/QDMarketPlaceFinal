@@ -27,7 +27,7 @@
                     </div>
                     <div class="info-product-cart float-left">
                         <p class="title-product title-hover-black"><a class="animate-default" href="@url">@item.Product.Name</a></p>
-                        <p class="clearfix price-product">@item.Product.PromotionPrice.Value.ToString("N0")đ <span class="">(x @item.Quantity)</span></p>
+                        <p class="clearfix price-product">@item.Price.ToString("N0")đ <span class="">(x @item.Quantity)</span></p>
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
         </div>
         <div class="relative border no-border-l no-border-r total-cart-header">
             <p class="bold clear-margin">Tổng cộng:</p>
-            <p class=" clear-margin bold">@Model.Sum(x => x.Quantity * x.Product.PromotionPrice).Value.ToString("N0")đ </p>
+            <p class=" clear-margin bold">@Model.Sum(x => x.Quantity * x.Price).ToString("N0")đ </p>
         </div>
         <div class="relative btn-cart-header">
             <a href="/cart.html" class="uppercase bold animate-default">Xem giỏ hàng</a>

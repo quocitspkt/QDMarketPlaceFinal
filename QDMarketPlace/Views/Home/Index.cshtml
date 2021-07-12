@@ -23,7 +23,7 @@
                     <!-- Menu -->
                     <div class="clearfix menu-web relative">
                         <ul>
-                            <li><a href="/san-pham-khuyen-mai-c.14.html"><img src="/client-side-1/img/icon-UuDai01-01.png" alt="Icon Hot Deals" /> <p style="color:white">Sản phẩm khuyến mãi</p></a></li>
+                            <li><a href="/san-pham-khuyen-mai-c.17.html"><img src="/client-side-1/img/icon-UuDai01-01.png" alt="Icon Hot Deals" /> <p style="color:white">Sản phẩm khuyến mãi</p></a></li>
                             <li><a href="/gian-hang-uy-tin-c.2.html"><img src="/client-side-1/img/icon-shop-01.png" alt="Icon Food" /> <p style="color:white">Gian hàng uy tín</p></a></li>
                             <li><a href="/key-game-stream-c.3.html"><img src="/client-side-1/img/icon-steam03-01.png" alt="Icon Mobile & Tablet" /> <p style="color:white">Key Game Stream</p></a></li>
                             <li><a href="/key-game-orgin-c.4.html"><img src="/client-side-1/img/icon-steam03-01.png" alt="Icon Electric Appliances" /> <p style="color:white">Key Game Orgin</p></a></li>
@@ -96,26 +96,33 @@
                                 <div class="owl-carousel owl-theme">
                                     @foreach (var item in Model.TopSellProducts)
                                     {
-                                        <div class=" product-son ">
-                                            <div class="clearfix image-product relative animate-default">
-                                                <div class="center-vertical-image">
-                                                    <img src="@item.Image" alt="Product @item.Name" />
-                                                </div>
-                                                <ul class="option-product animate-default">
-                                                    <li class="relative"><a href="#"><i class="data-icon data-icon-ecommerce icon-ecommerce-bag"></i></a></li>
-                                                    <li class="relative"><a href="#"><i class="data-icondata-icon-basic icon-basic-heart" aria-hidden="true"></i></a></li>
-                                                    <li class="relative"><a href="#"><i class="data-icon data-icon-basic icon-basic-magnifier" aria-hidden="true"></i></a></li>
-                                                </ul>
+                                    <div class=" product-son ">
+                                        <div class="clearfix image-product relative animate-default">
+                                            <div class="center-vertical-image">
+                                                <img src="@item.Image" alt="Product @item.Name" />
                                             </div>
-                                            <div class="clearfix ranking">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-half" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            </div>
-                                            <p class="title-product clearfix full-width title-hover-black animate-default"><a class="animate-default" href="/@item.SeoAlias-p.@(item.Id).html">@item.Name</a></p>
+                                            <ul class="option-product animate-default">
+                                                <li class="relative"><a href="#"><i class="data-icon data-icon-ecommerce icon-ecommerce-bag"></i></a></li>
+                                                <li class="relative"><a href="#"><i class="data-icondata-icon-basic icon-basic-heart" aria-hidden="true"></i></a></li>
+                                                <li class="relative"><a href="#"><i class="data-icon data-icon-basic icon-basic-magnifier" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix ranking">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-half" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="title-product clearfix full-width title-hover-black animate-default"><a class="animate-default" href="/@item.SeoAlias-p.@(item.Id).html">@item.Name</a></p>
+                                        @if (item.PromotionPrice != null)
+                                        {
                                             <p class="clearfix price-product"><span class="price-old">@item.Price.ToString("N0")₫</span> @item.PromotionPrice.Value.ToString("N0")₫</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="clearfix price-product"> @item.Price.ToString("N0")₫</p>
+                                        }
                                         </div>
                                     }
                                     <!-- End Product Son -->

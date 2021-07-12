@@ -34,7 +34,7 @@ namespace QDMarketPlace.Application.Implementation
             GC.SuppressFinalize(this);
         }
 
-        public string GetById(int productId)
+        public string GetById(int productId,int quantity)
         {
             var products = _productRepository.FindAll();
             var keys = _productKeyRepository.FindAll();
@@ -50,13 +50,18 @@ namespace QDMarketPlace.Application.Implementation
                             id = k.Id
                         };
             string kq = "";
+            int count = 0;
             foreach(var item in query)
             {
                 if(item.status)
                 {
-                    kq = item.value;
+                    kq = kq+item.value+", ";
                     RemoveKey(item.id);
-                    break;
+                    count = count + 1;
+                    if(count >= quantity)
+                    {
+                        break;
+                    }     
                 }    
             }    
             return kq;
@@ -67,6 +72,7 @@ namespace QDMarketPlace.Application.Implementation
             var key = _productKeyRepository.FindById(keyId);
             key.Status = false;
             _productKeyRepository.Update(key);
+            
         }
 
         public void Save()

@@ -20,7 +20,7 @@
     <tr>
         <td>Chi tiết</td>
         <td>
-            <table>
+            <table style="border-style:solid">
                 <thead>
                     <tr>
                         <th>Sản phẩm</th>
@@ -44,7 +44,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="5">
+                        <td colspan="5" style="font-weight:100;color:black">
                             Tổng cộng: @Model.BillDetails.Sum(x => x.Quantity * x.Price).ToString("N0")đ
                         </td>
                     </tr>

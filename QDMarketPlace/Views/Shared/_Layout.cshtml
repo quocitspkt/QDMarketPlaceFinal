@@ -27,6 +27,7 @@
     <meta name="keywords" content="@ViewData["MetaDescription"]" />
     <meta property="fb:app_id" content="794671461248018" />
 
+
     <!-- Mobile specific metas  -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -45,11 +46,25 @@
     </style>
 
     <!-- Favicons Icon -->
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="~/icon-01.png">
     <link href="~/lib/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
     <!-- CSS Style -->
     <link rel="stylesheet" href="~/client-side/style.css">
     <link href="~/lib/HotPhoneRing.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat%7CRoboto:100,300,400,500,700,900%7CRoboto+Condensed:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/icon-font-linea.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/effect.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/home.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/responsive.css">
+    
 </head>
 
 <body class="@ViewData["BodyClass"]">
@@ -72,8 +87,9 @@
         <!-- Footer -->
         <partial name="_Footer.cshtml" />
         <!-- End Footer -->
+        
     </div>
-
+    
     <!-- JS -->
     <!-- jquery js -->
     <script type="text/javascript" src="~/client-side/js/jquery.min.js"></script>
@@ -85,14 +101,15 @@
     <script type="text/javascript" src="~/client-side/js/owl.carousel.min.js"></script>
 
     <!-- jquery.mobile-menu js -->
-    <script type="text/javascript" src="~/client-side/js/mobile-menu.js"></script>
+    @*<script type="text/javascript" src="~/client-side/js/mobile-menu.js"></script>*@
 
     <!--jquery-ui.min js -->
     <script type="text/javascript" src="~/client-side/js/jquery-ui.js"></script>
 
     <!-- main js -->
-    <script type="text/javascript" src="~/client-side/js/main.js"></script>
-
+    @*<script type="text/javascript" src="~/client-side/js/main.js"></script>*@
+    <script src="~/client-side/js/main.js"></script>
+    <script src="~/client-side/js/mobile-menu.js"></script>
     <!-- countdown js -->
     <script type="text/javascript" src="~/client-side/js/countdown.js"></script>
 

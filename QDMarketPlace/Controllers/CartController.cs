@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 using PayPal.Core;
 using PayPal.Payments;
 using BraintreeHttp;
+using PaulMiami.AspNetCore.Mvc.Recaptcha;
 
 namespace QDMarketPlace.Controllers
 {
@@ -32,6 +33,7 @@ namespace QDMarketPlace.Controllers
         private readonly string _secretKey;
 
         public decimal TyGiaUSD = 23300;
+        public static string content;
         public CartController(IProductService productService,
             IViewRenderService viewRenderService, IEmailSender emailSender,
             IConfiguration configuration, IBillService billService,IConfiguration config,IKeyService keyService)
@@ -77,11 +79,12 @@ namespace QDMarketPlace.Controllers
 
         [Route("checkout.html", Name = "Checkout")]
         [ValidateAntiForgeryToken]
+        [ValidateRecaptcha]
         [HttpPost]
         public async Task<IActionResult> Checkout(CheckoutViewModel model)
         {
             var session = HttpContext.Session.Get<List<ShoppingCartViewModel>>(CommonConstants.CartSession);
-
+            
             if (ModelState.IsValid)
             {
                 if (session != null)
@@ -89,6 +92,12 @@ namespace QDMarketPlace.Controllers
                     var details = new List<BillDetailViewModel>();
                     foreach (var item in session)
                     {
+                        //string keys = "";
+                        //for (int i = 0; i < item.Quantity; i++)
+                        //{
+                        //    keys = keys + _keyService.GetById(item.Product.Id) + ", ";
+                        //    //_keyService.Save();
+                        //}
                         details.Add(new BillDetailViewModel()
                         {
                             Product = item.Product,
@@ -96,7 +105,7 @@ namespace QDMarketPlace.Controllers
                             ColorId = 1,
                             SizeId = 1,
                             Quantity = item.Quantity,
-                            Key = _keyService.GetById(item.Product.Id),
+                            Key = _keyService.GetById(item.Product.Id,item.Quantity),
                             ProductId = item.Product.Id
 
                         });
@@ -163,25 +172,25 @@ namespace QDMarketPlace.Controllers
                         {
                             Intent = "sale",
                             Transactions = new List<Transaction>()
-                {
-                    new Transaction()
-                    {
-                        Amount = new Amount()
-                        {
-                            Total = total.ToString(),
-                            Currency = "USD",
-                            Details = new AmountDetails
                             {
-                                Tax ="0",
-                                Shipping ="0",
-                                Subtotal = total.ToString()
-                            }
-                        },
-                        ItemList = itemList,
-                        Description =$"Invoice #{paypalOrderId}",
-                        InvoiceNumber = paypalOrderId.ToString()
-                    }
-                },
+                                new Transaction()
+                                {
+                                    Amount = new Amount()
+                                    {
+                                        Total = total.ToString(),
+                                        Currency = "USD",
+                                        Details = new AmountDetails
+                                        {
+                                            Tax ="0",
+                                            Shipping ="0",
+                                            Subtotal = total.ToString()
+                                        }
+                                    },
+                                    ItemList = itemList,
+                                    Description =$"Invoice #{paypalOrderId}",
+                                    InvoiceNumber = paypalOrderId.ToString()
+                                }
+                            },
                             RedirectUrls = new RedirectUrls
                             {
                                 CancelUrl = $"{hostname}/Cart/CheckoutFail",
@@ -211,15 +220,11 @@ namespace QDMarketPlace.Controllers
                                     paypalRedirectUrl = lnk.Href;
                                 }
                             }
-                            foreach(var item  in Carts)
-                            {
-                                _productService.SetUnitProduct(item.Product.Id, item.Quantity);
-                                _productService.Save();
-                            }
-                            var content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
+                            
+                            content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
                             //Send mail
-                            await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
-                            HttpContext.Session.Remove(CommonConstants.CartSession);
+                            //await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
+                            
 
                             return Redirect(paypalRedirectUrl);
                         }
@@ -231,12 +236,8 @@ namespace QDMarketPlace.Controllers
                             //Process when Checkout with Paypal fails
                             return Redirect("/Cart/CheckoutFail");
                         }
-
-                        //var content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
-                        //Send mail
-                        //await _emailSender.SendEmailAsync(_configuration["MailSettings:AdminMail"], "New bill from Panda Shop", content);
-                        ViewData["Success"] = true;
                         
+                        ViewData["Success"] = true;  
                     }
                     catch (Exception ex)
                     {
@@ -245,6 +246,7 @@ namespace QDMarketPlace.Controllers
                     }
                 }
             }
+            
             model.Carts = session;
             return View(model);
         }
@@ -336,6 +338,7 @@ namespace QDMarketPlace.Controllers
                     Color = _billService.GetColor(color),
                     Size = _billService.GetSize(size),
                     Price = product.PromotionPrice ?? product.Price
+                    //Price = product.Price
                 });
                 HttpContext.Session.Set(CommonConstants.CartSession, cart);
             }
@@ -530,8 +533,51 @@ namespace QDMarketPlace.Controllers
         { 
             return View();
         }
-        public IActionResult CheckoutSuccess()
+        public async Task<IActionResult> CheckoutSuccess(CheckoutViewModel model)
         {
+            var session = HttpContext.Session.Get<List<ShoppingCartViewModel>>(CommonConstants.CartSession);
+            model.Carts = session;
+            if (session == null)
+                return View();
+
+            //var details = new List<BillDetailViewModel>();
+            //foreach (var item in session)
+            //{
+            //    details.Add(new BillDetailViewModel()
+            //    {
+            //        Product = item.Product,
+            //        Price = item.Price,
+            //        ColorId = 1,
+            //        SizeId = 1,
+            //        Quantity = item.Quantity,
+            //        Key = _keyService.GetById(item.Product.Id),
+            //        ProductId = item.Product.Id
+
+            //    });
+                
+            //}
+
+            //var billViewModel = new BillViewModel()
+            //{
+            //    CustomerMobile = model.CustomerMobile,
+            //    BillStatus = BillStatus.New,
+            //    CustomerAddress = model.CustomerAddress,
+            //    CustomerName = model.CustomerName,
+            //    CustomerMessage = model.CustomerMessage,
+            //    BillDetails = details,
+            //    DateCreated = DateTime.Now,
+
+            //};
+            foreach (var item in Carts)
+            {
+                _productService.SetUnitProduct(item.Product.Id, item.Quantity);
+                _productService.Save();
+            }
+
+            //var content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
+            //Send mail
+            await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
+            HttpContext.Session.Remove(CommonConstants.CartSession);
             return View();
         }
         #endregion AJAX Request

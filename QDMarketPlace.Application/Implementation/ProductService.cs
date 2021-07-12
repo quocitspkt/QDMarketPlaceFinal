@@ -150,9 +150,58 @@ namespace QDMarketPlace.Application.Implementation
                 query = query.Where(x => x.CategoryId == categoryId.Value);
 
             int totalRow = query.Count();
-
             query = query.OrderByDescending(x => x.DateCreated)
                 .Skip((page - 1) * pageSize).Take(pageSize);
+
+            var data = _mapper.ProjectTo<ProductViewModel>(query).ToList();
+            
+            var paginationSet = new PagedResult<ProductViewModel>()
+            {
+                Results = data,
+                CurrentPage = page,
+                RowCount = totalRow,
+                PageSize = pageSize
+            };
+            
+            return paginationSet;
+        }
+        public PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize,string sortBy)
+        {
+            var query = _productRepository.FindAll(x => x.IsDeleted == false);
+            if (!string.IsNullOrEmpty(keyword))
+                query = query.Where(x => x.Name.Contains(keyword));
+            if (categoryId.HasValue)
+                query = query.Where(x => x.CategoryId == categoryId.Value);
+            query = query.Where(x => x.Status == Status.Active);
+            int totalRow = query.Count();
+            switch (sortBy)
+            {
+                case "DateCreated":
+                    {
+                        query = query.OrderByDescending(x => x.DateCreated)
+                            .Skip((page - 1) * pageSize).Take(pageSize);
+                        break;
+                    }
+                case "Price":
+                    {
+                        query = query.OrderByDescending(x => x.Price)
+                            .Skip((page - 1) * pageSize).Take(pageSize);
+                        break;
+                    }
+                case "Name":
+                    {
+                        query = query.OrderByDescending(x => x.Name)
+                        .Skip((page - 1) * pageSize).Take(pageSize);
+                        break;
+                    }
+                default:
+                    {
+                        query = query.OrderByDescending(x => x.DateCreated)
+                            .Skip((page - 1) * pageSize).Take(pageSize);
+                        break;
+                    }
+                    
+            }    
 
             var data = _mapper.ProjectTo<ProductViewModel>(query).ToList();
 
@@ -163,6 +212,7 @@ namespace QDMarketPlace.Application.Implementation
                 RowCount = totalRow,
                 PageSize = pageSize
             };
+
             return paginationSet;
         }
 
@@ -447,11 +497,11 @@ namespace QDMarketPlace.Application.Implementation
 
         public int CountProductAmount()
         {
-            List<ProductQuantityViewModel> quantity = _mapper.ProjectTo < ProductQuantityViewModel >(_productQuantityRepository.FindAll(x => x.ColorId == 1 && x.SizeId == 1)).ToList();
+            List<ProductViewModel> quantity = _mapper.ProjectTo < ProductViewModel >(_productRepository.FindAll()).ToList();
             int sum = 0;
-            foreach ( ProductQuantityViewModel item in quantity)
+            foreach ( ProductViewModel item in quantity)
             {
-                sum += item.Quantity;
+                sum += int.Parse(item.Unit);
 
             }
             return sum;

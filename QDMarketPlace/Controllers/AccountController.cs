@@ -17,12 +17,17 @@ using QDMarketPlace.Data.Entities;
 using QDMarketPlace.Data.Enums;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
 using QDMarketPlace.Utilities.Constants;
+using QDMarketPlace.Extensions;
+using QDMarketPlace.Application.Interfaces;
+using QDMarketPlace.Application.ViewModels.System;
 
 namespace QDMarketPlace.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        IUserService _userService;
+
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -32,12 +37,13 @@ namespace QDMarketPlace.Controllers
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _userService = userService;
         }
 
         [TempData]
@@ -487,5 +493,36 @@ namespace QDMarketPlace.Controllers
         }
 
         #endregion
+        [Route("account.html")]
+        public IActionResult MyAccount()
+        {
+
+            var accountDetail = new AccountDetailViewModel();
+            var user = _userManager.FindByIdAsync(User.GetSpecificClaim("UserId"));
+            accountDetail.FullName = user.Result.FullName;
+            accountDetail.Email = user.Result.Email;
+            accountDetail.BirthDay = (DateTime)user.Result.BirthDay;
+            accountDetail.DateCreated = user.Result.DateCreated;
+            accountDetail.PhoneNumber = user.Result.PhoneNumber;
+            accountDetail.Status = user.Result.Status;
+            return View(accountDetail);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateAccount(AccountDetailViewModel model)
+        {
+            var appUser = new AppUserViewModel();
+            appUser.FullName = model.FullName;
+            appUser.BirthDay = model.BirthDay;
+            appUser.DateCreated = model.DateCreated;
+            appUser.Id = Guid.Parse(User.GetSpecificClaim("UserId"));
+            appUser.Email = model.Email;
+            appUser.Status = Status.Active;
+            appUser.PhoneNumber = model.PhoneNumber;
+            //_userService.UpdateAccountAsync(appUser);
+            await _userService.UpdateAsync(appUser);
+            _userService.Save();
+            return View(model);
+            
+        }
     }
 }

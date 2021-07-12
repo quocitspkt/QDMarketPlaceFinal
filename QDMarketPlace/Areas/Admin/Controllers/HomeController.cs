@@ -41,6 +41,7 @@ namespace QDMarketPlace.Areas.Admin.Controllers
             ViewBag.CountBillInMonth = CountInMonth();
 
             ViewBag.TotalMoney = _billService.TotalMoney();
+            
             ViewBag.QuantityTotal = Total()[0];
             ViewBag.Money = Total()[1];
 

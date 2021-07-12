@@ -41,7 +41,6 @@
             <div class="col-main">
                 <div class="product-view-area">
                     <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
-                        <div class="icon-sale-label sale-left">Sale</div>
                         <div class="large-image" style="width:300px"> <a href="@product.Image" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" src="@product.Image" alt="@product.Name"> </a> </div>
                         <div class="flexslider flexslider-thumb">
                             <ul class="previews-list slides">
@@ -147,7 +146,7 @@
                                         <div class="std">
                                             @Html.Raw(product.Content)
                                         </div>
-                                        <div class="fb-comments " data-href="https://qdmarketplace.azurewebsites.net/@product.SeoAlias-p.@(product.Id).html" data-width="1135" data-numposts="5"></div>
+                                        <div class="fb-comments " data-href="https://qdmarketplace.azurewebsites.net/@product.SeoAlias-p.@(product.Id).html" data-width="100%" data-numposts="5" data-mobile></div>
                                     </div>
                                 </div>
                             </div>
