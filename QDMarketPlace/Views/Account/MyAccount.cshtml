@@ -22,7 +22,11 @@
     <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="~/client-side-1/css/responsive.css">
+    <link href="~/lib/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+
 </head>
+
 <div class="relative full-width">
     <div class="container-web relative">
         <div class="container">
@@ -38,7 +42,7 @@
     </div>
     <div class="relative container-web">
         <div class="container">
-            <div class="row relative"> 
+            <div class="row relative">
                 <div class="col-md-8 col-sm-12 col-xs-12 relative left-content-shoping clear-padding-left">
                     <p class="title-shoping-cart">Thông tin tài khoản</p>
                     <form method="POST" action="/Account/UpdateAccount" class="form-placeholde-animate">
@@ -69,15 +73,28 @@
                             </div>
                         </div>
                         <div class="relative justify-content form-login-checkout" style="margin-top:10px">
-                            <button type="submit" class="animate-default button-hover-red">Cập nhật</button>
+                            <button type="submit" class="animate-default button-hover-red" id="btn_update_account">Cập nhật</button>
                         </div>
-                    </form> 
+                        <div>
+                            <h1 id="test">Test</h1>
+                        </div>
+                    </form>
                 </div>
                 <!-- End Content Shoping Cart -->
             </div>
         </div>
     </div>
 </div>
+
+<script src="~/lib/notifyjs/dist/notify.js"></script>
+<script src="~/lib/notifyjs/dist/styles/metro/notify-metro.js"></script>
+<script src="~/app/shared/tedu.js"></script>
+<script>
+    $('#test').click(function () {
+        tedu.notify('Save user succesful', 'success');
+
+    })
+</script>
 <script src="~/client-side-1/js/jquery-3.3.1.min.js" defer=""></script>
 <script src="~/client-side-1/js/bootstrap.min.js" defer=""></script>
 <script src="~/client-side-1/js/multirange.js" defer=""></script>

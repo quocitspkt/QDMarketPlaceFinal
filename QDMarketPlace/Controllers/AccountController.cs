@@ -508,7 +508,7 @@ namespace QDMarketPlace.Controllers
             return View(accountDetail);
         }
         [HttpPost]
-        public IActionResult UpdateAccount(AccountDetailViewModel model)
+        public async Task<IActionResult> UpdateAccount(AccountDetailViewModel model)
         {
             var appUser = new AppUserViewModel();
             appUser.FullName = model.FullName;
@@ -517,9 +517,12 @@ namespace QDMarketPlace.Controllers
             appUser.Id = Guid.Parse(User.GetSpecificClaim("UserId"));
             appUser.Email = model.Email;
             appUser.Status = Status.Active;
-            _userService.UpdateAccountAsync(appUser);
+            appUser.PhoneNumber = model.PhoneNumber;
+            //_userService.UpdateAccountAsync(appUser);
+            await _userService.UpdateAsync(appUser);
             _userService.Save();
             return View(model);
+            
         }
     }
 }

@@ -51,11 +51,11 @@
                         <div class="relative clearfix full-width">
                             <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
                                 <label>Email</label>
-                                <input class="full-width" type="text" name="Email" value="@Model.Email">
+                                <input class="full-width" type="email" name="Email" value="@Model.Email">
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
                                 <label>Điện thoại</label>
-                                <input class="full-width" type="text" name="PhoneNumber" value="@Model.PhoneNumber">
+                                <input class="full-width" type="number" name="PhoneNumber" value="@Model.PhoneNumber">
                             </div>
                         </div>
                         <div class="relative clearfix full-width">
@@ -70,6 +70,9 @@
                         </div>
                         <div class="relative justify-content form-login-checkout" style="margin-top:10px">
                             <button type="submit" class="animate-default button-hover-red">Cập nhật</button>
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Cập nhật thành công!</h4>
+                            </div>
                         </div>
                     </form>
                 </div>
