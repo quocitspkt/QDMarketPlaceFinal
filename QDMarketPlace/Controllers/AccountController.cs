@@ -524,5 +524,10 @@ namespace QDMarketPlace.Controllers
             return View(model);
             
         }
+
+        public void Method()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
