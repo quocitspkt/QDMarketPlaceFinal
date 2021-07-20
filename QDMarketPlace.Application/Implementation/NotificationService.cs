@@ -19,7 +19,7 @@ namespace QDMarketPlace.Application.Implementation
         {
             // create message
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("xuanducpham1201@gmail.com"));
+            email.From.Add(MailboxAddress.Parse("quocitspkt@idrive.vn"));
             email.To.Add(MailboxAddress.Parse(to));
             email.Subject = subject;
             email.Body = new TextPart(TextFormat.Html) { Text = body };
@@ -27,7 +27,7 @@ namespace QDMarketPlace.Application.Implementation
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("xuanducpham1201@gmail.com", "XuanDuc@1201.bd");
+            smtp.Authenticate("quocitspkt@idrive.vn", "Dauchodau1");
             smtp.Send(email);
             smtp.Disconnect(true);
         }

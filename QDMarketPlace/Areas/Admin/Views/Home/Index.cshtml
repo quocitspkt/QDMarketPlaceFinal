@@ -65,32 +65,32 @@
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-user"></i></div>
             <div class="count">@countUser</div>
-            <h3>The number of Users</h3>
-            <p>on the total user</p>
+            <h3>Số lượng thành viên</h3>
+            @*<p>Tổng cộng</p>*@
         </div>
     </div>
     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-product-hunt"></i></div>
             <div class="count">@countProduct</div>
-            <h3>The number of Products</h3>
-            <p>on the total product category</p>
+            <h3>Số lượng sản phẩm</h3>
+            @*<p>Tổng cộng</p>*@
         </div>
     </div>
     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-product-hunt"></i></div>
             <div class="count">@countProductAmount</div>
-            <h3>The number of Products</h3>
-            <p>on the total number of products</p>
+            <h3>Tổng số lượng đơn vị sản phẩm</h3>
+            @*<p>on the total number of products</p>*@
         </div>
     </div>
     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="tile-stats">
             <div class="icon"><i class="fa fa-first-order"></i></div>
             <div class="count">@countBill</div>
-            <h3>The number of Bills</h3>
-            <p>on the total number of bills</p>
+            <h3>Số lượng đơn hàng</h3>
+            @*<p>on the total number of bills</p>*@
         </div>
     </div>
 </div>
@@ -104,7 +104,7 @@
 <div class="row" >
     <div class="col-md-6 col-sm-6 col-xs-6" ng-app="app">
         <div class="x_panel" ng-controller="BarCtrl">
-            <h3 class="item-info">The number of bills per month</h3>
+            <h3 class="item-info">Số lượng đơn hàng mỗi tháng</h3>
             <canvas id="bar" class="chart chart-bar"
                     chart-data="data" chart-labels="labels"
                     chart-series="series">
@@ -113,12 +113,12 @@
     </div>
     <div class="col-md-6 col-sm-6 col-xs-6">
         <div class="x_panel">
-            <h3 class="item-info">The number of bill percent month!</h3>
+            <h3 class="item-info">Số lượng đơn hàng mỗi tháng</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Month</th>
-                        <th>Quantity</th>
+                        <th>Tháng</th>
+                        <th>Số lượng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -140,10 +140,10 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ProductId</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Money</th>
+                        <th>Mã sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng tiền</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -207,7 +207,7 @@
                             </span>
                         </div>
                         <div class="col-md-6 tile">
-                            <span>Total Revenue</span>
+                            <span>Tổng cộng</span>
                             <h2>@money (thousand Dong)</h2>
                             <span class="sparkline22 graph" style="height: 160px;">
                                 <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>

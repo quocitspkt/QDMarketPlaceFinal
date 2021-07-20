@@ -79,13 +79,13 @@
                                     <span class="price"> @product.Price.ToString("N0") </span>
                                 </p>
                             }
-
-                        </div>
-                        <div class="ratings">
-                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <p class="rating-links"> <a href="#">1 lượt xem</a> <span class="separator"></span> <a href="#"></a> </p>
                             <p class="availability @(product.Status==QDMarketPlace.Data.Enums.Status.Active?"in-stock":"out-of-stock") pull-right">Số lượng: <span>@amount</span></p>
                         </div>
+                        <!--<div class="ratings">-->
+                            @*<div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                            <p class="rating-links"> <a href="#">1 lượt xem</a> <span class="separator"></span> <a href="#"></a> </p>*@
+                            <!--<p class="availability @(product.Status==QDMarketPlace.Data.Enums.Status.Active?"in-stock":"out-of-stock") pull-right">Số lượng: <span>@amount</span></p>
+                        </div>-->
                         <div class="short-description">
                             <h2>Tổng quan</h2>
                             @product.Description
@@ -106,13 +106,13 @@
                                 <button class="button pro-add-to-cart" id="btnAddToCart" data-id="@Model.Product.Id" title="Add to Cart" type="button"><span><i class="fa fa-shopping-basket"></i> Thêm vào giỏ </span></button>
                             </form>
                         </div>
-                        <div class="product-cart-option">
+                        @*<div class="product-cart-option">
                             <ul>
                                 <li><a href="#"><i class="fa fa-heart-o"></i><span>Add to Wishlist</span></a></li>
                                 <li><a href="#"><i class="fa fa-link"></i><span>Add to Compare</span></a></li>
                                 <li><a href="#"><i class="fa fa-envelope"></i><span>Email to a Friend</span></a></li>
                             </ul>
-                        </div>
+                        </div>*@
                         @if (Model.Tags.Count > 0)
                         {
                             <div class="pro-tags">
@@ -193,7 +193,6 @@
                                                 <div class="info-inner">
                                                     <div class="item-title"> <a title="@item.Name" href="@url">@item.Name</a> </div>
                                                     <div class="item-content">
-                                                        <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                                                         <div class="item-price">
                                                             <div class="price-box">
                                                                 <span class="regular-price">
