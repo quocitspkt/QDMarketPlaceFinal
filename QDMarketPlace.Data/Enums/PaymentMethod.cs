@@ -10,7 +10,7 @@ namespace QDMarketPlace.Data.Enums
         
         [Description("PayPal")]
         PayPal,
-        [Description("MoMo")]
+        [Description("Thanh toán khi nhận hàng")]
         MoMo
     }
 }

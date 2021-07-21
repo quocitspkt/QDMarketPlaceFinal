@@ -7,7 +7,7 @@ namespace QDMarketPlace.Data.Enums
 {
     public enum BillStatus
     {
-        [Description("Hoàn tất")]
+        [Description("Đơn mới")]
         New,
         [Description("Đang xử lý")]
         InProgress,
@@ -15,7 +15,7 @@ namespace QDMarketPlace.Data.Enums
         Returned,
         [Description("Đã hủy")]
         Cancelled,
-        [Description("Đơn mới")]
+        [Description("Hoàn tất")]
         Completed
     }
 }
