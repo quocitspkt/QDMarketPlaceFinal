@@ -92,12 +92,6 @@ namespace QDMarketPlace.Controllers
                     var details = new List<BillDetailViewModel>();
                     foreach (var item in session)
                     {
-                        //string keys = "";
-                        //for (int i = 0; i < item.Quantity; i++)
-                        //{
-                        //    keys = keys + _keyService.GetById(item.Product.Id) + ", ";
-                        //    //_keyService.Save();
-                        //}
                         details.Add(new BillDetailViewModel()
                         {
                             Product = item.Product,
@@ -119,59 +113,84 @@ namespace QDMarketPlace.Controllers
                             ProductId = item.Product.Id
                         };
                         _billService.CreateDetail(billDetailViewModel);
-                    }
-                    var billViewModel = new BillViewModel()
-                    {
-                        CustomerMobile = model.CustomerMobile,
-                        BillStatus = BillStatus.New,
-                        CustomerAddress = model.CustomerAddress,
-                        CustomerName = model.CustomerName,
-                        CustomerMessage = model.CustomerMessage,
-                        BillDetails = details,
-                        DateCreated = DateTime.Now,
                         
-                    };
-                    if (User.Identity.IsAuthenticated == true)
-                    {
-                        billViewModel.CustomerId = Guid.Parse(User.GetSpecificClaim("UserId"));
                     }
-                    _billService.Create(billViewModel);
                     
-                    
-                    try
+                    if(model.PaymentMethod==PaymentMethod.MoMo)
                     {
-
-                        _billService.Save();
-                        var environment = new SandboxEnvironment(_clientId, _secretKey);
-                        var client = new PayPalHttpClient(environment);
-
-
-                        #region Create paypal order
-                        var itemList = new ItemList()
+                        var billViewModel = new BillViewModel()
                         {
-                            Items = new List<Item>()
+                            CustomerMobile = model.CustomerMobile,
+                            BillStatus = BillStatus.New,
+                            CustomerAddress = model.CustomerAddress,
+                            CustomerName = model.CustomerName,
+                            CustomerMessage = model.CustomerMessage,
+                            PaymentMethod = model.PaymentMethod,
+                            BillDetails = details,
+                            DateCreated = DateTime.Now,
+
                         };
-                        var total = Math.Round(Carts.Sum(p => p.TotalPrice) / TyGiaUSD, 2);
-                        foreach (var item in Carts)
+                        if (User.Identity.IsAuthenticated == true)
                         {
-                            itemList.Items.Add(new Item()
-                            {
-                                Name = item.Product.Name,
-                                Currency = "USD",
-                                Price = Math.Round(item.Price / TyGiaUSD, 2).ToString(),
-                                Quantity = item.Quantity.ToString(),
-                                Sku = "sku",
-                                Tax = "0"
-
-                            });
+                            billViewModel.CustomerId = Guid.Parse(User.GetSpecificClaim("UserId"));
                         }
-                        #endregion
-                        var paypalOrderId = DateTime.Now.Ticks;
-                        var hostname = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
-                        var payment = new Payment()
+                        _billService.Create(billViewModel);
+                        _billService.Save();
+                        return Redirect("/Cart/CheckoutSuccess");
+                    }    
+
+                    if (model.PaymentMethod == PaymentMethod.PayPal)
+                    {
+                        try
                         {
-                            Intent = "sale",
-                            Transactions = new List<Transaction>()
+                            var billViewModel = new BillViewModel()
+                            {
+                                CustomerMobile = model.CustomerMobile,
+                                BillStatus = BillStatus.Completed,
+                                CustomerAddress = model.CustomerAddress,
+                                CustomerName = model.CustomerName,
+                                CustomerMessage = model.CustomerMessage,
+                                PaymentMethod = model.PaymentMethod,
+                                BillDetails = details,
+                                DateCreated = DateTime.Now,
+
+                            };
+                            if (User.Identity.IsAuthenticated == true)
+                            {
+                                billViewModel.CustomerId = Guid.Parse(User.GetSpecificClaim("UserId"));
+                            }
+                            _billService.Create(billViewModel);
+                            _billService.Save();
+                            var environment = new SandboxEnvironment(_clientId, _secretKey);
+                            var client = new PayPalHttpClient(environment);
+
+
+                            #region Create paypal order
+                            var itemList = new ItemList()
+                            {
+                                Items = new List<Item>()
+                            };
+                            var total = Math.Round(Carts.Sum(p => p.TotalPrice) / TyGiaUSD, 2);
+                            foreach (var item in Carts)
+                            {
+                                itemList.Items.Add(new Item()
+                                {
+                                    Name = item.Product.Name,
+                                    Currency = "USD",
+                                    Price = Math.Round(item.Price / TyGiaUSD, 2).ToString(),
+                                    Quantity = item.Quantity.ToString(),
+                                    Sku = "sku",
+                                    Tax = "0"
+
+                                });
+                            }
+                            #endregion
+                            var paypalOrderId = DateTime.Now.Ticks;
+                            var hostname = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+                            var payment = new Payment()
+                            {
+                                Intent = "sale",
+                                Transactions = new List<Transaction>()
                             {
                                 new Transaction()
                                 {
@@ -191,58 +210,59 @@ namespace QDMarketPlace.Controllers
                                     InvoiceNumber = paypalOrderId.ToString()
                                 }
                             },
-                            RedirectUrls = new RedirectUrls
-                            {
-                                CancelUrl = $"{hostname}/Cart/CheckoutFail",
-                                ReturnUrl = $"{hostname}/Cart/CheckoutSuccess"
-                            },
-                            Payer = new Payer()
-                            {
-                                PaymentMethod = "paypal"
-                            }
-                        };
-                        PaymentCreateRequest request = new PaymentCreateRequest();
-                        request.RequestBody(payment);
-                        try
-                        {
-                            var response = await client.Execute(request);
-                            var statusCode = response.StatusCode;
-                            Payment result = response.Result<Payment>();
-
-                            var links = result.Links.GetEnumerator();
-                            string paypalRedirectUrl = null;
-                            while (links.MoveNext())
-                            {
-                                LinkDescriptionObject lnk = links.Current;
-                                if (lnk.Rel.ToLower().Trim().Equals("approval_url"))
+                                RedirectUrls = new RedirectUrls
                                 {
-                                    //saving the payapalredirect URL to which user will be redirected for payment  
-                                    paypalRedirectUrl = lnk.Href;
+                                    CancelUrl = $"{hostname}/Cart/CheckoutFail",
+                                    ReturnUrl = $"{hostname}/Cart/CheckoutSuccess"
+                                },
+                                Payer = new Payer()
+                                {
+                                    PaymentMethod = "paypal"
                                 }
+                            };
+                            PaymentCreateRequest request = new PaymentCreateRequest();
+                            request.RequestBody(payment);
+                            try
+                            {
+                                var response = await client.Execute(request);
+                                var statusCode = response.StatusCode;
+                                Payment result = response.Result<Payment>();
+
+                                var links = result.Links.GetEnumerator();
+                                string paypalRedirectUrl = null;
+                                while (links.MoveNext())
+                                {
+                                    LinkDescriptionObject lnk = links.Current;
+                                    if (lnk.Rel.ToLower().Trim().Equals("approval_url"))
+                                    {
+                                        //saving the payapalredirect URL to which user will be redirected for payment  
+                                        paypalRedirectUrl = lnk.Href;
+                                    }
+                                }
+
+                                content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
+                                //Send mail
+                                //await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
+
+
+                                return Redirect(paypalRedirectUrl);
                             }
-                            
-                            content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
-                            //Send mail
-                            //await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
-                            
+                            catch (HttpException httpException)
+                            {
+                                var statusCode = httpException.StatusCode;
+                                var debugId = httpException.Headers.GetValues("PayPal-Debug-Id").FirstOrDefault();
 
-                            return Redirect(paypalRedirectUrl);
+                                //Process when Checkout with Paypal fails
+                                return Redirect("/Cart/CheckoutFail");
+                            }
+
+                            ViewData["Success"] = true;
                         }
-                        catch (HttpException httpException)
+                        catch (Exception ex)
                         {
-                            var statusCode = httpException.StatusCode;
-                            var debugId = httpException.Headers.GetValues("PayPal-Debug-Id").FirstOrDefault();
-
-                            //Process when Checkout with Paypal fails
-                            return Redirect("/Cart/CheckoutFail");
+                            ViewData["Success"] = false;
+                            ModelState.AddModelError("", ex.Message);
                         }
-                        
-                        ViewData["Success"] = true;  
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewData["Success"] = false;
-                        ModelState.AddModelError("", ex.Message);
                     }
                 }
             }
@@ -568,16 +588,19 @@ namespace QDMarketPlace.Controllers
             //    DateCreated = DateTime.Now,
 
             //};
-            foreach (var item in Carts)
+            if (model.PaymentMethod == PaymentMethod.PayPal)
             {
-                _productService.SetUnitProduct(item.Product.Id, item.Quantity);
-                _productService.Save();
-            }
+                foreach (var item in Carts)
+                {
+                    _productService.SetUnitProduct(item.Product.Id, item.Quantity);
+                    _productService.Save();
+                }
 
-            //var content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
-            //Send mail
-            await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
-            HttpContext.Session.Remove(CommonConstants.CartSession);
+                //var content = await _viewRenderService.RenderToStringAsync("Cart/_BillMail", billViewModel);
+                //Send mail
+                await _emailSender.SendEmailAsync(User.GetSpecificClaim("Email"), "Đơn hàng của bạn từ QDMarketPlace", content);
+                HttpContext.Session.Remove(CommonConstants.CartSession);
+            }
             return View();
         }
         #endregion AJAX Request
