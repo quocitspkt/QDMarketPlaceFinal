@@ -36,8 +36,8 @@
                 processData: false,
                 data: data,
                 success: function (path) {
-                    $('#txtImage').val(path);
-                    tedu.notify('Upload image succesful!', 'success');
+                    $('#txtImageM').val(path);
+                    tedu.notify('Tải ảnh lên thành công!', 'success');
 
                 },
                 error: function () {

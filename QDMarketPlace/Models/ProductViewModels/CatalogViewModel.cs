@@ -20,7 +20,7 @@ namespace QDMarketPlace.Models.ProductViewModels
 
         public List<SelectListItem> SortTypes { get; } = new List<SelectListItem>
         {
-            new SelectListItem(){Value = "DateCreated",Text = "Lâu nhất"},
+            new SelectListItem(){Value = "DateCreated",Text = "Mới nhất"},
             new SelectListItem(){Value = "Price",Text = "Giá"},
             new SelectListItem(){Value = "Name",Text = "Tên"},
         };

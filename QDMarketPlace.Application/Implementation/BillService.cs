@@ -123,27 +123,27 @@ namespace QDMarketPlace.Application.Implementation
             {
                 for (int i = 0; i < 12; i++)
                 {
-                    //var m = item.DateCreated.ToString().Substring(0, 2);
-                    //if (m.GetType() == typeof(int))
-                    //{
-                    //    if (int.Parse(m) == i+1)
-                    //    {
-                    //        lst[i] += 1;
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    m = item.DateCreated.ToString().Substring(0, 1);
-                    //    if (int.Parse(m) == i+1)
-                    //    {
-                    //        lst[i] += 1;
-                    //    }
-                    //}
-                    int m = int.Parse(item.DateCreated.ToString().Substring(5, 2));
-                    if (m == i + 1)
+                    var m = item.DateCreated.ToString().Substring(0, 2);
+                    if (m.GetType() == typeof(int))
                     {
-                        lst[i] += 1;
+                        if (int.Parse(m) == i + 1)
+                        {
+                            lst[i] += 1;
+                        }
                     }
+                    else
+                    {
+                        m = item.DateCreated.ToString().Substring(0, 1);
+                        if (int.Parse(m) == i + 1)
+                        {
+                            lst[i] += 1;
+                        }
+                    }
+                    //int m = int.Parse(item.DateCreated.ToString().Substring(5, 2));
+                    //if (m == i + 1)
+                    //{
+                    //    lst[i] += 1;
+                    //}
 
                 }
                     

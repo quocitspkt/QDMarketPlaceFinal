@@ -20,7 +20,7 @@ namespace QDMarketPlace.Application.ViewModels.Product
         public string CustomerAddress { set; get; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(10)]
         public string CustomerMobile { set; get; }
 
         [Required]

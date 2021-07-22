@@ -75,7 +75,7 @@ namespace QDMarketPlace.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("Người dùng đã đăng nhập.");
                     return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -84,12 +84,12 @@ namespace QDMarketPlace.Controllers
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Tài khoản đã bị khóa");
                     return RedirectToAction(nameof(Lockout));
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Đăng nhập không hợp lệ");
                     return View(model);
                 }
             }
@@ -508,8 +508,12 @@ namespace QDMarketPlace.Controllers
             return View(accountDetail);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateAccount(AccountDetailViewModel model)
+        public async Task<IActionResult> MyAccount(AccountDetailViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             var appUser = new AppUserViewModel();
             appUser.FullName = model.FullName;
             appUser.BirthDay = model.BirthDay;
