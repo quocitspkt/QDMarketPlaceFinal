@@ -37,13 +37,8 @@ namespace QDMarketPlace.Areas.Admin.Controllers
             ViewBag.CountProductAmount = _productService.CountProductAmount();
 
             ViewBag.CountBill = _billService.CountBill();
-            ViewBag.DataPoints = JsonConvert.SerializeObject(CountInMonth());
+            // ViewBag.DataPoints = JsonConvert.SerializeObject(CountInMonth());
             ViewBag.CountBillInMonth = CountInMonth();
-
-            ViewBag.TotalMoney = _billService.TotalMoney();
-            
-            ViewBag.QuantityTotal = Total()[0];
-            ViewBag.Money = Total()[1];
 
             return View();
         }
@@ -53,7 +48,7 @@ namespace QDMarketPlace.Areas.Admin.Controllers
             return new OkObjectResult(await _reportService.GetReportAsync(fromDate, toDate));
         }
 
-        [Microsoft.AspNetCore.Mvc.HttpGet]
+        //[Microsoft.AspNetCore.Mvc.HttpGet]
         //public Microsoft.AspNetCore.Mvc.JsonResult GetCountInMont()
         //{
         //    var model = _billService.CountInMonth();
@@ -74,20 +69,8 @@ namespace QDMarketPlace.Areas.Admin.Controllers
             return dataPoints;
         }
 
-        public List<int> Total()
-        { 
-            var lst = _billService.TotalMoney();
-            int sumQuantity = 0, sumTotal = 0;
-            foreach(var item in lst)
-            {
-                sumQuantity += item.Quantity;
-                sumTotal += (int)(item.Quantity * item.Price);
-            }
-            List<int> lstTotal = new List<int>();
-            lstTotal.Add(sumQuantity);
-            lstTotal.Add(sumTotal);
-            return lstTotal;
-        }
+
     }
+    
    
 }
