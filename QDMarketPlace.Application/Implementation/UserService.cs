@@ -123,6 +123,7 @@ namespace QDMarketPlace.Application.Implementation
 
                 //Update user detail
                 user.FullName = userVm.FullName;
+                user.BirthDay = userVm.BirthDay;
                 user.Status = userVm.Status;
                 user.Email = userVm.Email;
                 user.PhoneNumber = userVm.PhoneNumber;

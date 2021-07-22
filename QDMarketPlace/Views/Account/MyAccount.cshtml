@@ -45,7 +45,7 @@
             <div class="row relative">
                 <div class="col-md-8 col-sm-12 col-xs-12 relative left-content-shoping clear-padding-left">
                     <p class="title-shoping-cart">Thông tin tài khoản</p>
-                    <form method="POST" action="/Account/UpdateAccount" class="form-placeholde-animate">
+                    @*<form method="POST" action="/Account/UpdateAccount" class="form-placeholde-animate">
                         <div class="relative clearfix full-width form-input">
                             <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
                                 <label>Họ tên</label>
@@ -55,11 +55,11 @@
                         <div class="relative clearfix full-width">
                             <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
                                 <label>Email</label>
-                                <input class="full-width" type="text" name="Email" value="@Model.Email">
+                                <input class="full-width" type="email" name="Email" value="@Model.Email">
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
                                 <label>Điện thoại</label>
-                                <input class="full-width" type="text" name="PhoneNumber" value="@Model.PhoneNumber">
+                                <input class="full-width" type="tel" name="PhoneNumber" value="@Model.PhoneNumber">
                             </div>
                         </div>
                         <div class="relative clearfix full-width">
@@ -75,7 +75,45 @@
                         <div class="relative justify-content form-login-checkout" style="margin-top:10px">
                             <button type="submit" class="animate-default button-hover-red" id="btn_update_account">Cập nhật</button>
                         </div>
-                    </form>
+                    </form>*@
+                <form method="POST" action="/Account/MyAccount" class="form-placeholde-animate">
+                    <div class="col-xs-12">
+                        <div class="check-title">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+
+                        </div>
+                    </div>
+                    <div class="relative clearfix full-width form-input">
+                        <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                            <label>Họ tên</label>
+                            <input class="full-width" type="text" asp-for="FullName" value="@Model.FullName">
+                        </div>
+                    </div>
+                    <div class="relative clearfix full-width">
+                        <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                            <label>Email</label>
+                            <input class="full-width" type="text" asp-for="Email" value="@Model.Email" readonly="readonly">
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                            <label>Điện thoại</label>
+                            <input class="full-width" type="text" asp-for="PhoneNumber" value="@Model.PhoneNumber">
+                        </div>
+                    </div>
+                    <div class="relative clearfix full-width">
+                        <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                            <label>Ngày sinh</label>
+                            <input class="full-width" type="text" asp-for="BirthDay" value="@Model.BirthDay.ToString("MM/dd/yyyy")">
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                            <label>Ngày tham gia</label>
+                            <input class="full-width" type="text" asp-for="DateCreated" value="@Model.DateCreated.ToString("MM/dd/yyyy")" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="relative justify-content form-login-checkout" style="margin-top:10px">
+                        <button type="submit" class="animate-default button-hover-red" id="btn_update_account">Cập nhật</button>
+                    </div>
+                </form>
+
                 </div>
                 <!-- End Content Shoping Cart -->
             </div>
