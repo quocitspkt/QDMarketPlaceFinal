@@ -69,6 +69,7 @@ namespace QDMarketPlace.Areas.Admin.Controllers
             }
             else
             {
+                billVm.DateCreated = DateTime.Now;
                 _billService.Update(billVm);
             }
             _billService.Save();
