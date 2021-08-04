@@ -31,7 +31,8 @@ namespace QDMarketPlace.Helpers
                 new Claim("FullName",user.FullName),
                 new Claim("Avatar",user.Avatar??string.Empty),
                 new Claim("Roles",string.Join(";",roles)),
-                new Claim("UserId",user.Id.ToString())
+                new Claim("UserId",user.Id.ToString()),
+                new Claim("PhoneNumber",user.PhoneNumber.ToString())
             });
             return principal;
         }

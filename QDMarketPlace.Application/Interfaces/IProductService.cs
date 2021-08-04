@@ -10,9 +10,11 @@ namespace QDMarketPlace.Application.Interfaces
     public interface IProductService : IDisposable
     {
         List<ProductViewModel> GetAll();
+        List<ProductViewModel> GetAll(string keyword);
+        List<PurchaseHistoryViewModel> GetPurchaseHistory(Guid id);
 
         PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize);
-
+        PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize,string sortBy);
         ProductViewModel Add(ProductViewModel product);
 
         void Update(ProductViewModel product);
@@ -20,6 +22,7 @@ namespace QDMarketPlace.Application.Interfaces
         void Delete(int id);
 
         ProductViewModel GetById(int id);
+        int GetAmount(int productId);
 
         void ImportExcel(string filePath, int categoryId);
 
@@ -29,14 +32,13 @@ namespace QDMarketPlace.Application.Interfaces
         void AddQuantity(int productId, List<ProductQuantityViewModel> quantities);
 
         List<ProductQuantityViewModel> GetQuantities(int productId);
-
         void AddImages(int productId, string[] images);
 
         List<ProductImageViewModel> GetImages(int productId);
 
-        void AddWholePrice(int productId, List<WholePriceViewModel> wholePrices);
+        void AddWholePrice(int productId, List<ProductKeyViewModel> WholePrices);
 
-        List<WholePriceViewModel> GetWholePrices(int productId);
+        List<ProductKeyViewModel> GetWholePrices(int productId);
 
         List<ProductViewModel> GetLastest(int top);
 
@@ -49,7 +51,9 @@ namespace QDMarketPlace.Application.Interfaces
 
         bool CheckAvailability(int productId, int size, int color);
 
-        
+        int CountProduct();
+        int CountProductAmount();
+        void SetUnitProduct(int productId,int quantity);
 
 
     }

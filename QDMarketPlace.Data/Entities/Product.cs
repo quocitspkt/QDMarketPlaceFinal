@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -129,5 +130,12 @@ namespace QDMarketPlace.Data.Entities
         public DateTime DateModified {set;get;}
 
         public Status Status {set;get;}
+
+        public bool IsDeleted { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Key> Keys { get; set; }
+        public virtual ICollection<ProductKey> ProductKeys { get; set; }
+
+
     }
 }

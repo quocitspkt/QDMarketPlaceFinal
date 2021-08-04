@@ -11,18 +11,23 @@ using QDMarketPlace.Application.Interfaces;
 using QDMarketPlace.Application.ViewModels.System;
 using QDMarketPlace.Data.Entities;
 using QDMarketPlace.Utilities.Dtos;
+using QDMarketPlace.Infrastructure.Interfaces;
 
 namespace QDMarketPlace.Application.Implementation
 {
     public class UserService : IUserService
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<IdentityResult> _userManagerModel;
         private readonly IMapper _mapper;
+        IUnitOfWork _unitOfWork;
 
-        public UserService(UserManager<AppUser> userManager, IMapper mapper)
+        public UserService(UserManager<AppUser> userManager, IMapper mapper,IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
+            
         }
 
         public async Task<bool> AddAsync(AppUserViewModel userVm)
@@ -49,7 +54,8 @@ namespace QDMarketPlace.Application.Implementation
         public async Task DeleteAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            await _userManager.DeleteAsync(user);
+            user.IsDeleted = true;
+            await _userManager.UpdateAsync(user);
         }
 
         public async Task<List<AppUserViewModel>> GetAllAsync()
@@ -59,7 +65,7 @@ namespace QDMarketPlace.Application.Implementation
 
         public PagedResult<AppUserViewModel> GetAllPagingAsync(string keyword, int page, int pageSize)
         {
-            var query = _userManager.Users;
+            var query = _userManager.Users.Where(x => x.IsDeleted == false);
             if (!string.IsNullOrEmpty(keyword))
                 query = query.Where(x => x.FullName.Contains(keyword)
                 || x.UserName.Contains(keyword)
@@ -73,7 +79,7 @@ namespace QDMarketPlace.Application.Implementation
             {
                 UserName = x.UserName,
                 Avatar = x.Avatar,
-                BirthDay = x.BirthDay.ToString(),
+                BirthDay = (DateTime)x.BirthDay,
                 Email = x.Email,
                 FullName = x.FullName,
                 Id = x.Id,
@@ -117,11 +123,45 @@ namespace QDMarketPlace.Application.Implementation
 
                 //Update user detail
                 user.FullName = userVm.FullName;
+                user.BirthDay = userVm.BirthDay;
                 user.Status = userVm.Status;
                 user.Email = userVm.Email;
                 user.PhoneNumber = userVm.PhoneNumber;
                 await _userManager.UpdateAsync(user);
             }
         }
+        public async Task UpdateAccountAsync(AppUserViewModel userVm)
+        {
+            //var appUser = _appUserRepository.FindById(userVm.Id);
+            //appUser.FullName = userVm.FullName;
+            //appUser.BirthDay = userVm.BirthDay;
+            //appUser.Email = userVm.Email;
+            //appUser.PhoneNumber = userVm.PhoneNumber;
+            //appUser.DateCreated = userVm.DateCreated;
+            //_appUserRepository.Update(appUser);
+        }
+
+        public async Task<string> ForgotPasswordAsync(string email)
+        {
+            string pass = "XuanDuc@1999";
+            var user = await _userManager.FindByEmailAsync(email);
+
+            await _userManager.RemovePasswordAsync(user);
+            await _userManager.AddPasswordAsync(user,pass );
+            return pass;
+        }
+
+        public int CountUser() 
+        {
+            List<AppUserViewModel> lst = _mapper.ProjectTo<AppUserViewModel>(_userManager.Users).ToList();
+            return lst.Count() - 1;
+        }
+
+        public void Save()
+        {
+            _unitOfWork.Commit();
+        }
+
+        
     }
 }

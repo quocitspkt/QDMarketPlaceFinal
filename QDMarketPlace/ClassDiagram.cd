@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="QDMarketPlace.Data.Entities.AppUser">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.Bill">
+    <Position X="2.5" Y="8.75" Width="3.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.BillDetail">
+    <Position X="10.25" Y="10" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Bill" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.Footer">
+    <Position X="6" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.Function">
+    <Position X="7.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.Permission">
+    <Position X="2.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.AppRole">
+    <Position X="4.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.Announcement">
+    <Position X="6" Y="12.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.AnnouncementUser">
+    <Position X="7.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.ProductCategory">
+    <Position X="2.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.ProductImage">
+    <Position X="4.25" Y="16.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.ProductKey">
+    <Position X="6" Y="16.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.ProductTag">
+    <Position X="0.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.Slide">
+    <Position X="7.75" Y="16.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.SystemConfig">
+    <Position X="4.25" Y="19.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.Tag">
+    <Position X="6" Y="19.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="QDMarketPlace.Data.EF.EFRepository&lt;T, K&gt;">
+    <Position X="4.5" Y="26" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Data.EF.EFUnitOfWork">
+    <Position X="2.5" Y="26" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.AnnouncementService">
+    <Position X="0.5" Y="30.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.BillService">
+    <Position X="2.5" Y="33.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.CommonService">
+    <Position X="4.5" Y="30.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.FunctionService">
+    <Position X="6.25" Y="32.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.KeyService">
+    <Position X="8" Y="30.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.NotificationService">
+    <Position X="0.5" Y="34" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.ProductCategoryService">
+    <Position X="4.5" Y="36" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.ProductService">
+    <Position X="8" Y="38.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.RoleService">
+    <Position X="0.5" Y="38.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Application.Implementation.UserService">
+    <Position X="2.5" Y="41" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Controllers.AccountController">
+    <Position X="0.5" Y="47" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAABAAjKAAAAAIAAAFgUgIAJACBAIAAAgEVAAAgAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Controllers.CartController">
+    <Position X="2.5" Y="47" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAQQAAAAABECAAQBACEEBAAGAAACCAAEIAAAEACA=</HashCode>
+      <FileName>Controllers\CartController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Controllers.HomeController">
+    <Position X="4.5" Y="47" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAQEACgACAAAAAAAAQAAAAAEEEAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Controllers.ManageController">
+    <Position X="6.25" Y="47" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgBAAAAAAAiAAABABBAAAAIgCAIQEAAEEEwIAggAE=</HashCode>
+      <FileName>Controllers\ManageController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Controllers.ProductController">
+    <Position X="8" Y="47" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAABAQAAAABAAAAAAAAAAABAAAAQAAAAAEAAAAgAAA=</HashCode>
+      <FileName>Controllers\ProductController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.AspNetCore.Mvc.Controller" Collapsed="true">
+    <Position X="4.5" Y="45.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.BaseController" Collapsed="true">
+    <Position X="4.25" Y="54" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\BaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.AccountController">
+    <Position X="0.5" Y="55.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAIAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.AnnouncementController">
+    <Position X="2.25" Y="55.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\AnnouncementController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.BillController">
+    <Position X="4" Y="55.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAEAAAAAEAAAAAAAAAAAAAQEMCAQAEAAAEAAIA=</HashCode>
+      <FileName>Areas\Admin\Controllers\BillController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.FunctionController">
+    <Position X="6" Y="55.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAEAAAAAAAAAAAUAAAAAQgEAAAIIAIA=</HashCode>
+      <FileName>Areas\Admin\Controllers\FunctionController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.HomeController">
+    <Position X="7.75" Y="55.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAgAAQAAAIAAAAAAAAAAAAAAAAAQAAAAAEEAIAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.LoginController">
+    <Position X="0.5" Y="58" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAABAAAAIIAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\LoginController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.NotificationController">
+    <Position X="2.25" Y="58" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEEAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\NotificationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.ProductCategoryController">
+    <Position X="4" Y="59.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAQAAAQgEAAAIIAIA=</HashCode>
+      <FileName>Areas\Admin\Controllers\ProductCategoryController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.ProductController">
+    <Position X="6" Y="59.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAQCAAAAAACAAABAAAAQCAEAUMAAQgEAAAAAAMA=</HashCode>
+      <FileName>Areas\Admin\Controllers\ProductController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.ReportController">
+    <Position X="7.75" Y="59.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\ReportController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.RoleController">
+    <Position X="0.5" Y="61" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAgEAAIACQgEAAAACAIA=</HashCode>
+      <FileName>Areas\Admin\Controllers\RoleController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.UploadController">
+    <Position X="2.25" Y="61" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\UploadController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Areas.Admin.Controllers.UserController">
+    <Position X="7.75" Y="60.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAEAAIAAUgEEAAAAAIA=</HashCode>
+      <FileName>Areas\Admin\Controllers\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.Key">
+    <Position X="7.75" Y="20" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Product" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="QDMarketPlace.Data.Entities.Product">
+    <Position X="10" Y="16.75" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="QDMarketPlace.Data.Interfaces.IDateTracking">
+    <Position X="2.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Data.Interfaces.ISwitchable">
+    <Position X="4.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Data.Interfaces.IHasSeoMetaData">
+    <Position X="6" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Data.Interfaces.ISortable">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Infrastructure.Interfaces.IUnitOfWork">
+    <Position X="2.5" Y="23.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Infrastructure.Interfaces.IRepository&lt;T, K&gt;">
+    <Position X="4.5" Y="23.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.IAnnouncementService">
+    <Position X="0.5" Y="29" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.IBillService">
+    <Position X="2.5" Y="29" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.ICommonService">
+    <Position X="4.5" Y="29" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.IFunctionService">
+    <Position X="6.25" Y="29" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.IKeyService">
+    <Position X="8" Y="29" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.INotification">
+    <Position X="0.5" Y="32.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.IProductCategoryService">
+    <Position X="4.5" Y="32.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.IProductService">
+    <Position X="8" Y="32.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.IRoleService">
+    <Position X="0.5" Y="35.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="QDMarketPlace.Application.Interfaces.IUserService">
+    <Position X="2.5" Y="37.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

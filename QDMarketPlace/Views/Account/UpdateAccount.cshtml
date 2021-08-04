@@ -1,0 +1,90 @@
+﻿@model QDMarketPlace.Models.AccountViewModels.AccountDetailViewModel
+
+@{
+    ViewData["Title"] = "Update Account Success";
+}
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat%7CRoboto:100,300,400,500,700,900%7CRoboto+Condensed:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/icon-font-linea.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/multirange.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/effect.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/cartpage.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/contact.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/responsive.css">
+</head>
+<div class="relative full-width">
+    <div class="container-web relative">
+        <div class="container">
+            <div class="row">
+                <div class="breadcrumb-web">
+                    <ul class="clear-margin">
+                        <li class="animate-default title-hover-red"><a href="/">Home</a></li>
+                        <li class="animate-default title-hover-red"><a href="#">Tài khoản của tôi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relative container-web">
+        <div class="container">
+            <div class="row relative">
+                <div class="col-md-8 col-sm-12 col-xs-12 relative left-content-shoping clear-padding-left">
+                    <p class="title-shoping-cart">Thông tin tài khoản</p>
+                    <form method="POST" action="/Account/UpdateAccount" class="form-placeholde-animate">
+                        <div class="relative clearfix full-width form-input">
+                            <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                                <label>Họ tên</label>
+                                <input class="full-width" type="text" name="FullName" value="@Model.FullName">
+                            </div>
+                        </div>
+                        <div class="relative clearfix full-width">
+                            <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                                <label>Email</label>
+                                <input class="full-width" type="email" name="Email" value="@Model.Email">
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                                <label>Điện thoại</label>
+                                <input class="full-width" type="number" name="PhoneNumber" value="@Model.PhoneNumber">
+                            </div>
+                        </div>
+                        <div class="relative clearfix full-width">
+                            <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                                <label>Ngày sinh</label>
+                                <input class="full-width" type="text" name="BirthDay" value="@Model.BirthDay.ToString("MM/dd/yyyy")">
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 clearfix clear-padding-left clear-padding-480 relative form-input">
+                                <label>Ngày tham gia</label>
+                                <input class="full-width" type="text" name="DateCreated" value="@Model.DateCreated.ToString("MM/dd/yyyy")">
+                            </div>
+                        </div>
+                        <div class="relative justify-content form-login-checkout" style="margin-top:10px">
+                            <button type="submit" class="animate-default button-hover-red">Cập nhật</button>
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Cập nhật thành công!</h4>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- End Content Shoping Cart -->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/client-side-1/js/jquery-3.3.1.min.js" defer=""></script>
+<script src="~/client-side-1/js/bootstrap.min.js" defer=""></script>
+<script src="~/client-side-1/js/multirange.js" defer=""></script>
+<script src="~/client-side-1/js/owl.carousel.min.js" defer=""></script>
+<script src="~/client-side-1/js/sync_owl_carousel.js" defer=""></script>
+<script src="~/client-side-1/js/scripts.js" defer=""></script>
+

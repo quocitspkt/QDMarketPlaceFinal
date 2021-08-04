@@ -5,6 +5,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KN2X66N7MQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-KN2X66N7MQ');
+    </script>
+
     <!-- Basic page needs -->
     <meta charset="utf-8">
     <!--[if IE]>
@@ -14,6 +25,8 @@
     <title>@ViewData["Title"]</title>
     <meta name="description" content="@ViewData["MetaKeyword"]">
     <meta name="keywords" content="@ViewData["MetaDescription"]" />
+    <meta property="fb:app_id" content="794671461248018" />
+
 
     <!-- Mobile specific metas  -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,51 +46,50 @@
     </style>
 
     <!-- Favicons Icon -->
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="~/icon-01.png">
     <link href="~/lib/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
     <!-- CSS Style -->
     <link rel="stylesheet" href="~/client-side/style.css">
     <link href="~/lib/HotPhoneRing.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat%7CRoboto:100,300,400,500,700,900%7CRoboto+Condensed:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/icon-font-linea.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/effect.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/home.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/responsive.css">
+    
 </head>
 
 <body class="@ViewData["BodyClass"]">
-
-    
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=794671461248018&autoLogAppEvents=1" nonce="azoCq0xJ"></script>
 
     <!--[if lt IE 8]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!-- mobile menu -->
-    @await Component.InvokeAsync("MobileMenu")
     <!-- end mobile menu -->
     <div id="page">
 
         <!-- Header -->
         <partial name="_Header.cshtml" />
         <!-- end header -->
-        <nav>
-            <div class="container">
-                <div class="row">
-                    <div class="mm-toggle-wrap">
-                        <div class="mm-toggle"><i class="fa fa-align-justify"></i> </div>
-                        <span class="mm-label">All Categories</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 mega-container hidden-xs">
-                        @await Component.InvokeAsync("CategoryMenu")
-                    </div>
-                    <div class="col-md-9 col-sm-9 jtv-megamenu">
-                        @await Component.InvokeAsync("MainMenu")
-                    </div>
-                </div>
-            </div>
-        </nav>
+
 
         @RenderBody()
         <!-- Footer -->
         <partial name="_Footer.cshtml" />
         <!-- End Footer -->
+        
     </div>
-
+    
     <!-- JS -->
     <!-- jquery js -->
     <script type="text/javascript" src="~/client-side/js/jquery.min.js"></script>
@@ -89,14 +101,15 @@
     <script type="text/javascript" src="~/client-side/js/owl.carousel.min.js"></script>
 
     <!-- jquery.mobile-menu js -->
-    <script type="text/javascript" src="~/client-side/js/mobile-menu.js"></script>
+    @*<script type="text/javascript" src="~/client-side/js/mobile-menu.js"></script>*@
 
     <!--jquery-ui.min js -->
     <script type="text/javascript" src="~/client-side/js/jquery-ui.js"></script>
 
     <!-- main js -->
-    <script type="text/javascript" src="~/client-side/js/main.js"></script>
-
+    @*<script type="text/javascript" src="~/client-side/js/main.js"></script>*@
+    <script src="~/client-side/js/main.js"></script>
+    <script src="~/client-side/js/mobile-menu.js"></script>
     <!-- countdown js -->
     <script type="text/javascript" src="~/client-side/js/countdown.js"></script>
 

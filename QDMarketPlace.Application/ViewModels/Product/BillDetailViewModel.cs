@@ -22,6 +22,7 @@ namespace QDMarketPlace.Application.ViewModels.Product
         public int ColorId { get; set; }
 
         public int SizeId { get; set; }
+        public string Key { get; set; }
 
         public BillViewModel Bill { set; get; }
 

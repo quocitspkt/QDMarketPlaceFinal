@@ -83,6 +83,7 @@ namespace QDMarketPlace.Areas.Admin.Controllers
                 }
                 else
                 {
+                    productVm.DateModified = DateTime.Now;
                     _productService.Update(productVm);
                 }
                 _productService.Save();
@@ -135,18 +136,18 @@ namespace QDMarketPlace.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveWholePrice(int productId, List<WholePriceViewModel> wholePrices)
+        public IActionResult SaveWholePrice(int productId, List<ProductKeyViewModel> WholePrices)
         {
-            _productService.AddWholePrice(productId, wholePrices);
+            _productService.AddWholePrice(productId, WholePrices);
             _productService.Save();
-            return new OkObjectResult(wholePrices);
+            return new OkObjectResult(WholePrices);
         }
 
         [HttpGet]
         public IActionResult GetWholePrices(int productId)
         {
-            var wholePrices = _productService.GetWholePrices(productId);
-            return new OkObjectResult(wholePrices);
+            var WholePrices = _productService.GetWholePrices(productId);
+            return new OkObjectResult(WholePrices);
         }
         [HttpPost]
         public IActionResult ImportExcel(IList<IFormFile> files, int categoryId)

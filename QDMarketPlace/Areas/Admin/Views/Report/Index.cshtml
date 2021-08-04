@@ -3,6 +3,27 @@
 *@
 
 @section Scripts{
+
+    <!-- Flot -->
+    <script src="~/lib/flot/jquery.flot.js"></script>
+    <script src="~/lib/flot/jquery.flot.pie.js"></script>
+    <script src="~/lib/flot/jquery.flot.time.js"></script>
+    <script src="~/lib/flot/jquery.flot.stack.js"></script>
+    <script src="~/lib/flot/jquery.flot.resize.js"></script>
+
+    <!-- Flot plugins -->
+    <script src="~/lib/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="~/lib/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="~/lib/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="~/lib/DateJS/build/date.js"></script>
+    <script src="~/app/controllers/home/index.js" asp-append-version="true"></script>
+    <script>
+        var homeObj = new HomeController();
+        homeObj.initialize();
+    </script>
+
+
     <script src="~/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     <script src="~/lib/angular/angular.js"></script>
     <script src="~/lib/angular-chart/angular-chart.js"></script>
@@ -13,10 +34,20 @@
     <link href="~/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
 }
 
-<div class="row" ng-app="app">
-    <div class="col-md-6 col-sm-6 col-xs-6" >
+@{ 
+    var countInMonth = ViewBag.CountBillInMonth;
+    //var total = ViewBag.Total;
+}
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
+
+
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6" ng-app="app">
         <div class="x_panel" ng-controller="BarCtrl">
-            <h3 class="item-info">Product per month</h3>
+            <h3 class="item-info">Số lượng đơn hàng mỗi tháng</h3>
             <canvas id="bar" class="chart chart-bar"
                     chart-data="data" chart-labels="labels"
                     chart-series="series">
@@ -24,33 +55,105 @@
         </div>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="x_panel" ng-controller="BarCtrl">
-            <h3 class="item-info">Revenue per month (unit: thousand Dong)</h3>
-            <table class="table table-striped" >
+        <div class="x_panel">
+            <h3 class="item-info">Số lượng đơn hàng mỗi tháng</h3>
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Month</th>
-                        <th>Purchase Turnover</th>
-                        <th>Revenue</th>
-                        <th>Profit</th>
+                        <th>Tháng</th>
+                        <th>Số lượng</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in reports">
-                        <td>{{item.Month}}</td>
-                        <td>{{item.Purchase}}</td>
-                        <td>{{item.Revenue}}</td>
-                        <td>{{item.Revenue - item.Purchase}}</td>
-                    </tr>
-                    <tr>
-                        <td><b>Sum:</b></td>
-                        <td><b>{{sumPur}}</b></td>
-                        <td><b>{{sumRev}}</b></td>
-                        <td><b>{{sumRev - sumPur}}</b></td>
-                    </tr>
+                    @foreach (var item in countInMonth)
+                    {
+                        <tr>
+                            <td>@item.Label</td>
+                            <td>@item.Y</td>
+
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
+    @*<div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="x_panel">
+            <h3 class="item-info">Tổng tiền hàng tháng</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Mã sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in total()[0])
+                    {
+                        <tr>
+                            <td>@item.ProductId</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
+                            <td>@(@item.Quantity@item.Price)</td>
+                        </tr>
+                    }
+
+                    <tr>
+
+                        <td><b>Sum:</b></td>
+                        <td><b>@total()[1]</b></td>
+                        <td><b></b></td>
+                        <td><b>@total()[2].00</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>*@
 </div>
 <div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Summary Yearly</h2>
+                <div class="filter">
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @*<div class="demo-container" style="height:280px">
+                            <div id="chart_plot_02" class="demo-placeholder"></div>
+                        </div>*@
+                    <div class="tiles">
+                        <div class="col-md-6 tile">
+                            <span>Tổng số lượng sản phẩm</span>
+                            <h2>424</h2>
+                            <span class="sparkline11 graph" style="height: 160px;">
+                                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+                            </span>
+                        </div>
+                        <div class="col-md-6 tile">
+                            <span>Tổng cộng</span>
+                            <h2>
+                                698,662,450.00
+                            </h2>
+                            <span class="sparkline22 graph" style="height: 160px;">
+                                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

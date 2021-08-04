@@ -8,11 +8,11 @@ namespace QDMarketPlace.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "Email không được trống")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "Mật khẩu không được trống")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

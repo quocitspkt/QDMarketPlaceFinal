@@ -7,6 +7,9 @@ using QDMarketPlace.Models.ProductViewModels;
 using QDMarketPlace.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using QDMarketPlace.Models;
+using Microsoft.AspNetCore.Identity;
+using QDMarketPlace.Data.Entities;
 
 namespace QDMarketPlace.Controllers
 {
@@ -16,14 +19,27 @@ namespace QDMarketPlace.Controllers
         IBillService _billService;
         IProductCategoryService _productCategoryService;
         IConfiguration _configuration;
+
+        private readonly UserManager<AppUser> _userManager;
         public ProductController(IProductService productService, IConfiguration configuration,
             IBillService billService,
-            IProductCategoryService productCategoryService)
+            IProductCategoryService productCategoryService,
+            UserManager<AppUser> userManager)
         {
             _productService = productService;
             _productCategoryService = productCategoryService;
             _configuration = configuration;
             _billService = billService;
+            _userManager = userManager;
+        }
+
+        [Route("purchaseshistory.html")]
+        public IActionResult PurchaseHistory()
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var userIdGuid = new Guid(userId);
+            var product = _productService.GetPurchaseHistory(userIdGuid);
+            return View(product);
         }
         [Route("products.html")]
         public IActionResult Index()
@@ -42,7 +58,7 @@ namespace QDMarketPlace.Controllers
 
             catalog.PageSize = pageSize;
             catalog.SortType = sortBy;
-            catalog.Data = _productService.GetAllPaging(id, string.Empty, page, pageSize.Value);
+            catalog.Data = _productService.GetAllPaging(id, string.Empty, page, pageSize.Value,sortBy);
             catalog.Category = _productCategoryService.GetById(id);
 
             return View(catalog);
@@ -59,7 +75,8 @@ namespace QDMarketPlace.Controllers
 
             catalog.PageSize = pageSize;
             catalog.SortType = sortBy;
-            catalog.Data = _productService.GetAllPaging(null, keyword, page, pageSize.Value);
+            catalog.Data = _productService.GetAllPaging(null, keyword, page, pageSize.Value, sortBy);
+                 
             catalog.Keyword = keyword;
 
             return View(catalog);
@@ -86,7 +103,7 @@ namespace QDMarketPlace.Controllers
                 Text = x.Name,
                 Value = x.Id.ToString()
             }).ToList();
-
+            ViewBag.Amount = _productService.GetAmount(id);
             return View(model);
         }
 

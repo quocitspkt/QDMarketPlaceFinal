@@ -42,10 +42,13 @@ namespace QDMarketPlace.Controllers
             ViewData["BodyClass"] = "cms-index-index cms-home-page";
             var homeVm = new HomeViewModel();
             homeVm.HomeCategories = _productCategoryService.GetHomeCategories(5);
-            homeVm.HotProducts = _productService.GetHotProduct(5);
-            homeVm.TopSellProducts = _productService.GetLastest(5);
+            homeVm.HotProducts = _productService.GetAll("Game").Take(3).ToList();
+            homeVm.TopSellProducts = _productService.GetHotProduct(10);
             homeVm.LastestBlogs = _blogService.GetLastest(5);
             homeVm.HomeSlides = _commonService.GetSlides("top");
+            homeVm.TopGames = _productService.GetAll("Game").Take(4).ToList();
+            homeVm.TopMicorsofts = _productService.GetAll("Microsoft").Take(4).ToList();
+            homeVm.TopSecurities = _productService.GetAll("Security").Take(4).ToList();
             return View(homeVm);
         }
 

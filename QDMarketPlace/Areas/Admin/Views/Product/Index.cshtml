@@ -28,27 +28,27 @@
 }
 <div class="page-title">
     <div class="title_left">
-        <h3>Products <small>List products</small></h3>
+        <h3>Sản phẩm <small>Danh sách sản phẩm</small></h3>
     </div>
 
     <div class="title_right">
         <div class="col-md-3 col-sm-5 col-xs-12 form-group pull-right">
 
             <div class="input-group">
-                <input type="text" id="txtKeyword" class="form-control" placeholder="Search for...">
+                <input type="text" id="txtKeyword" class="form-control" placeholder="Tìm kiếm">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" id="btnSearch" type="button">Go!</button>
+                    <button class="btn btn-primary" id="btnSearch" type="button">Tìm</button>
                 </span>
             </div>
         </div>
         <div class="col-md-3 col-sm-12  form-group pull-right">
             <select class="form-control" id="ddlCategorySearch">
-                <option>--Select category--</option>
+                <option>--Chọn danh mục--</option>
             </select>
         </div>
         <div class="col-md-6 col-sm-12  form-group pull-right">
-            <button id="btnCreate" class="btn btn-success">Create</button>
-            <a class="btn btn-danger" href="~/templates/ProductImportTemplate.xlsx">Template</a>
+            <button id="btnCreate" class="btn btn-success">Tạo</button>
+            <a class="btn btn-danger" href="~/templates/ProductImportTemplate.xlsx">Biểu mẫu</a>
             <button class="btn btn-primary" id="btn-import" type="button"><i class="fa fa-file-excel-o"></i></button>
             <button class="btn btn-default" id="btn-export" type="button"><i class="fa fa-forward"></i></button>
         </div>
@@ -64,13 +64,13 @@
                     <thead>
                         <tr>
 
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Image</th>
-                            <th>Created Date</th>
-                            <th>Status</th>
-                            <th width="20%">#</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Danh mục</th>
+                            <th>Giá</th>
+                            <th>Hình ảnh</th>
+                            <th>Ngày cập nhật</th>
+                            <th>Trạng thái</th>
+                            <th width="20%">Công cụ</th>
                         </tr>
                     </thead>
                     <tbody id="tbl-content"></tbody>
@@ -113,13 +113,13 @@
             <a class="btn  btn-sm btn-edit" data-id="{{Id}}"><i class="fa fa-pencil"></i></a>
             <a class="btn  btn-sm btn-delete" data-id="{{Id}}"><i class="fa fa-trash"></i></a>
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-images"><i class="fa fa-image"></i></a>
-            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-quantity"><i class="fa fa-hourglass-start"></i></a>
+            @*<a href="#" data-id="{{Id}}" class="btn btn-xs btn-quantity"><i class="fa fa-hourglass-start"></i></a>*@
             <a href="#" data-id="{{Id}}" class="btn btn-xs btn-whole-price"><i class="fa fa-money"></i></a>
         </th>
     </tr>
 </script>
 <partial name="_AddEditModal" />
 <partial name="_ImportExcelModal" />
-<partial name="_QuantityManagement" />
+@*<partial name="_QuantityManagement" />*@
 <partial name="_ImageManagement" />
 <partial name="_WholePriceManagement" />

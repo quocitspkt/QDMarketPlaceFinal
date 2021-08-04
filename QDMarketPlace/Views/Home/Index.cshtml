@@ -6,623 +6,393 @@
 }
 @section Scripts{
     <script src="~/client-app/controllers/home/index.js"></script>
+    
     <script>
         var homeObj = new HomeController();
         homeObj.initialize();
+        var productObj1 = new ProductDetailController();
+        productObj1.initialize();
     </script>
 }
-<!-- Slideshow  -->
-<div class="main-slider" id="home">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-12 banner-left hidden-xs"><img src="/client-side/images/banner-left.jpg" alt="banner"></div>
-            <div class="col-sm-9 col-md-9 col-lg-9 col-xs-12 jtv-slideshow">
-                <div id="jtv-slideshow">
-                    <div id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container'>
-                        <div id='rev_slider_4' class='rev_slider fullwidthabanner'>
+<div class="relative clearfix full-width">
+    <!-- Menu & Slide -->
+    <div class="clearfix container-web relative">
+        <div class=" container relative">
+            <div class="row">
+                <div class="clearfix relative menu-slide clear-padding bottom-margin-default">
+                    <!-- Menu -->
+                    <div class="clearfix menu-web relative">
+                        <ul>
+                            @*<li><a href="/san-pham-khuyen-mai-c.17.html"><img src="/client-side-1/img/icon-UuDai01-01.png" alt="Icon Hot Deals" /> <p style="color:white">Sản phẩm khuyến mãi</p></a></li>
+        <li><a href="/gian-hang-uy-tin-c.2.html"><img src="/client-side-1/img/icon-shop-01.png" alt="Icon Food" /> <p style="color:white">Gian hàng uy tín</p></a></li>
+        <li><a href="/key-game-stream-c.3.html"><img src="/client-side-1/img/icon-steam03-01.png" alt="Icon Mobile & Tablet" /> <p style="color:white">Key Game Stream</p></a></li>
+        <li><a href="/key-game-orgin-c.4.html"><img src="/client-side-1/img/icon-steam03-01.png" alt="Icon Electric Appliances" /> <p style="color:white">Key Game Orgin</p></a></li>
+        <li><a href="/Key-game-xbox-c.5.html"><img src="/client-side-1/img/icon-xbox-01.png" alt="Icon Electronics & Technology" /> <p style="color:white">Key Game Xbox</p></a></li>
+        <li><a href="/Phan-mem-pc-c.6.html"><img src="/client-side-1/img/icon_computer.png" alt="Icon Fashion" /> <p style="color:white">Phần mềm PC</p></a></li>
+        <li><a href="/Phan-mem-di-dong-c.7.html"><img src="/client-side-1/img/icon_mobile.png" alt="Icon Health & Beauty" /> <p style="color:white">Phần mềm di động</p></a></li>
+        <li><a href="/Windows-c.8.html"><img src="/client-side-1/img/icon-window.png" alt="Icon Mother & Baby" /> <p style="color:white">Windows</p></a></li>
+        <li><a href="/Microsoft-Office-c.9.html"><img src="/client-side-1/img/icon-window.png" alt="Icon Books & Stationery" /> <p style="color:white">Microsoft Office</p></a></li>
+        <li><a href="/VPN-c.10.html"><img src="/client-side-1/img/icon-vpn-01.png" alt="Icon Home & Life" /> <p style="color:white">VPN</p></a></li>
+        <li><a href="/Antivirus-c.11.html"><img src="/client-side-1/img/icon-virus-01.png" alt="Icon Sports & Outdoors" /> <p style="color:white">Antivirus</p></a></li>
+        <li><a href="/Chinh-sach-bao-hanh-c.12.html"><img src="/client-side-1/img/icon-baohanh-01.png" alt="Icon Auto & Moto" /> <p style="color:white">Chính sách bảo hành</p></a></li>
+        <li><a href="/Quy-trinh-doi-tra-c.13.html"><img src="/client-side-1/img/icon-reload-01.png" alt="Icon Voucher Service" /> <p style="color:white">Quy trình đổi trả</p></a></li>*@
+                            @foreach (var item in Model.HomeCategories)
+                            {
+                                <li><a href="@item.SeoAlias-c.@(item.Id).html"><img src="@item.Image" alt="Icon Hot Deals" /> <p style="color:white">@item.Name</p></a></li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- Slide -->
+                    <div class="clearfix slide-box-home slide-v1 relative">
+                        <div class="clearfix slide-home owl-carousel owl-theme">
+                            <div class="item"><a href="/Key-game-xbox-c.5.html"><img src="/client-side/images/slider/slide-1.jpg" alt="Banner Header 1"></a></div>
+                            <div class="item"><a href="/key-game-stream-c.3.html"><img src="/client-side/images/slider/slide-2-1.jpg" alt="Banner Header 2"></a></div>
+                            <div class="item"><a href="/key-game-orgin-c.4.html"><img src="/client-side/images/slider/slide-3.jpg" alt="Banner Header 3"></a></div>
+                            <div class="item"><a href="/Key-game-xbox-c.5.html"><img src="/client-side/images/slider/slide-4.jpg" alt="Banner Header 4"></a></div>
+                        </div>
+                    </div>
+                    <div class=" box-banner-small-v1 box-banner-small">
+                        <div class="effect-layla relative clear-padding col-md-4 col-sm-4 col-xs-4 float-left zoom-image-hover">
+                            <img src="/client-side/images/products/product-4.jpg" alt="counter-strik">
+                            <a href="/Key-Game-Assassin-s-Creed-p.28.html" class="relative"></a>
+                        </div>
+                        <div class="effect-layla relative clear-padding col-md-4 col-sm-4 col-xs-4 float-left zoom-image-hover">
+                            <img src="/client-side/images/products/product-5.jpg" alt="">
+                            <a href="/Battlefield-V-p.38.html" class="relative"></a>
+                        </div>
+                        <div class="effect-layla relative clear-padding col-md-4 col-sm-4 col-xs-4 float-left zoom-image-hover">
+                            <img src="/client-side/images/products/product-6.jpg" alt="">
+                            <a href="/game-grand-theft-auto-v-premium-edition-p.25.html" class="relative"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Menu & Slide -->
+            </div>
+        </div>
+    </div>
+    <!-- Content Product -->
+    <div class="clearfix box-product full-width top-padding-default bg-gray">
+        <div class="clearfix container-web">
+            <div class=" container">
+                <div class="row">
+                    <!-- Title Product -->
+                    <div class="clearfix title-box full-width bottom-margin-default border bg-white">
+                        <div class="clearfix name-title-box title-hot-bg relative">
+                            <img src="/client-side-1/img/icon_percent.png" class="absolute" alt="Icon Hot Deals" />
+                            <p>Sản phẩm nổi bật</p>
+                        </div>
+                        <div class="clearfix menu-title-box bold uppercase">
                             <ul>
-                                @foreach (var slide in Model.HomeSlides)
-                                {
-                                    <li data-transition='fade' data-slotamount='7' data-masterspeed='1000' data-thumb=''>
-                                        <img src='@slide.Image' data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' alt="@slide.Name" />
-                                    </li>
-                                }
+                                <li><a href="/key-game-stream-c.3.html">Key Game Stream</a></li>
+                                <li><a href="/Windows-c.8.html">Microsoft Windows</a></li>
+                                <li><a href="/Microsoft-Office-c.9.html">Microsoft Office</a></li>
+                                <li><a href="/Antivirus-c.11.html">Antivirus</a></li>
+                                <li><a href="/VPN-c.10.html">VPN</a></li>
                             </ul>
-                            <div class="tp-bannertimer"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- service section -->
-<partial name="_ServicePartial" />
-
-<div class="inner-box">
-    <div class="container">
-        <div class="row">
-            <!-- Banner -->
-            <div class="col-md-3 top-banner hidden-sm">
-                <div class="jtv-banner3">
-                    <div class="jtv-banner3-inner">
-                        <a href="#"><img src="/client-side/images/sub1.jpg" alt="HTML template"></a>
-                        <div class="hover_content">
-                            <div class="hover_data">
-                                <div class="title"> Big Sale </div>
-                                <div class="desc-text">Up to 55% off</div>
-                                <span>Camera, Laptop & Mobile</span>
-                                <p><a href="#" class="shop-now">Get it now!</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Best Sale -->
-            <div class="col-sm-12 col-md-9 jtv-best-sale special-pro">
-                <div class="jtv-best-sale-list">
-                    <div class="wpb_wrapper">
-                        <div class="best-title text-left">
-                            <h2>Special Offers</h2>
-                        </div>
-                    </div>
-                    <div class="slider-items-products">
-                        <div id="jtv-best-sale-slider" class="product-flexslider">
-                            <div class="slider-items">
-                                @foreach (var item in Model.TopSellProducts)
-                                {
-                                    <div class="product-item">
-                                        <div class="item-inner">
-                                            <div class="product-thumbnail">
-                                                <div class="icon-new-label new-left">New</div>
-                                                <div class="pr-img-area">
-                                                    <a title="@item.Name" href="/@item.SeoAlias-p.@(item.Id).html">
-                                                        <figure>
-                                                            <img class="first-img" src="@item.Image?w=190" alt="@item.Name">
-                                                            <img class="hover-img" src="@item.Image?w=190" alt="@item.Name">
-                                                        </figure>
-                                                    </a>
-                                                </div>
-                                                <div class="pr-info-area">
-                                                    <div class="pr-button">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                        <div class="mt-button quick-view"> <a href="quick_view.html"> <i class="fa fa-search"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="@item.Name" href="/@item.SeoAlias-p.@(item.Id).html">@item.Name </a> </div>
-                                                    <div class="item-content">
-                                                        <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                        <div class="item-price">
-                                                            <div class="price-box"> <span class="regular-price"> <span class="price">@item.Price.ToString("N0")</span> </span> </div>
-                                                        </div>
-                                                        <div class="pro-action">
-                                                            <button type="button" class="add-to-cart" data-id="@item.Id"><span> Purchase</span> </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- All products-->
-
-<div class="container">
-    <div class="home-tab">
-        <div class="tab-title text-left">
-            <h2>Best selling</h2>
-            <ul class="nav home-nav-tabs home-product-tabs">
-                @for (var i = 0; i < Model.HomeCategories.Count; i++)
-                {
-                    var item = Model.HomeCategories[i];
-                    if (i == 0)
-                    {
-                        <li class="active"><a href="#@item.SeoAlias" data-toggle="tab" aria-expanded="false">@item.Name</a></li>
-                    }
-                    else
-                    {
-                        <li><a href="#@item.SeoAlias" data-toggle="tab" aria-expanded="false">@item.Name</a></li>
-                    }
-                }
-            </ul>
-        </div>
-        <div id="productTabContent" class="tab-content">
-            @for (var i = 0; i < Model.HomeCategories.Count; i++)
-            {
-                var category = Model.HomeCategories[i];
-                string css = string.Empty;
-                if (i == 0)
-                {
-                    css = "tab-pane active in";
-                }
-                else
-                {
-                    css = "tab-pane wow fadeInLeft";
-                }
-                <div class="@css" id="@category.SeoAlias">
-                    <div class="featured-pro">
-                        <div class="slider-items-products">
-                            <div id="computer-slider" class="product-flexslider hidden-buttons">
-                                <div class="slider-items slider-width-col4">
-                                    @foreach (var item in category.Products)
+                <div class="clearfix content-product-box bottom-margin-default full-width">
+                    <div class="row">
+                        <div class="relative">
+                            <div class="good-deal-product animate-default active-box-category hidden-content-box" id="mobile-tablet">
+                                <!-- Product Son -->
+                                <div class="owl-carousel owl-theme">
+                                    @foreach (var item in Model.TopSellProducts)
                                     {
-                                        <div class="product-item">
-                                            <div class="item-inner">
-                                                <div class="product-thumbnail">
-                                                    <div class="icon-new-label new-left">mới</div>
-                                                    <div class="pr-img-area">
-                                                        <a title="@item.Name" href="/@item.SeoAlias-p.@(item.Id).html">
-                                                            <figure>
-                                                                <img class="first-img" src="@item.Image" alt="@item.Name">
-                                                                <img class="hover-img" src="@item.Image" alt="@item.Name">
-                                                            </figure>
-                                                        </a>
-                                                    </div>
-                                                    <div class="pr-info-area">
-                                                        <div class="pr-button">
-                                                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                            <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                            <div class="mt-button quick-view"> <a href="quick_view.html"> <i class="fa fa-search"></i> </a> </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="item-info">
-                                                    <div class="info-inner">
-                                                        <div class="item-title"> <a title="Product title here" href="/@item.SeoAlias-p.@(item.Id).html">@item.Name </a> </div>
-                                                        <div class="item-content">
-                                                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                            <div class="item-price">
-                                                                <div class="price-box"> <span class="regular-price"> <span class="price">@item.Price.ToString("N0")</span> </span> </div>
-                                                            </div>
-                                                            <div class="pro-action">
-                                                                <button type="button" data-id="@item.Id" class="add-to-cart"><span> Purchase</span> </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    <div class=" product-son ">
+                                        <div class="clearfix image-product relative animate-default">
+                                            <div class="center-vertical-image">
+                                                <img src="@item.Image" alt="Product @item.Name" />
                                             </div>
+                                            <ul class="option-product animate-default">
+                                                <li class="relative"><a href="#"><i class="data-icon data-icon-ecommerce icon-ecommerce-bag"></i></a></li>
+                                                <li class="relative"><a href="#"><i class="data-icondata-icon-basic icon-basic-heart" aria-hidden="true"></i></a></li>
+                                                <li class="relative"><a href="#"><i class="data-icon data-icon-basic icon-basic-magnifier" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        @*<div class="clearfix ranking">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-half" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </div>*@
+                                        <p class="title-product clearfix full-width title-hover-black animate-default"><a class="animate-default" href="/@item.SeoAlias-p.@(item.Id).html">@item.Name</a></p>
+                                        @if (item.PromotionPrice != null)
+                                        {
+                                            <p class="clearfix price-product"><span class="price-old">@item.Price.ToString("N0")₫</span> @item.PromotionPrice.Value.ToString("N0")₫</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="clearfix price-product"> @item.Price.ToString("N0")₫</p>
+                                        }
                                         </div>
                                     }
+                                    <!-- End Product Son -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            }
+            </div>
         </div>
     </div>
-</div>
-<div class="featured-products">
-    <div class="container">
-        <div class="row">
-
-            <!-- Best Sale -->
-            <div class="col-sm-12 col-md-4 jtv-best-sale">
-                <div class="jtv-best-sale-list">
-                    <div class="wpb_wrapper">
-                        <div class="best-title text-left">
-                            <h2>Top Rate</h2>
-                        </div>
+    <!-- End Content Product -->
+    <!-- Product Box -->
+    <div class="top-margin-default container-web">
+        <div class=" container">
+            <div class="row">
+                <div class="clearfix title-box full-width border">
+                    <div class="clearfix name-title-box title-category title-green-bg relative">
+                        <img alt="Icon Food" src="/client-side-1/img/icon-game-01.png" class="absolute" />
+                        <p>Shop Game</p>
                     </div>
-                    <div class="slider-items-products">
-                        <div id="toprate-products-slider" class="product-flexslider">
-                            <div class="slider-items">
-                                <ul class="products-grid">
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$99.99</span> </span> </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="products-grid">
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$99.99</span> </span> </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="products-grid">
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box">
-                                                            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="clearfix menu-title-box bold uppercase">
+                        <ul>
+                            <li><a href="/key-game-stream-c.3.html">Key Game Stream</a></li>
+                            <li><a href="/key-game-orgin-c.4.html">Key Game Orgin</a></li>
+                            <li><a href="/Key-game-xbox-c.5.html">Key Game Xbox</a></li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-            <!-- Banner -->
-            <div class="col-md-4 top-banner hidden-sm">
-                <div class="jtv-banner3">
-                    <div class="jtv-banner3-inner">
-                        <a href="#"><img src="/client-side/images/sub1a.jpg" alt="HTML template"></a>
-                        <div class="hover_content">
-                            <div class="hover_data bottom">
-                                <div class="desc-text">Top Brands at discount prices </div>
-                                <div class="title">Electronisc Sale</div>
-                                <span>Smartphone & Cell phone</span>
-                                <p><a href="#" class="shop-now">Get it now!</a></p>
-                            </div>
-                        </div>
+                <div class="display-table bottom-margin-default full-width">
+                    <div class="clearfix clear-padding list-logo-category border no-border-t no-border-r list-logo-category-v1 float-left">
+                        <ul>
+                            <li><a href="#"><img src="/client-side-1/img/logo_3.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_4.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_5.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_6.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_1.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_2.png" alt="Logo"></a></li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4 jtv-best-sale">
-                <div class="jtv-best-sale-list">
-                    <div class="wpb_wrapper">
-                        <div class="best-title text-left">
-                            <h2>New products</h2>
-                        </div>
+                    <div class=" banner-category banner-category-v1 float-left relative effect-bubba zoom-image-hover">
+                        <img src="/client-side-1/img/slide-pes2021.png" alt="Banner">
+                        <a href="/KEY-PES-2021-p.24.html"></a>
                     </div>
-                    <div class="slider-items-products">
-                        <div id="new-products-slider" class="product-flexslider">
-                            <div class="slider-items">
-                                <ul class="products-grid">
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box">
-                                                            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="products-grid">
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box">
-                                                            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="products-grid">
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <div class="item-inner">
-                                            <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="/client-side/images/products/product-1.jpg"> </a> </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title"> <a title="Product title here" href="single_product.html">Product title here </a> </div>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                    <div class="item-price">
-                                                        <div class="price-box">
-                                                            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="pro-action">
-                                                        <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                                                    </div>
-                                                    <div class="pr-button-hover">
-                                                        <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                                        <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                    <div class="clearfix list-products-category list-products-category-v1 float-left relative">
+                        <div class="box-food-content relative animate-default active-box-category hidden-content-box border-collapsed-box" id="confectionery">
+                            @foreach(var item in Model.TopGames)
+                            {
+                                <div class="clearfix relative product-no-ranking border-collapsed-element percent-content-2">
+                                    <div class="effect-hover-zoom center-vertical-image">
+                                        <img src="@item.Image" alt="Product @item.Name" />
+                                        <a href="/@item.SeoAlias-p.@(item.Id).html"></a>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Blog -->
-<section class="blog-post-wrapper">
-    <div class="container">
-        <div class="best-title text-left">
-            <h2>Our Latest News</h2>
+    <!-- End Product Box -->
+    <!-- Banner Full With -->
+    <div class="clearfix relative full-width bottom-margin-default">
+        <div class="clearfix container-web">
+            <div class=" container banner_full_width">
+                <div class="row overfollow-hidden banners-effect5 relative effect-hover-zoom center-vertical-image">
+                    <img src="/client-side-1/img/ngang1.png" alt="Banner Full Width . . .">
+                    <a href="#"></a>
+                </div>
+            </div>
         </div>
-        <div class="slider-items-products">
-            <div id="latest-news-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col6">
-                    @foreach (var item in Model.LastestBlogs)
-                    {
-                        <div class="item">
-                            <div class="blog-box">
-                                <a href="blog_single_post.html"> <img class="primary-img" src="@item.Image" alt="@item.Name"></a>
-                                <div class="blog-btm-desc">
-                                    <div class="blog-top-desc">
-                                        <div class="blog-date"> @item.DateCreated </div>
-                                        <h4><a href="blog_single_post.html">@item.Name</a></h4>
-                                        <div class="jtv-entry-meta">
-                                            <i class="fa fa-user-o"></i> <strong>Admin</strong>
-                                            <a href="#"><i class="fa fa-commenting-o"></i> <strong>15 Comments</strong></a>
+    </div>
+    <!-- End Banner Full With -->
+    <!-- Product Box -->
+    <div class=" container-web">
+        <div class=" container">
+            <div class="row">
+                <div class="clearfix title-box full-width border">
+                    <div class="clearfix name-title-box title-category title-jungle-green-bg relative">
+                        <img alt="Icon Mobile & Tablet" src="/client-side-1/img/icon_mobile.png" class="absolute" />
+                        <p>Shop Microsoft</p>
+                    </div>
+                    <div class="clearfix menu-title-box bold uppercase">
+                        <ul>
+                            <li><a href="/Windows-c.8.html">Windows</a></li>
+                            <li><a href="/Microsoft-Office-c.9.html">Office</a></li>
+                            <li><a href="/Windows-c.8.html">Viusal Studio</a></li>
+                            <li><a href="/Windows-c.8.html">Microsoft Viso</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="display-table bottom-margin-default full-width">
+                    <div class="clearfix clear-padding list-logo-category list-logo-category-v1 float-left border no-border-t no-border-r">
+                        <ul>
+                            <li><a href="#"><img src="/client-side-1/img/logo_3.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_4.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_5.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_6.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_1.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_2.png" alt="Logo"></a></li>
+                        </ul>
+                    </div>
+                    <div class=" banner-category float-left relative effect-bubba zoom-image-hover">
+                        <img src="/client-side-1/img/slide-window10.png" alt="Banner">
+                        <a href="#"></a>
+                    </div>
+                    <div class="clearfix list-products-category list-products-category-v1 float-left relative">
+                        <div class="box-mobile-content border-collapsed-box animate-default hidden-content-box active-box-category" id="smart-phone">
+                            @foreach (var item in Model.TopMicorsofts)
+                            {
+                                <div class="clearfix relative product-no-ranking border-collapsed-element percent-content-2">
+                                    <div class="effect-hover-zoom center-vertical-image">
+                                        <img src="@item.Image" alt="Product @item.Name" />
+                                        <a href="/@item.SeoAlias-p.@(item.Id).html"></a>
+                                    </div>
+                                </div>
+                            }
+                        </div>                 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Product Box -->
+    <!-- Banner Full With -->
+    <div class="clearfix relative full-width bottom-margin-default ">
+        <div class="clearfix container-web">
+            <div class=" container banner_full_width effect-bubba zoom-image-hover">
+                <div class="row relative banners-effect5">
+                    <img src="/client-side-1/img/slide-face.jpg" alt="Banner Full Width . . ." class="img-responsive">
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Banner Full With -->
+    <!-- Product Box -->
+    <div class=" container-web">
+        <div class=" container">
+            <div class="row">
+                <div class="clearfix title-box full-width border">
+                    <div class="clearfix name-title-box title-category title-turquoise-bg relative">
+                        <img alt="Icon Electric" src="/client-side-1/img/icon-virus-01.png" class="absolute" />
+                        <p>Shop Security</p>
+                    </div>
+                    <div class="clearfix menu-title-box bold uppercase">
+                        <ul>
+                            <li><a href="/Antivirus-c.11.html">Antivirus</a></li>
+                            <li><a href="/VPN-c.10.html">VPN</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="display-table bottom-margin-default full-width">
+                    <div class="clearfix clear-padding list-logo-category border no-border-t no-border-r list-logo-category-v1 float-left">
+                        <ul>
+                            <li><a href="#"><img src="/client-side-1/img/logo_3.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_4.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_5.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_6.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_1.png" alt="Logo"></a></li>
+                            <li><a href="#"><img src="/client-side-1/img/logo_2.png" alt="Logo"></a></li>
+                        </ul>
+                    </div>
+                    <div class=" banner-category float-left relative zoom-image-hover effect-bubba">
+                        <img src="/client-side-1/img/slide-antivirus.jpg" alt="Banner">
+                        <a href="/Antivirus-c.11.html"></a>
+                    </div>
+                    <div class="clearfix list-products-category list-products-category-v1 float-left relative">
+                        <div class="border-collapsed-box active-box-category hidden-content-box box-electric-content animate-default" id="television">
+                            
+                                @foreach (var item in Model.TopSecurities)
+                                {
+                                    <div class="clearfix relative product-no-ranking border-collapsed-element percent-content-2">
+                                        <div class="effect-hover-zoom center-vertical-image">
+                                            <img src="@item.Image" alt="Product @item.Name" />
+                                            <a href="/@item.SeoAlias-p.@(item.Id).html"></a>
                                         </div>
                                     </div>
-                                    <p>@item.Description</p>
-                                    <a class="read-more" href="blog_single_post.html"> Read more</a>
-                                </div>
-                            </div>
+                                }
+                           
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-
-<!-- our clients Slider -->
-@Component.InvokeAsync("Brand")
-<!-- BANNER-AREA-START -->
-<section class="banner-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    <!-- End Product Box -->
+    <!-- Banner Half Website -->
+    
+    <!-- End Banner Half Website -->
+    <!-- Product Category Percent 2 -->
+    
+    <!-- End Product Category Percent 2 -->
+    <!-- Product Category Percent 2 -->
+    
+    <!-- End Product Category Percent 2 -->
+    <!-- Slide Logo Brand -->
+    @*<div class=" slide-brand-box full-width bottom-margin-default">
+        <div class="clearfix container-web relative">
+            <div class=" container relative">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-lg-6 col-md-6">
-                        <div class="banner-block">
-                            <a href="#"> <img src="/client-side/images/banner-sunglasses.jpg" alt="banner sunglasses"> </a>
-                            <div class="text-des-container">
-                                <div class="text-des">
-                                    <h2>Galaxy Note 5</h2>
-                                    <p>Fall Phone 25% off Colorful designs!</p>
-                                </div>
-                            </div>
+                    <div class="nav-prev nav-slide-brand"></div>
+                    <div class="slide-logo-brand col-md-12 clear-padding relative owl-theme owl-carousel border-collapsed-box">
+                        <div class="item">
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_3.png" alt="Logo"></div>
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_7.png" alt="Logo"></div>
+                        </div>
+                        <div class="item">
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_4.png" alt="Logo"></div>
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_8.png" alt="Logo"></div>
+                        </div>
+                        <div class="item">
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_5.png" alt="Logo"></div>
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_9.png" alt="Logo"></div>
+                        </div>
+                        <div class="item">
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_6.png" alt="Logo" /></div>
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_10.png" alt="Logo" /></div>
+                        </div>
+                        <div class="item">
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_1.png" alt="Logo" /></div>
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_11.png" alt="Logo" /></div>
+                        </div>
+                        <div class="item">
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_2.png" alt="Logo" /></div>
+                            <div class="clearfix border-collapsed-element relative logo-brand-son"><img src="/client-side-1/img/logo_12.png" alt="Logo" /></div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-lg-6 col-md-6">
-                        <div class="banner-block">
-                            <a href="#"> <img src="/client-side/images/banner-kids.jpg" alt="banner kids"> </a>
-                            <div class="text-des-container">
-                                <div class="text-des">
-                                    <h2>Music & Sound</h2>
-                                    <p>For the littlest people</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="banner-block">
-                            <a href="#"> <img src="/client-side/images/banner-women.jpg" alt="banner women"> </a>
-                            <div class="text-des-container">
-                                <div class="text-des">
-                                    <h2>Best Quality Music</h2>
-                                    <p>Modern Headphones designs shop!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="nav-next nav-slide-brand"></div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-4 col-lg-4 col-md-4">
-                <div class="banner-block">
-                    <a href="#"> <img src="/client-side/images/banner-arrival.jpg" alt="banner arrival"> </a>
-                    <div class="text-des-container">
-                        <div class="text-des">
-                            <h2>special collection</h2>
-                            <p>Sale upto 50% off on selected items</p>
-                        </div>
+        </div>
+    </div>*@
+    <!-- End Slide Brand -->
+    <!-- Banner Full With -->
+    
+    <!-- End Banner Full With -->
+    <!-- Support -->
+    <div class=" support-box full-width clear-padding bottom-margin-default">
+        <div class="container-web clearfix">
+            <div class=" container border top-padding-default bottom-padding-default">
+                <div class="row">
+                    <div class=" support-box-info relative col-md-3 col-sm-3 col-xs-6">
+                        <img src="/client-side-1/img/icon_free_ship.png" alt="Icon Free Ship" class="absolute" />
+                        <p>Nhận hàng qua mail</p>
+                        <p>Tức thì</p>
+                    </div>
+                    <div class=" support-box-info relative col-md-3 col-sm-3 col-xs-6">
+                        <img src="/client-side-1/img/icon_support.png" alt="Icon Supports" class="absolute">
+                        <p>Hỗ trợ</p>
+                        <p>Hỗ trợ 24/7</p>
+                    </div>
+                    <div class=" support-box-info relative col-md-3 col-sm-3 col-xs-6">
+                        <img src="/client-side-1/img/icon_patner.png" alt="Icon partner" class="absolute">
+                        <p>Liên kết chặt chẽ</p>
+                        <p>Gian hàng uy tín</p>
+                    </div>
+                    <div class=" support-box-info relative col-md-3 col-sm-3 col-xs-6">
+                        <img src="/client-side-1/img/icon_phone_big.png" alt="Icon Phone Tablet" class="absolute">
+                        <p>Liên hệ</p>
+                        <p>+84-33545-7878</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-<!-- BANNER-AREA-END -->
+    <!-- End Support Box -->
+</div>

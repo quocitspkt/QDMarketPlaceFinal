@@ -24,7 +24,10 @@ namespace QDMarketPlace.Application.Implementation
         private IRepository<ProductTag, int> _productTagRepository;
         private IRepository<ProductQuantity, int> _productQuantityRepository;
         private IRepository<ProductImage, int> _productImageRepository;
-        private IRepository<WholePrice, int> _wholePriceRepository;
+        private IRepository<ProductKey, int> _wholePriceRepository;
+        private IRepository<Bill, int> _billRepository;
+        private IRepository<BillDetail, int> _billDetailRepository;
+        private IRepository<ProductKey, int> _productKeyRepository;
         private readonly IMapper _mapper;
         private IUnitOfWork _unitOfWork;
 
@@ -32,7 +35,10 @@ namespace QDMarketPlace.Application.Implementation
             IRepository<Tag, string> tagRepository,
             IRepository<ProductQuantity, int> productQuantityRepository,
             IRepository<ProductImage, int> productImageRepository,
-            IRepository<WholePrice, int> wholePriceRepository,
+            IRepository<ProductKey, int> wholePriceRepository,
+            IRepository<Bill,int> billRepository,
+            IRepository<BillDetail,int> billDetailRepository,
+            IRepository<ProductKey, int> productKeyRepository,
         IUnitOfWork unitOfWork,
         IRepository<ProductTag, int> productTagRepository, IMapper mapper)
         {
@@ -42,6 +48,9 @@ namespace QDMarketPlace.Application.Implementation
             _productTagRepository = productTagRepository;
             _wholePriceRepository = wholePriceRepository;
             _productImageRepository = productImageRepository;
+            _billRepository = billRepository;
+            _billDetailRepository = billDetailRepository;
+            _productKeyRepository = productKeyRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -77,6 +86,7 @@ namespace QDMarketPlace.Application.Implementation
                 {
                     product.ProductTags.Add(productTag);
                 }
+                product.DateCreated = DateTime.Now;
                 _productRepository.Add(product);
             }
             return productVm;
@@ -99,7 +109,10 @@ namespace QDMarketPlace.Application.Implementation
 
         public void Delete(int id)
         {
-            _productRepository.Remove(id);
+            var product = _productRepository.FindSingle(x => x.Id == id);
+            product.IsDeleted = true;
+            _productRepository.Update(product);
+
         }
 
         public void Dispose()
@@ -113,19 +126,82 @@ namespace QDMarketPlace.Application.Implementation
                 _productRepository.FindAll(x => x.ProductCategory))
                 .ToList();
         }
+        public List<ProductViewModel> GetAll(string keyword)
+        {
+            if (!string.IsNullOrEmpty(keyword))
+                return _mapper.ProjectTo<ProductViewModel>(
+                    _productRepository.FindAll(x => x.Name.Contains(keyword)
+                || x.Description.Contains(keyword))
+                    .OrderBy(x => x.Name)).ToList();
+            else
+                return _mapper.ProjectTo<ProductViewModel>(
+                    _productRepository.FindAll().OrderBy(x => x.Name)
+                    )
+                    .ToList();
+        }
+        
 
         public PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize)
         {
-            var query = _productRepository.FindAll(x => x.Status == Status.Active);
+            var query = _productRepository.FindAll(x => x.IsDeleted == false);
             if (!string.IsNullOrEmpty(keyword))
                 query = query.Where(x => x.Name.Contains(keyword));
             if (categoryId.HasValue)
                 query = query.Where(x => x.CategoryId == categoryId.Value);
 
             int totalRow = query.Count();
-
             query = query.OrderByDescending(x => x.DateCreated)
                 .Skip((page - 1) * pageSize).Take(pageSize);
+
+            var data = _mapper.ProjectTo<ProductViewModel>(query).ToList();
+            
+            var paginationSet = new PagedResult<ProductViewModel>()
+            {
+                Results = data,
+                CurrentPage = page,
+                RowCount = totalRow,
+                PageSize = pageSize
+            };
+            
+            return paginationSet;
+        }
+        public PagedResult<ProductViewModel> GetAllPaging(int? categoryId, string keyword, int page, int pageSize,string sortBy)
+        {
+            var query = _productRepository.FindAll(x => x.IsDeleted == false);
+            if (!string.IsNullOrEmpty(keyword))
+                query = query.Where(x => x.Name.Contains(keyword));
+            if (categoryId.HasValue)
+                query = query.Where(x => x.CategoryId == categoryId.Value);
+            query = query.Where(x => x.Status == Status.Active);
+            int totalRow = query.Count();
+            switch (sortBy)
+            {
+                case "DateCreated":
+                    {
+                        query = query.OrderByDescending(x => x.DateCreated)
+                            .Skip((page - 1) * pageSize).Take(pageSize);
+                        break;
+                    }
+                case "Price":
+                    {
+                        query = query.OrderByDescending(x => x.Price)
+                            .Skip((page - 1) * pageSize).Take(pageSize);
+                        break;
+                    }
+                case "Name":
+                    {
+                        query = query.OrderByDescending(x => x.Name)
+                        .Skip((page - 1) * pageSize).Take(pageSize);
+                        break;
+                    }
+                default:
+                    {
+                        query = query.OrderByDescending(x => x.DateCreated)
+                            .Skip((page - 1) * pageSize).Take(pageSize);
+                        break;
+                    }
+                    
+            }    
 
             var data = _mapper.ProjectTo<ProductViewModel>(query).ToList();
 
@@ -136,6 +212,7 @@ namespace QDMarketPlace.Application.Implementation
                 RowCount = totalRow,
                 PageSize = pageSize
             };
+
             return paginationSet;
         }
 
@@ -228,6 +305,7 @@ namespace QDMarketPlace.Application.Implementation
             {
                 product.ProductTags.Add(productTag);
             }
+            product.DateCreated = DateTime.Now;
             _productRepository.Update(product);
         }
 
@@ -252,26 +330,66 @@ namespace QDMarketPlace.Application.Implementation
             }
         }
 
-        public void AddWholePrice(int productId, List<WholePriceViewModel> wholePrices)
+        public void AddWholePrice(int productId, List<ProductKeyViewModel> WholePrices)
         {
-            _wholePriceRepository.RemoveMultiple(_wholePriceRepository.FindAll(x => x.ProductId == productId).ToList());
-            foreach (var wholePrice in wholePrices)
+            //Get list key with status is true
+            var productKeys = _wholePriceRepository.FindAll(x => x.ProductId == productId);
+            var query = from p in productKeys
+                        where p.Status == true
+                        select p;
+            foreach(var itemProductKey in query.ToList())
             {
-                _wholePriceRepository.Add(new WholePrice()
+                var count = 0;
+                foreach (var itemWholePrice in WholePrices)
+                {
+                    
+                    if (itemWholePrice.Key.Contains(itemProductKey.Key))
+                    {
+                        break;
+                    }
+                    if (!itemWholePrice.Key.Contains(itemProductKey.Key))
+                    {
+                        count = count + 1;
+                    }
+                    if(count == WholePrices.Count())
+                    {
+                        var key = _productKeyRepository.FindById(itemProductKey.Id);
+                        key.Status = false;
+                        _productKeyRepository.Update(key);
+                        _unitOfWork.Commit();
+                    }    
+                }
+            }
+            var productKeyLast = _wholePriceRepository.FindAll(x => x.ProductId == productId);
+            var queryLast = from p in productKeyLast
+                        where p.Status == true
+                        select p;
+            //Delete list key
+            _wholePriceRepository.RemoveMultiple(queryLast.ToList());
+            foreach (var wholePrice in WholePrices)
+            {
+                _wholePriceRepository.Add(new ProductKey()
                 {
                     ProductId = productId,
-                    FromQuantity = wholePrice.FromQuantity,
-                    ToQuantity = wholePrice.ToQuantity,
-                    Price = wholePrice.Price
+                    Key = wholePrice.Key,
+                    Status = true,
                 });
+                _unitOfWork.Commit();
             }
         }
 
-        public List<WholePriceViewModel> GetWholePrices(int productId)
+        public List<ProductKeyViewModel> GetWholePrices(int productId)
         {
-            return _mapper.ProjectTo<WholePriceViewModel>(
-                _wholePriceRepository.FindAll(x => x.ProductId == productId)
-                ).ToList();
+            var productKeys = _wholePriceRepository.FindAll(x => x.ProductId == productId);
+
+            var query = from p in productKeys
+                        where p.Status == true
+                        select p;
+
+            //return _mapper.ProjectTo<ProductKeyViewModel>(
+            //    _wholePriceRepository.FindAll(x => x.ProductId == productId)
+            //    ).ToList();
+            return _mapper.ProjectTo<ProductKeyViewModel>(query).ToList();
         }
 
         public List<ProductViewModel> GetLastest(int top)
@@ -335,6 +453,66 @@ namespace QDMarketPlace.Application.Implementation
             if (quantity == null)
                 return false;
             return quantity.Quantity > 0;
+        }
+
+        public int GetAmount(int productId)
+        {
+            var quantity = _productRepository.FindSingle(x => x.Id == productId);
+            return int.Parse(quantity.Unit);
+        }
+
+        public List<PurchaseHistoryViewModel> GetPurchaseHistory(Guid id)
+        {
+            var bills = _billRepository.FindAll();
+            var billDetails = _billDetailRepository.FindAll();
+            var products = _productRepository.FindAll();
+
+            var query = from b in bills
+                        join bd in billDetails
+                        on b.Id equals bd.BillId
+                        join pd in products
+                        on bd.ProductId equals pd.Id
+                        where b.CustomerId == id
+                        select new PurchaseHistoryViewModel()
+                        {
+                            ProductName = pd.Name,
+                            Image = pd.Image,
+                            Price = pd.Price,
+                            Quantity = bd.Quantity,
+                            DateCreated = b.DateCreated
+                        };
+            return query.ToList();
+        }
+
+        public int CountProduct()
+        {
+            int count = 0;
+
+            List<ProductViewModel> lst = _mapper.ProjectTo<ProductViewModel>(
+                _productRepository.FindAll(x => x.ProductCategory))
+                .ToList();
+            count = lst.Count();
+            return count;
+        }
+
+        public int CountProductAmount()
+        {
+            List<ProductViewModel> quantity = _mapper.ProjectTo < ProductViewModel >(_productRepository.FindAll()).ToList();
+            int sum = 0;
+            foreach ( ProductViewModel item in quantity)
+            {
+                sum += int.Parse(item.Unit);
+
+            }
+            return sum;
+        }
+
+        public void SetUnitProduct(int productId,int quantity)
+        {
+            var product = _productRepository.FindById(productId);
+            product.Unit = (int.Parse(product.Unit) - quantity).ToString();
+            _productRepository.Update(product);
+            
         }
     }
 }

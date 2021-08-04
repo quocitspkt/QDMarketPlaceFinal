@@ -20,7 +20,7 @@ namespace QDMarketPlace.Application.ViewModels.Product
         public string CustomerAddress { set; get; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(10)]
         public string CustomerMobile { set; get; }
 
         [Required]
@@ -38,6 +38,7 @@ namespace QDMarketPlace.Application.ViewModels.Product
         public Status Status { set; get; }
 
         public Guid? CustomerId { set; get; }
+        public string Key { get; set; }
 
         public List<BillDetailViewModel> BillDetails { set; get; }
     }

@@ -1,0 +1,87 @@
+﻿@model List<QDMarketPlace.Application.ViewModels.Product.PurchaseHistoryViewModel>
+
+@{
+    ViewData["Title"] = "PurchaseHistory";
+}
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat%7CRoboto:100,300,400,500,700,900%7CRoboto+Condensed:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/icon-font-linea.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/multirange.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/effect.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/cartpage.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/contact.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="~/client-side-1/css/responsive.css">
+</head>
+<div class="container-web relative">
+    <div class="container">
+        <div class="row">
+            <div class="breadcrumb-web">
+                <ul class="clear-margin">
+                    <li class="animate-default title-hover-red"><a href="#">Home</a></li>
+                    <li class="animate-default title-hover-red"><a href="#">Lịch sử mua hàng</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="relative container-web">
+    <div class="container">
+        <div class="row relative">
+            <div class="full-width relative table-wish-list">
+                <table class="full-width">
+                    <thead>
+                        <tr>
+                            <th colspan="2" style="font-size:14px">Tên sản phẩm</th>
+                            <th style="font-size:14px">Ngày mua</th>
+                            <th style="font-size:14px">Số lượng</th>
+                            <th style="font-size:14px">Tổng tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@item.Image" alt="" />
+                                </td>
+                                <td>
+                                    <p style="padding-top:100px; color:black">@item.ProductName</p>
+                                </td>
+                                <td>
+                                    <p class="text-red" style="padding-top:100px">@item.DateCreated</p>
+                                </td>
+                                <td>
+                                    <p class="text-red" style="padding-top:100px"><i aria-hidden="true"></i> @item.Quantity</p>
+                                </td>
+                                <td>
+                                    @{ 
+                                        var price = item.Price;
+                                        var quantity = item.Quantity;
+                                        var tong = price * quantity;
+                                    }
+                                    <p class="text-red" style="padding-top:100px;font-size:18px;padding-left:20px">@tong.ToString("N0") đ</p>
+                                </td>
+                            </tr>
+                         }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/client-side-1/js/jquery-3.3.1.min.js" defer=""></script>
+<script src="~/client-side-1/js/bootstrap.min.js" defer=""></script>
+<script src="~/client-side-1/js/multirange.js" defer=""></script>
+<script src="~/client-side-1/js/owl.carousel.min.js" defer=""></script>
+<script src="~/client-side-1/js/sync_owl_carousel.js" defer=""></script>
+<script src="~/client-side-1/js/scripts.js" defer=""></script>
+
+

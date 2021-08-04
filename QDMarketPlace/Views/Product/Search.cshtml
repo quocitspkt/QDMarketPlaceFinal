@@ -12,7 +12,7 @@
             <div class="col-xs-12">
                 <ul>
                     <li class="home"> <a title="Go to Home Page" href="/">Home</a><span>&raquo;</span></li>
-                    <li><strong>Search result: @Model.Keyword</strong></li>
+                    <li><strong>Kết quả tìm kiếm: @Model.Keyword</strong></li>
                 </ul>
             </div>
         </div>
@@ -26,19 +26,19 @@
             <div class="col-main col-sm-12 col-xs-12">
                 <div class="shop-inner">
                     <div class="page-title">
-                        <h2>Search result: @Model.Keyword</h2>
+                        <h2>Kết quả tìm kiếm: @Model.Keyword</h2>
                     </div>
                     <div class="toolbar column">
                         <form action="/search.html" method="get">
                             <input type="hidden" name="keyword" value="@Model.Keyword" />
                             <div class="sorter">
                                 <div class="short-by">
-                                    <label>Sort By:</label>
+                                    <label>Sắp xếp theo:</label>
                                     <select name="sortBy" asp-for="SortType"
                                             onchange="this.form.submit()" asp-items="Model.SortTypes"></select>
                                 </div>
                                 <div class="short-by page">
-                                    <label>Show:</label>
+                                    <label>Hiển thị:</label>
                                     <select name="pageSize" asp-for="PageSize" onchange="this.form.submit()"
                                             asp-items="Model.PageSizes"></select>
                                 </div>
@@ -54,8 +54,14 @@
                                     <div class="product-item">
                                         <div class="item-inner">
                                             <div class="product-thumbnail">
-                                                <div class="icon-sale-label sale-left">Sale</div>
-                                                <div class="icon-new-label new-right">New</div>
+                                                @if (item.PromotionPrice != null)
+                                                {
+                                                    <div class="icon-sale-label sale-left">Sale</div>
+                                                }
+                                                @if (DateTime.Now.Day - item.DateCreated.Day <= 3)
+                                                {
+                                                    <div class="icon-new-label new-right">New</div>
+                                                }
                                                 <div class="pr-img-area">
                                                     <a title="Ipsums Dolors Untra" href="@url">
                                                         <figure> <img class="first-img" src="@item.Image" alt="@item.Name"> <img class="hover-img" src="@item.Image" alt="@item.Name"></figure>
@@ -73,12 +79,12 @@
                                                 <div class="info-inner">
                                                     <div class="item-title"> <a title="@item.Name" href="@url">@item.Name</a> </div>
                                                     <div class="item-content">
-                                                        <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                                        @*<div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>*@
                                                         <div class="item-price">
-                                                            <div class="price-box"> <span class="regular-price"> <span class="price">@item.Price.ToString("N0")</span> </span> </div>
+                                                            <div class="price-box"> <span class="regular-price"> <span class="price">@item.Price.ToString("N0")₫</span> </span> </div>
                                                         </div>
                                                         <div class="pro-action">
-                                                            <button type="button" data-id="@item.Id" class="add-to-cart"><span> Add to Cart</span> </button>
+                                                            <button type="button" data-id="@item.Id" class="add-to-cart"><span> Thêm vào giỏ</span> </button>
                                                         </div>
                                                     </div>
                                                 </div>

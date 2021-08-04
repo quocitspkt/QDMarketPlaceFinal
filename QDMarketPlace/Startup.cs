@@ -181,6 +181,7 @@ namespace QDMarketPlace
             services.AddTransient<IPageService, PageService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IAnnouncementService, AnnouncementService>();
+            services.AddTransient<IKeyService, KeyService>();
 
             services.AddTransient<IAuthorizationHandler, BaseResourceAuthorizationHandler>();
 
@@ -199,17 +200,29 @@ namespace QDMarketPlace
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            // Thêm StaticFileMiddleware - nếu Request là yêu cầu truy cập file tĩnh,
+            // Nó trả ngay về Response nội dung file và là điểm cuối pipeline, nếu  khác
+            // nó gọi  Middleware phía sau trong Pipeline
             app.UseStaticFiles();
+
+            // Thêm EndpointRoutingMiddleware: ánh xạ Request gọi đến Endpoint (Middleware cuối)
+            // phù hợp định nghĩa bởi EndpointMiddleware
             app.UseRouting();
             app.UseCors("CorsPolicy");
             //app.UseMinResponse();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            // Thêm SessionMiddleware:  khôi phục, thiết lập - tạo ra session
+            // gán context.Session, sau đó chuyển gọi ngay middleware
+            // tiếp trong pipeline
             app.UseSession();
 
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);
 
+            // app.UseEndpoint dùng để xây dựng các endpoint - điểm cuối  của pipeline theo Url truy cập
             app.UseEndpoints(routes =>
             {
                 routes.MapHub<TeduHub>("/teduHub");

@@ -312,6 +312,9 @@ namespace QDMarketPlace.Data.EF.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -541,13 +544,47 @@ namespace QDMarketPlace.Data.EF.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NameColors")
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
                     b.HasKey("Id");
 
                     b.ToTable("Colors");
+                });
+
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200)
+                        .IsUnicode(true);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("QDMarketPlace.Data.Entities.Contact", b =>
@@ -679,6 +716,30 @@ namespace QDMarketPlace.Data.EF.Migrations
                     b.ToTable("Functions");
                 });
 
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.Key", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Keys");
+                });
+
             modelBuilder.Entity("QDMarketPlace.Data.Entities.Language", b =>
                 {
                     b.Property<string>("Id")
@@ -718,6 +779,9 @@ namespace QDMarketPlace.Data.EF.Migrations
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -801,6 +865,9 @@ namespace QDMarketPlace.Data.EF.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -929,6 +996,29 @@ namespace QDMarketPlace.Data.EF.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductKey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductKeys");
                 });
 
             modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductQuantity", b =>
@@ -1102,32 +1192,6 @@ namespace QDMarketPlace.Data.EF.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("QDMarketPlace.Data.Entities.WholePrice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("FromQuantity")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ToQuantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("WholePrices");
-                });
-
             modelBuilder.Entity("QDMarketPlace.Data.Entities.Advertistment", b =>
                 {
                     b.HasOne("QDMarketPlace.Data.Entities.AdvertistmentPosition", "AdvertistmentPosition")
@@ -1209,6 +1273,30 @@ namespace QDMarketPlace.Data.EF.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.Comment", b =>
+                {
+                    b.HasOne("QDMarketPlace.Data.Entities.Product", "Product")
+                        .WithMany("Comments")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QDMarketPlace.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.Key", b =>
+                {
+                    b.HasOne("QDMarketPlace.Data.Entities.Product", "Product")
+                        .WithMany("Keys")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("QDMarketPlace.Data.Entities.Permission", b =>
                 {
                     b.HasOne("QDMarketPlace.Data.Entities.Function", "Function")
@@ -1234,6 +1322,15 @@ namespace QDMarketPlace.Data.EF.Migrations
                 });
 
             modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductImage", b =>
+                {
+                    b.HasOne("QDMarketPlace.Data.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("QDMarketPlace.Data.Entities.ProductKey", b =>
                 {
                     b.HasOne("QDMarketPlace.Data.Entities.Product", "Product")
                         .WithMany()
@@ -1274,15 +1371,6 @@ namespace QDMarketPlace.Data.EF.Migrations
                     b.HasOne("QDMarketPlace.Data.Entities.Tag", "Tag")
                         .WithMany()
                         .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("QDMarketPlace.Data.Entities.WholePrice", b =>
-                {
-                    b.HasOne("QDMarketPlace.Data.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

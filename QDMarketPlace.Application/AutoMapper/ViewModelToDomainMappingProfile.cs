@@ -27,6 +27,8 @@ namespace QDMarketPlace.Application.AutoMapper
             .ConstructUsing(c => new AppUser(c.Id.GetValueOrDefault(Guid.Empty), c.FullName, c.UserName,
             c.Email, c.PhoneNumber, c.Avatar, c.Status));
 
+
+
             CreateMap<PermissionViewModel, Permission>()
             .ConstructUsing(c => new Permission(c.RoleId, c.FunctionId, c.CanCreate, c.CanRead, c.CanUpdate, c.CanDelete));
 
@@ -49,7 +51,7 @@ namespace QDMarketPlace.Application.AutoMapper
                 .ConstructUsing(c => new Feedback(c.Id, c.Name, c.Email, c.Message, c.Status));
 
             CreateMap<PageViewModel, Page>()
-             .ConstructUsing(c => new Page(c.Id, c.Name, c.Alias, c.Content, c.Status));
+             .ConstructUsing(c => new Page(c.Id, c.Name, c.Alias, c.Content, c.Status,c.DateCreated));
 
 
             CreateMap<AnnouncementViewModel, Announcement>()
